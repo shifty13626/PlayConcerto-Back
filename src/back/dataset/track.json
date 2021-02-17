@@ -1,0 +1,90 @@
+[
+	{
+		"artist": "tis",
+		"danceability": "danceability",
+		"duration": "duration_ms",
+		"energy": "energy",
+		"instrumentalness": "instrumentalness",
+		"liveness": "liveness",
+		"name": "name",
+		"popularity": "popularity",
+		"year": "year\r"
+	},
+	{
+		"artist": "Mamie Smith",
+		"danceability": "0.598",
+		"duration": "168333",
+		"energy": "0.22399999999999998",
+		"instrumentalness": "0.000522",
+		"liveness": "0.379",
+		"name": "Keep A Song In Your Soul",
+		"popularity": "12",
+		"year": "1920\r"
+	},
+	{
+		"artist": "Roberto Roena Y Su Apollo Sound",
+		"danceability": "0.491",
+		"duration": "442622",
+		"energy": "0.636",
+		"instrumentalness": "0.0235",
+		"liveness": "0.397",
+		"name": "Marejada Feliz",
+		"popularity": "39",
+		"year": "1969\r"
+	},
+	{
+		"artist": "Janis Joplin",
+		"danceability": "0.65",
+		"duration": "325160",
+		"energy": "0.74",
+		"instrumentalness": "0.23800000000000002",
+		"liveness": "0.0808",
+		"name": "As Good As You've Been to This World",
+		"popularity": "38",
+		"year": "1969\r"
+	},
+	{
+		"artist": "'Neil Youn",
+		"danceability": " 'Crazy Horse']\"",
+		"duration": "0.376",
+		"energy": "336933",
+		"instrumentalness": "0RsjnRihXCrpQXHEk64Kcp",
+		"liveness": "0",
+		"name": "1",
+		"popularity": "Running Dry (Requiem for the Rockets) - 2009 Remaster",
+		"year": "0.12"
+	},
+	{
+		"artist": "Joe Cocker",
+		"danceability": "0.46399999999999997",
+		"duration": "284840",
+		"energy": "0.48",
+		"instrumentalness": "0.0",
+		"liveness": "0.1",
+		"name": "Darling Be Home Soon",
+		"popularity": "39",
+		"year": "1969\r"
+	},
+	{
+		"artist": "The Velvet Underground",
+		"danceability": "0.5539999999999999",
+		"duration": "242840",
+		"energy": "0.314",
+		"instrumentalness": "0.0186",
+		"liveness": "0.122",
+		"name": "Some Kinda Love",
+		"popularity": "34",
+		"year": "1969\r"
+	},
+	{
+		"artist": "The Maytals",
+		"danceability": "0.619",
+		"duration": "188253",
+		"energy": "0.746",
+		"instrumentalness": "0.0",
+		"liveness": "0.213",
+		"name": "Sweet and Dandy",
+		"popularity": "36",
+		"year": "1969"
+	}
+]
