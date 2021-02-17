@@ -1,0 +1,15 @@
+src/logs/*
+src/.gitkeep
+src/node_modules/
+src/app/lib/
+src/tmp
+src/.DS_Store
+src/.idea
+
+logs/*
+.gitkeep
+node_modules/
+app/lib/
+tmp
+.DS_Store
+.idea
