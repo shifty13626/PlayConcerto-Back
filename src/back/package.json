@@ -1,0 +1,32 @@
+{
+  "name": "spotify_api",
+  "version": "1.0.0",
+  "description": "Api for getting playlist through Spotify API (more CSV of spotify's playlist)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shifty13626/SpotifyAPI.git"
+  },
+  "keywords": [
+    "spotify",
+    "api",
+    "rest",
+    "docker",
+    "architecture",
+    "services"
+  ],
+  "author": "HAMEL Ludovic, MARIE Alexandre, XAINTRAY Chloé",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shifty13626/SpotifyAPI/issues"
+  },
+  "homepage": "https://github.com/shifty13626/SpotifyAPI#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
+}
