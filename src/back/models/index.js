@@ -29,6 +29,20 @@ if (process.argv[2] == "import") {
     trackList.shift()
     console.log("CSV parsed.")
 
+    console.log("Element found " +trackList.length)
+
+    
+
+    // insert into db
+    dbManager.OpenConnection(config)
+    trackList.forEach(track => {
+        console.log(track)
+        dbManager.StoreTrackOnDB(config, track)
+    });
+
+    console.log("All import in DB finished")
+
+    /*
     var song = new Track(
         "Toto",
         "10",
