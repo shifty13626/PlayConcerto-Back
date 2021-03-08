@@ -2,22 +2,36 @@ var mysql = require('mysql');
 
 module.exports = {
     // Function to add track on DB
-    StoreTrackOnDB : function (config, track) {
-
+    StoreTrackOnDB : async function (config, track) {
+        console.log("Start import in DB ...")
         var connection = OpenConnection(config)
         if (connection != null) console.log("Connected to DB")
         else console.log("NOT connected to DB")
 
-        var returnSearchArtist = GetArtist('MUSE', connection)        /track.artist
-        console.log("Return request GetArtiste : " +returnSearchArtist)
+        try {
+            // check artiste already exist
+            const idArtist = await GetArtist('Toto', connection);
+            console.log("Return request GetArtiste (Toto): " +idArtist);
+    
+            // if artist doesn't exist
+            if (idArtist === null)
+            {
+                console.log("Artiste, doesn't exist ... creation ...")
+                InsertArtist(track.artist, connection)
+                console.log("Artiste created.")
+            }
 
-        /*
+        } catch (error) {
+            console.log(error)
+        }
+       
+
+        /* 
         if(returnSearchArtist == "[]")
             InsertArtist(Track.artist, connection)
         
-*/
-        //artist_id = ""
-        // InsertTrack(track, artist_id, connection)
+        InsertTrack(track, artist_id, connection)
+        */
     }
 }
 
@@ -38,24 +52,39 @@ function GetArtist(nameArtist, connection)
     console.log("Artist searched : " +nameArtist)
     var query = "SELECT * FROM artist WHERE name = '" +nameArtist +"';";
 
-    //connection.connect(function(err) {
-    //    if (err) throw err;
+    return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
-            console.log(result)
-            console.log("field : " +fields[0].id_artist)
-            console.log("result : " +result[0].id_artist)
-            return result[0].id_artist;
-        });  
-    //});
-    //connection.end();
+            if(result.length === 0) resolve(null);
+            else resolve(result[0].id_artist);
+        });
+
+    })
 }
+
+
+/*
+    connection.query(query, function (err, result, fields) {
+        if (err) throw err;
+        if(result.length === 0){
+            console.log("no result")
+            return null;
+        }
+        else {
+            console.log(result[0]);
+            console.log(result[0].id_artist)
+            console.log(result[0].name)
+            return result[0].id_artist;
+        }
+    });
+    */
+
 
 // Function to search an artist
 function InsertArtist(nameArtist, connection)
 {
-    var id = CountArtist(connection);
-    var query = "INSERT INTO artist VALUES (" + id +",'" +nameArtist +"');";
+   //var id = CountArtist(connection);
+    var query = "INSERT INTO artist VALUES ('" +nameArtist +"');";
     
     connection.connect(function(err) {
         if (err) throw err;

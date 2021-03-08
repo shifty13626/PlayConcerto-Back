@@ -13,11 +13,12 @@ app.use(bodyParser.json());
 
 const users = require("../api/routes/user.js");
 const track = require('../entities/track.js');
+const { Track } = require('../entities/track.js');
 app.use('/api/v1', users());
 
 // Load config
 console.log("Load config ...");
-var config = configManager.LoadConfig('./config.json')
+var config = configManager.LoadConfig('../config.json')
 console.log("Config loaded.");
 
 // Arguments
@@ -27,9 +28,21 @@ if (process.argv[2] == "import") {
     var trackList = parserManager.ParseCSVToJson(config)
     trackList.shift()
     console.log("CSV parsed.")
-    
 
-    dbManager.StoreTrackOnDB(config, trackList[0])
+    var song = new Track(
+        "Toto",
+        "10",
+        "4.30",
+        "70",
+        "0",
+        "100",
+        "Africa",
+        "100",
+        "1975"
+    )
+    //.Add(song)
+
+    dbManager.StoreTrackOnDB(config, song)
     /*
     // Add track to DB
     trackList.forEach(track => {
