@@ -15,8 +15,12 @@ module.exports = {
 
     // create all track object
     .forEach(element => {
+      var artists = element.split(',')[1].substring(2, (element.split(',')[1].length-2))
+          .split(",")
+
       trackList.push(new track.Track(
-        element.split(',')[1].substring(2, (element.split(',')[1].length-2)),   // artist
+        //element.split(',')[1].substring(2, (element.split(',')[1].length-2)),   // artist
+        artists,
         element.split(',')[2],    // danceability
         element.split(',')[3],    // duration
         element.split(',')[4],    // energy
