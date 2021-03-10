@@ -1,11 +1,23 @@
 const express = require('express');
-const playlist = require('./routes/playlist');
 const router = express.Router();
-const models = require('../../models/index.js')
 
 module.exports = () => {
-    router.use('/playlist', playlist());
 
+    router.get('/', (req, res) => {
+        console.log("playlist GET /");
+    });
+
+    router.get('/:id', (req, res) => {
+        console.log("playlist GET /"+req.params.id);
+    });
+
+    router.delete('/:id', (req, res) => {
+        console.log("playlist DELETE /"+req.params.id);
+    });
+
+    router.post('/', (req, res) => {
+        console.log("playlist POST /");
+    });
 
     return router;
 };

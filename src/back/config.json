@@ -4,5 +4,6 @@
   "user": "user",
   "password": "password",
   "pathJsonTracks": "../dataset/track.json",
-  "pathCSVToRead": "../dataset/spotify_tracks.csv"
+  "pathCSVToRead": "../dataset/spotify_tracks.csv",
+  "port": "3000"
 }
