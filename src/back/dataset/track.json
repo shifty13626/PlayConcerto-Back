@@ -1,0 +1,1211 @@
+[
+	{
+		"artist": [
+			"tis"
+		],
+		"danceability": "danceability",
+		"duration": "duration_ms",
+		"energy": "energy",
+		"instrumentalness": "instrumentalness",
+		"liveness": "liveness",
+		"name": "name",
+		"popularity": "popularity",
+		"year": "year\r"
+	},
+	{
+		"artist": [
+			"Mamie Smith"
+		],
+		"danceability": "0.598",
+		"duration": "168333",
+		"energy": "0.22399999999999998",
+		"instrumentalness": "0.000522",
+		"liveness": "0.379",
+		"name": "Keep A Song In Your Soul",
+		"popularity": "12",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"\"\"Screamin' Jay Hawkins\"\""
+		],
+		"danceability": "0.852",
+		"duration": "150200",
+		"energy": "0.517",
+		"instrumentalness": "0.0264",
+		"liveness": "0.0809",
+		"name": "I Put A Spell On You",
+		"popularity": "7",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Mamie Smith"
+		],
+		"danceability": "0.647",
+		"duration": "163827",
+		"energy": "0.18600000000000005",
+		"instrumentalness": "1.76e-05",
+		"liveness": "0.519",
+		"name": "Golfing Papa",
+		"popularity": "4",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Oscar Velazquez"
+		],
+		"danceability": "0.73",
+		"duration": "422087",
+		"energy": "0.7979999999999999",
+		"instrumentalness": "0.8009999999999999",
+		"liveness": "0.128",
+		"name": "True House Music - Xavier Santos & Carlos Gomix Remix",
+		"popularity": "17",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Mixe"
+		],
+		"danceability": "0.7040000000000001",
+		"duration": "165224",
+		"energy": "0.7070000000000001",
+		"instrumentalness": "0.000246",
+		"liveness": "0.402",
+		"name": "Xuniverxe",
+		"popularity": "2",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Mamie Smith & Her Jazz Hounds"
+		],
+		"danceability": "0.424",
+		"duration": "198627",
+		"energy": "0.245",
+		"instrumentalness": "0.799",
+		"liveness": "0.235",
+		"name": "Crazy Blues - 78rpm Version",
+		"popularity": "9",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Mamie Smith"
+		],
+		"danceability": "0.782",
+		"duration": "195200",
+		"energy": "0.0573",
+		"instrumentalness": "1.61e-06",
+		"liveness": "0.17600000000000002",
+		"name": "Don't You Advertise Your Man",
+		"popularity": "5",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Mamie Smith & Her Jazz Hounds"
+		],
+		"danceability": "0.474",
+		"duration": "186173",
+		"energy": "0.239",
+		"instrumentalness": "0.18600000000000005",
+		"liveness": "0.195",
+		"name": "Arkansas Blues",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Francisco Canaro"
+		],
+		"danceability": "0.469",
+		"duration": "146840",
+		"energy": "0.23800000000000002",
+		"instrumentalness": "0.96",
+		"liveness": "0.149",
+		"name": "La Chacarera - Remasterizado",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Meetya"
+		],
+		"danceability": "0.5710000000000001",
+		"duration": "476304",
+		"energy": "0.753",
+		"instrumentalness": "0.873",
+		"liveness": "0.092",
+		"name": "Broken Puppet - Original Mix",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Dorville"
+		],
+		"danceability": "0.688",
+		"duration": "150067",
+		"energy": "0.22",
+		"instrumentalness": "0.0",
+		"liveness": "0.262",
+		"name": "Oouin",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Francisco Canaro"
+		],
+		"danceability": "0.579",
+		"duration": "167213",
+		"energy": "0.35600000000000004",
+		"instrumentalness": "0.948",
+		"liveness": "0.174",
+		"name": "Desengaño - Remasterizado",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Ka Koula"
+		],
+		"danceability": "0.353",
+		"duration": "285707",
+		"energy": "0.396",
+		"instrumentalness": "0.924",
+		"liveness": "0.312",
+		"name": "Ta oula sou",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Justrock"
+		],
+		"danceability": "0.643",
+		"duration": "304078",
+		"energy": "0.998",
+		"instrumentalness": "0.47600000000000003",
+		"liveness": "0.105",
+		"name": "Schumacher",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Takis Nikolaou"
+		],
+		"danceability": "0.45299999999999996",
+		"duration": "255520",
+		"energy": "0.41",
+		"instrumentalness": "0.16",
+		"liveness": "0.292",
+		"name": "Mparmpaouzos",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Aggeliki Karagianni"
+		],
+		"danceability": "0.525",
+		"duration": "258167",
+		"energy": "0.433",
+		"instrumentalness": "0.111",
+		"liveness": "0.134",
+		"name": "To katinaki",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Giorgos Katsaros"
+		],
+		"danceability": "0.528",
+		"duration": "277720",
+		"energy": "0.325",
+		"instrumentalness": "0.0234",
+		"liveness": "0.102",
+		"name": "Oli mera paizei zaria",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Francisco Canaro"
+		],
+		"danceability": "0.46799999999999997",
+		"duration": "177427",
+		"energy": "0.5329999999999999",
+		"instrumentalness": "0.87",
+		"liveness": "0.179",
+		"name": "El Africano - Remasterizado",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Giorgos Katsaros"
+		],
+		"danceability": "0.528",
+		"duration": "278813",
+		"energy": "0.456",
+		"instrumentalness": "0.439",
+		"liveness": "0.102",
+		"name": "Vre ti magkas pou eimai ego",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Amalia Vaka"
+		],
+		"danceability": "0.397",
+		"duration": "258160",
+		"energy": "0.484",
+		"instrumentalness": "0.179",
+		"liveness": "0.327",
+		"name": "Thelo na se lismoniso",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Ron van der Kraan"
+		],
+		"danceability": "0.7440000000000001",
+		"duration": "215773",
+		"energy": "0.428",
+		"instrumentalness": "3.07e-05",
+		"liveness": "0.106",
+		"name": "On a Ragga Trip",
+		"popularity": "8",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"\"\"Vasílis Besíris 'Tourkovasílis'\"\""
+		],
+		"danceability": "0.465",
+		"duration": "208347",
+		"energy": "0.611",
+		"instrumentalness": "0.8859999999999999",
+		"liveness": "0.145",
+		"name": "Sirtó prevezániko",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Tr0ma"
+		],
+		"danceability": "0.389",
+		"duration": "774360",
+		"energy": "0.81",
+		"instrumentalness": "0.9179999999999999",
+		"liveness": "0.332",
+		"name": "Big Rip",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Ron van der Kraan"
+		],
+		"danceability": "0.763",
+		"duration": "324333",
+		"energy": "0.363",
+		"instrumentalness": "0.0",
+		"liveness": "0.0956",
+		"name": "Sweet Reggae Music",
+		"popularity": "1",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Oscar Velazquez"
+		],
+		"danceability": "0.568",
+		"duration": "386287",
+		"energy": "0.7290000000000001",
+		"instrumentalness": "0.912",
+		"liveness": "0.0613",
+		"name": "True House Music - Original Massive Mix",
+		"popularity": "3",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Jodoli"
+		],
+		"danceability": "0.521",
+		"duration": "142445",
+		"energy": "0.7759999999999999",
+		"instrumentalness": "0.00088",
+		"liveness": "0.175",
+		"name": "Taro Yard Slaughter House",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Dick Haymes"
+		],
+		"danceability": "0.26899999999999996",
+		"duration": "181200",
+		"energy": "0.255",
+		"instrumentalness": "0.00263",
+		"liveness": "0.17800000000000002",
+		"name": "Serenade of the Bells",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"ST"
+		],
+		"danceability": "0.9359999999999999",
+		"duration": "166113",
+		"energy": "0.3720000000000001",
+		"instrumentalness": "0.0",
+		"liveness": "0.083",
+		"name": "Comme à l'époque",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Manolis Karapiperis"
+		],
+		"danceability": "0.58",
+		"duration": "267560",
+		"energy": "0.42200000000000004",
+		"instrumentalness": "0.7879999999999999",
+		"liveness": "0.34700000000000003",
+		"name": "Aidiniko",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Félix Mayol"
+		],
+		"danceability": "0.6559999999999999",
+		"duration": "171200",
+		"energy": "0.292",
+		"instrumentalness": "0.0",
+		"liveness": "0.23399999999999999",
+		"name": "Bou Dou Ba Da Bouh",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Meetya"
+		],
+		"danceability": "0.6970000000000001",
+		"duration": "489012",
+		"energy": "0.617",
+		"instrumentalness": "0.902",
+		"liveness": "0.149",
+		"name": "Day After - Original Mix",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Maurice Chevalier"
+		],
+		"danceability": "0.613",
+		"duration": "178133",
+		"energy": "0.27399999999999997",
+		"instrumentalness": "0.428",
+		"liveness": "0.172",
+		"name": "Oh Maurice",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"David Daniells"
+		],
+		"danceability": "0.369",
+		"duration": "162000",
+		"energy": "0.321",
+		"instrumentalness": "0.0",
+		"liveness": "0.309",
+		"name": "Jesus Paid It All",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"\"\"The Swingin' Bachelors\"\""
+		],
+		"danceability": "0.5589999999999999",
+		"duration": "288293",
+		"energy": "0.83",
+		"instrumentalness": "0.146",
+		"liveness": "0.187",
+		"name": "Voodoo Doll",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Ron van der Kraan"
+		],
+		"danceability": "0.6409999999999999",
+		"duration": "257667",
+		"energy": "0.292",
+		"instrumentalness": "0.000121",
+		"liveness": "0.35600000000000004",
+		"name": "Dancehall Good To Me",
+		"popularity": "1",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"\"\"The Swingin' Bachelors\"\""
+		],
+		"danceability": "0.745",
+		"duration": "261013",
+		"energy": "0.7909999999999999",
+		"instrumentalness": "0.0",
+		"liveness": "0.102",
+		"name": "Penticton Kitty",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Ron van der Kraan"
+		],
+		"danceability": "0.737",
+		"duration": "225707",
+		"energy": "0.32799999999999996",
+		"instrumentalness": "1.64e-06",
+		"liveness": "0.0765",
+		"name": "Sweat (A La La La La Long)",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Meetya"
+		],
+		"danceability": "0.602",
+		"duration": "496170",
+		"energy": "0.5920000000000001",
+		"instrumentalness": "0.898",
+		"liveness": "0.10800000000000001",
+		"name": "Headbanger - Original Mix",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"biex"
+		],
+		"danceability": "0.639",
+		"duration": "180000",
+		"energy": "0.552",
+		"instrumentalness": "0.855",
+		"liveness": "0.135",
+		"name": "Kexirr",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"'Mamie Smit"
+		],
+		"danceability": " 'The Harlem Trio']\"",
+		"duration": "0.48200000000000004",
+		"energy": "198000",
+		"instrumentalness": "0lqEx4vktZP1y9hnwfF27Y",
+		"liveness": "7",
+		"name": "1",
+		"popularity": "Kansas City Man Blues - 78rpm Version",
+		"year": "0.461"
+	},
+	{
+		"artist": [
+			"Esther Lekain"
+		],
+		"danceability": "0.6409999999999999",
+		"duration": "179160",
+		"energy": "0.16899999999999998",
+		"instrumentalness": "0.0",
+		"liveness": "0.0706",
+		"name": "Ca N'vaut Pas L'amour",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Mamie Smith & Her Jazz Hounds"
+		],
+		"danceability": "0.534",
+		"duration": "176360",
+		"energy": "0.191",
+		"instrumentalness": "0.0982",
+		"liveness": "0.805",
+		"name": "Mean Man",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"'Broke Go"
+		],
+		"danceability": " 'Pcxix']\"",
+		"duration": "0.84",
+		"energy": "229695",
+		"instrumentalness": "0tOhG2JieOnLL8XSCdoKcE",
+		"liveness": "1",
+		"name": "1",
+		"popularity": "#NOHOOK",
+		"year": "0.59"
+	},
+	{
+		"artist": [
+			"Two Charming Men"
+		],
+		"danceability": "0.779",
+		"duration": "375015",
+		"energy": "0.7240000000000001",
+		"instrumentalness": "0.887",
+		"liveness": "0.12300000000000001",
+		"name": "Brusque - Original Mix",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Tr0ma"
+		],
+		"danceability": "0.49",
+		"duration": "454776",
+		"energy": "0.922",
+		"instrumentalness": "0.855",
+		"liveness": "0.12300000000000001",
+		"name": "Quantum Fluctuation",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"\"\"The Swingin' Bachelors\"\""
+		],
+		"danceability": "0.603",
+		"duration": "235547",
+		"energy": "0.7190000000000001",
+		"instrumentalness": "0.0",
+		"liveness": "0.111",
+		"name": "Cloud 9",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"\"\"The Swingin' Bachelors\"\""
+		],
+		"danceability": "0.716",
+		"duration": "264240",
+		"energy": "0.836",
+		"instrumentalness": "5.81e-06",
+		"liveness": "0.191",
+		"name": "Big Jim and the Twins",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Marika Papagkika"
+		],
+		"danceability": "0.23",
+		"duration": "231387",
+		"energy": "0.396",
+		"instrumentalness": "0.0742",
+		"liveness": "0.27399999999999997",
+		"name": "Ntourou Ntourou",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"'Gustavo Obligad"
+		],
+		"danceability": " 'Ariel Flores'",
+		"duration": " 'Sam Nacht']\"",
+		"energy": "0.565",
+		"instrumentalness": "1",
+		"liveness": "0.00028700000000000004",
+		"name": "-30.644000000000002",
+		"popularity": "1",
+		"year": "94.51899999999999"
+	},
+	{
+		"artist": [
+			"Jodoli"
+		],
+		"danceability": "0.8140000000000001",
+		"duration": "170161",
+		"energy": "0.705",
+		"instrumentalness": "0.821",
+		"liveness": "0.209",
+		"name": "Zeet Zoot Zeet Zoot Zeet",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Maurice Chevalier"
+		],
+		"danceability": "0.48700000000000004",
+		"duration": "191173",
+		"energy": "0.298",
+		"instrumentalness": "0.0",
+		"liveness": "0.133",
+		"name": "L'oeil Assassin",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"No.Losiento"
+		],
+		"danceability": "0.68",
+		"duration": "88696",
+		"energy": "0.9390000000000001",
+		"instrumentalness": "0.879",
+		"liveness": "0.0924",
+		"name": "Playground Sparks",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Mamie Smith & Her Jazz Hounds"
+		],
+		"danceability": "0.575",
+		"duration": "177173",
+		"energy": "0.247",
+		"instrumentalness": "0.0684",
+		"liveness": "0.36200000000000004",
+		"name": "Frankie Blues",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Mistinguett"
+		],
+		"danceability": "0.368",
+		"duration": "230360",
+		"energy": "0.275",
+		"instrumentalness": "0.0",
+		"liveness": "0.588",
+		"name": "Toute Petite",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"\"\"The Swingin' Bachelors\"\""
+		],
+		"danceability": "0.72",
+		"duration": "210293",
+		"energy": "0.718",
+		"instrumentalness": "3.11e-06",
+		"liveness": "0.319",
+		"name": "Jitterbug Jive",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Mamie Smith & Her Jazz Hounds"
+		],
+		"danceability": "0.679",
+		"duration": "175200",
+		"energy": "0.182",
+		"instrumentalness": "0.6679999999999999",
+		"liveness": "0.47",
+		"name": "The Darktown Flappers' Ball",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Mistinguett"
+		],
+		"danceability": "0.623",
+		"duration": "180467",
+		"energy": "0.33899999999999997",
+		"instrumentalness": "0.0",
+		"liveness": "0.155",
+		"name": "Le Gri Gri D'amour",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"No.Losiento"
+		],
+		"danceability": "0.652",
+		"duration": "188958",
+		"energy": "0.647",
+		"instrumentalness": "0.321",
+		"liveness": "0.094",
+		"name": "Pillbox",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Marika Paragkika"
+		],
+		"danceability": "0.306",
+		"duration": "241813",
+		"energy": "0.498",
+		"instrumentalness": "0.00198",
+		"liveness": "0.22699999999999998",
+		"name": "Mpraila",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Francisco Canaro"
+		],
+		"danceability": "0.369",
+		"duration": "168293",
+		"energy": "0.285",
+		"instrumentalness": "0.938",
+		"liveness": "0.193",
+		"name": "El Baccarat - Remasterizado",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Amalia Vaka"
+		],
+		"danceability": "0.287",
+		"duration": "216720",
+		"energy": "0.621",
+		"instrumentalness": "0.784",
+		"liveness": "0.151",
+		"name": "Argilamas kai psarades",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Georgel"
+		],
+		"danceability": "0.716",
+		"duration": "163133",
+		"energy": "0.25",
+		"instrumentalness": "0.0",
+		"liveness": "0.188",
+		"name": "Les Petits Païens",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Ánna Khrisáfi"
+		],
+		"danceability": "0.632",
+		"duration": "211147",
+		"energy": "0.42200000000000004",
+		"instrumentalness": "0.0109",
+		"liveness": "0.0494",
+		"name": "Samiótissa",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Konbeatz"
+		],
+		"danceability": "0.609",
+		"duration": "247678",
+		"energy": "0.322",
+		"instrumentalness": "0.848",
+		"liveness": "0.12300000000000001",
+		"name": "Airplanes",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Two Charming Men"
+		],
+		"danceability": "0.828",
+		"duration": "345000",
+		"energy": "0.467",
+		"instrumentalness": "0.9329999999999999",
+		"liveness": "0.0741",
+		"name": "Brusque - Etnik Remix",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"No.Losiento"
+		],
+		"danceability": "0.831",
+		"duration": "154667",
+		"energy": "0.586",
+		"instrumentalness": "0.789",
+		"liveness": "0.0825",
+		"name": "Breakup Sext",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"\"\"The Swingin' Bachelors\"\""
+		],
+		"danceability": "0.7070000000000001",
+		"duration": "279053",
+		"energy": "0.324",
+		"instrumentalness": "0.000558",
+		"liveness": "0.193",
+		"name": "Beat Up Scratched Up",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Gianni Negro"
+		],
+		"danceability": "0.6659999999999999",
+		"duration": "257313",
+		"energy": "0.914",
+		"instrumentalness": "0.731",
+		"liveness": "0.0982",
+		"name": "Big White - Radio Edit",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"srlil"
+		],
+		"danceability": "0.8540000000000001",
+		"duration": "77477",
+		"energy": "0.555",
+		"instrumentalness": "0.315",
+		"liveness": "0.0883",
+		"name": "Trap em Casa",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"LolCat"
+		],
+		"danceability": "0.792",
+		"duration": "129287",
+		"energy": "0.532",
+		"instrumentalness": "0.0",
+		"liveness": "0.16",
+		"name": "Nugget",
+		"popularity": "1",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Raff"
+		],
+		"danceability": "0.89",
+		"duration": "117816",
+		"energy": "0.413",
+		"instrumentalness": "0.0",
+		"liveness": "0.139",
+		"name": "Wock(y)",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"LOU Rice!"
+		],
+		"danceability": "0.792",
+		"duration": "220611",
+		"energy": "0.266",
+		"instrumentalness": "2.45e-06",
+		"liveness": "0.0916",
+		"name": "Raindrops Droptops!",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Dick Haymes"
+		],
+		"danceability": "0.257",
+		"duration": "183387",
+		"energy": "0.284",
+		"instrumentalness": "0.0518",
+		"liveness": "0.35100000000000003",
+		"name": "Adieu",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"\"\"The Swingin' Bachelors\"\""
+		],
+		"danceability": "0.747",
+		"duration": "269360",
+		"energy": "0.708",
+		"instrumentalness": "0.0",
+		"liveness": "0.136",
+		"name": "Gold Digger",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"'Gustavo Obligad"
+		],
+		"danceability": " 'Ariel Flores'",
+		"duration": " 'Sam Nacht']\"",
+		"energy": "0.439",
+		"instrumentalness": "1",
+		"liveness": "0.873",
+		"name": "-27.838",
+		"popularity": "1",
+		"year": "108.79"
+	},
+	{
+		"artist": [
+			"Félix Mayol"
+		],
+		"danceability": "0.5770000000000001",
+		"duration": "172987",
+		"energy": "0.147",
+		"instrumentalness": "0.0",
+		"liveness": "0.40399999999999997",
+		"name": "Lilas Blanc",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Mamie Smith & Her Jazz Hounds"
+		],
+		"danceability": "0.551",
+		"duration": "175267",
+		"energy": "0.19699999999999998",
+		"instrumentalness": "0.00021099999999999998",
+		"liveness": "0.155",
+		"name": "Mean Daddy Blues",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Marika Papagkika"
+		],
+		"danceability": "0.382",
+		"duration": "231400",
+		"energy": "0.4920000000000001",
+		"instrumentalness": "0.0137",
+		"liveness": "0.157",
+		"name": "Sti filaki me valane",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Fortugé"
+		],
+		"danceability": "0.509",
+		"duration": "201867",
+		"energy": "0.306",
+		"instrumentalness": "0.0",
+		"liveness": "0.3720000000000001",
+		"name": "Je Suis Le Petit Jeune Homme Que Vous Cherchez",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Gustavo Obligado"
+		],
+		"danceability": "0.0735",
+		"duration": "281500",
+		"energy": "0.0888",
+		"instrumentalness": "0.97",
+		"liveness": "0.105",
+		"name": "Sin Safari (Live)",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"South Shore Singers"
+		],
+		"danceability": "0.326",
+		"duration": "220003",
+		"energy": "0.401",
+		"instrumentalness": "0.0",
+		"liveness": "0.0903",
+		"name": "I'll See You in C U B A",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Amalia Vaka"
+		],
+		"danceability": "0.287",
+		"duration": "216720",
+		"energy": "0.621",
+		"instrumentalness": "0.784",
+		"liveness": "0.151",
+		"name": "Argilamas kai psarades",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"South Shore Singers"
+		],
+		"danceability": "0.69",
+		"duration": "205140",
+		"energy": "0.419",
+		"instrumentalness": "0.0",
+		"liveness": "0.163",
+		"name": "My Little Bimbo",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Marika Papagkika"
+		],
+		"danceability": "0.382",
+		"duration": "231400",
+		"energy": "0.4920000000000001",
+		"instrumentalness": "0.0137",
+		"liveness": "0.157",
+		"name": "Sti filaki me valane",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"696"
+		],
+		"danceability": "0.7609999999999999",
+		"duration": "127948",
+		"energy": "0.56",
+		"instrumentalness": "0.00014199999999999998",
+		"liveness": "0.0835",
+		"name": "High Asf",
+		"popularity": "1",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Justrock"
+		],
+		"danceability": "0.526",
+		"duration": "284165",
+		"energy": "0.9329999999999999",
+		"instrumentalness": "0.455",
+		"liveness": "0.11",
+		"name": "Head Off",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Francisco Canaro"
+		],
+		"danceability": "0.433",
+		"duration": "148720",
+		"energy": "0.322",
+		"instrumentalness": "0.983",
+		"liveness": "0.21600000000000005",
+		"name": "Tierrita - Remasterizado",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Two Charming Men"
+		],
+		"danceability": "0.7390000000000001",
+		"duration": "335176",
+		"energy": "0.738",
+		"instrumentalness": "0.89",
+		"liveness": "0.125",
+		"name": "Brusque - Dynasty Remix",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Gustavo Obligado"
+		],
+		"danceability": "0.212",
+		"duration": "451500",
+		"energy": "0.0148",
+		"instrumentalness": "0.727",
+		"liveness": "0.6990000000000001",
+		"name": "Descuernacabras (Live)",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Jodoli"
+		],
+		"danceability": "0.79",
+		"duration": "177528",
+		"energy": "0.43799999999999994",
+		"instrumentalness": "0.000177",
+		"liveness": "0.182",
+		"name": "The Logo",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Berthe Sylva"
+		],
+		"danceability": "0.446",
+		"duration": "183093",
+		"energy": "0.10300000000000001",
+		"instrumentalness": "0.00041900000000000016",
+		"liveness": "0.4320000000000001",
+		"name": "Du Gris",
+		"popularity": "0",
+		"year": "1920\r"
+	},
+	{
+		"artist": [
+			"Bonheur Alice"
+		],
+		"danceability": "0.4270000000000001",
+		"duration": "196200",
+		"energy": "0.147",
+		"instrumentalness": "0.0",
+		"liveness": "0.39899999999999997",
+		"name": "Bien Chapeautée",
+		"popularity": "0",
+		"year": "1920"
+	}
+]

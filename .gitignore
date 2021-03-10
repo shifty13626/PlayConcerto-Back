@@ -13,3 +13,11 @@ app/lib/
 tmp
 .DS_Store
 .idea
+
+*/logs/*
+*/.gitkeep
+*/node_modules/
+*/app/lib/
+*/tmp
+*/.DS_Store
+*/.idea

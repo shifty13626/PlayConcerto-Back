@@ -1,8 +1,0 @@
-acousticness,artists,danceability,duration_ms,energy,explicit,id,instrumentalness,key,liveness,loudness,mode,name,popularity,release_date,speechiness,tempo,valence,year
-0.991,['Mamie Smith'],0.598,168333,0.22399999999999998,0,0cS0A1fUEUd1EW3FcF8AEI,0.000522,5,0.379,-12.628,0,Keep A Song In Your Soul,12,1920,0.0936,149.976,0.634,1920
-0.83,['Roberto Roena Y Su Apollo Sound'],0.491,442622,0.636,0,6yntDRxeKQo8eB5cLY9tkm,0.0235,7,0.397,-4.738,0,Marejada Feliz,39,1969-12-31,0.0401,96.852,0.624,1969
-0.282,['Janis Joplin'],0.65,325160,0.74,0,0BlhdiMCG3coa1l0q03WLp,0.23800000000000002,0,0.0808,-9.026,0,As Good As You've Been to This World,38,1969-09-11,0.0458,103.792,0.733,1969
-0.434,"['Neil Young', 'Crazy Horse']",0.376,336933,0.331,0,0RsjnRihXCrpQXHEk64Kcp,0.0035399999999999997,0,0.106,-8.135,1,Running Dry (Requiem for the Rockets) - 2009 Remaster,33,1969-05-14,0.038,64.997,0.12,1969
-0.708,['Joe Cocker'],0.46399999999999997,284840,0.48,0,0Yw8XI8wOfLa5rTJdX7wVK,0.0,9,0.1,-9.818999999999999,1,Darling Be Home Soon,39,1969-11-01,0.026000000000000002,88.557,0.4320000000000001,1969
-0.08199999999999999,['The Velvet Underground'],0.5539999999999999,242840,0.314,0,4MpXtUeOPwa65Szx9WZID6,0.0186,2,0.122,-14.713,1,Some Kinda Love,34,1969,0.0304,112.787,0.5770000000000001,1969
-0.0714,['The Maytals'],0.619,188253,0.746,0,0vYfDfb2G23BsMfRUybVsD,0.0,3,0.213,-7.0089999999999995,1,Sweet and Dandy,36,1969-01-01,0.0667,157.921,0.903,1969

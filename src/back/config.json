@@ -1,0 +1,9 @@
+{
+  "database_name": "db",
+  "address": "92.151.63.16",
+  "port" : "9658",
+  "user": "user",
+  "password": "password",
+  "pathJsonTracks": "../dataset/track.json",
+  "pathCSVToRead": "../dataset/spotify_tracks.csv"
+}
