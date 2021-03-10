@@ -7,6 +7,7 @@ module.exports = {
     OpenConnection : function OpenConnection(config) {
         connection = mysql.createConnection({
             host: config.address,
+            port: config.port,
             user: config.user,
             password: config.password,
             database: config.database_name
@@ -24,6 +25,8 @@ module.exports = {
         track.artist = track.artist.replace(", ", " ");
         track.name = track.name.replace("'", "");
         track.artist = track.artist.replace("'", "");
+        track.name = track.name.replace("]", "");
+        track.artist = track.artist.replace("]", "");
 
         try {
             var idArtist;
@@ -82,7 +85,6 @@ function GetArtist(nameArtist, connection)
             if(result.length === 0) resolve(null);
             else resolve(result[0].id_artist);
         });
-
     })
 }
 
