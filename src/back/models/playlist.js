@@ -5,8 +5,8 @@ module.exports = {
     },
 
     //********************GET FROM DATABASE********************
-    GetPlaylists : function GetPlaylists(connection){
-        GetPlaylists(connection)
+    GetAllPlaylists : function GetAllPlaylists(connection){
+        GetAllPlaylists(connection)
     },
 
     GetPlaylistById : function GetPlaylistById(connection, id){
@@ -49,7 +49,7 @@ function InsertPlaylist(connection, playlist)
 //Function to get playlist by id
 function GetPlaylistById(connection, id)
 {
-    let query = "SELECT * FROM playlist WHERE playlist.id=" +id+");";
+    let query = "SELECT * FROM playlist WHERE playlist.id_playlist=" +id+");";
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
@@ -73,9 +73,9 @@ function GetPlaylistByName(connection, name)
 }
 
 //Function to get playlists
-function GetPlaylists(connection)
+function GetAllPlaylists(connection)
 {
-    let query = "SELECT * FROM playlist"
+    let query = "SELECT * FROM playlist;"
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
