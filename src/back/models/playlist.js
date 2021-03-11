@@ -1,4 +1,3 @@
-
 //Function to insert playlist
 function InsertPlaylist(connection, playlist)
 {
@@ -12,7 +11,6 @@ function InsertPlaylist(connection, playlist)
 
 
 }
-
 
 //Function to get playlist by id
 function GetPlaylistById(connection, id)
@@ -88,25 +86,24 @@ function DeletePlaylist(connection, id)
         });
     });
 }
-module.exports = {
-    //********************INSERT IN DATABASE********************
 
+module.exports = {
+    //********************INSERT IN DATABASE*******************
     InsertPlaylist :  InsertPlaylist,
 
     //********************GET FROM DATABASE********************
-    GetPlaylists : GetPlaylists,
-
     GetPlaylistById : GetPlaylistById,
 
     GetPlaylistByName : GetPlaylistByName,
 
+    GetAllPlaylists : GetAllPlaylists,
+
     GetUserPlaylist : GetUserPlaylist,
 
-    //********************UPDATE IN DATABASE********************
+    //********************UPDATE IN DATABASE*******************
     UpdatePlaylist : UpdatePlaylist,
 
-    //********************DELETE IN DATABASE********************
+    //********************DELETE IN DATABASE*******************
     DeletePlaylist : DeletePlaylist
-
 }
 

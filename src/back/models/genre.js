@@ -74,19 +74,19 @@ function DeleteGenre(connection, id)
 }
 
 module.exports = {
-    //********************INSERT IN DATABASE********************
+    //********************INSERT IN DATABASE*********************
     InsertGenre : InsertGenre,
 
-    //********************GET FROM DATABASE********************
+    //********************GET FROM DATABASE**********************
     GetGenreById : GetGenreById,
 
     GetGenreByName : GetGenreByName,
 
     GetAllGenres : GetAllGenres,
 
-    //********************UPDATE IN DATABASE********************
+    //********************UPDATE IN DATABASE*********************
     UpdateGenre : UpdateGenre,
 
-    //********************DELETE FROM DATABASE********************
+    //********************DELETE FROM DATABASE*******************
     DeleteGenre : DeleteGenre
 }
