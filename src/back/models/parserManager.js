@@ -9,26 +9,40 @@ module.exports = {
     // Read csv file
     var trackList = []
     var contents = fs.readFileSync(config.pathCSVToRead, 'utf8');
-    console.log(contents);
 
     lines = contents.split('\n')
 
     // create all track object
     .forEach(element => {
-      var artists = element.split(',')[1].substring(2, (element.split(',')[1].length-2))
+      var artists = element.split(';')[1].substring(2, (element.split(';')[1].length-2))
           .split(",")
+
+      for (index = 0; index < artists.length; ++index) {
+        artists[index] = artists[index].replace("'", "");
+        artists[index] = artists[index].replace("'", "");
+        //artists[index] = artists[index].replace(" ", "");
+        artists[index] = artists[index].replace("\"", "");
+        artists[index] = artists[index].replace("\"", "");
+      }
+
+      let name = element.split(';')[12]
+      name = name.replace("\"", "")
+      name = name.replace("\"", "")
+
+
+
 
       trackList.push(new track.Track(
         //element.split(',')[1].substring(2, (element.split(',')[1].length-2)),   // artist
         artists,
-        element.split(',')[2],    // danceability
-        element.split(',')[3],    // duration
-        element.split(',')[4],    // energy
-        element.split(',')[7],    // instrumentalness
-        element.split(',')[9],    // liveness
-        element.split(',')[12],   // name
-        element.split(',')[13],   // popularity
-        element.split(',')[18],   // year
+        element.split(';')[2],    // danceability
+        element.split(';')[3],    // duration
+        element.split(';')[4],    // energy
+        element.split(';')[7],    // instrumentalness
+        element.split(';')[9],    // liveness
+        name,                              // name
+        element.split(';')[13],   // popularity
+        element.split(';')[18],   // year
       ))
     });
 
