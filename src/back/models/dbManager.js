@@ -188,54 +188,6 @@ function InsertUser(user, connection)
     });
 }
 
-//Function to insert playlist
-function InsertPlaylist(playlist, connection)
-{
-    let query = "INSERT INTO playlist (name, id_genre) "
-        + "values (\"" + playlist.name +"\"," +playlist.id_genre +");";
 
-    connection.query(query, function (err, result, fields) {
-        if (err) throw err;
-    });
-}
 
-//***************************GET FROM DATABASE***************************
 
-//Function to get playlist by id
-function GetPlaylistById(id, connection)
-{
-    let query = "SELECT * FROM playlist WHERE playlist.id=" +id+");";
-    return new Promise((resolve, reject) => {
-        connection.query(query, function (err, result, fields) {
-            if (err) throw err;
-            if(result.length === 0) resolve(null);
-            else resolve(result);
-        });
-    });
-}
-
-//Function to get playlist by name
-function GetPlaylistByName(name, connection)
-{
-    let query = "SELECT * FROM playlist WHERE playlist.name LIKE" +name+");";
-    return new Promise((resolve, reject) => {
-        connection.query(query, function (err, result, fields) {
-            if (err) throw err;
-            if(result.length === 0) resolve(null);
-            else resolve(result);
-        });
-    });
-}
-
-//Function to get playlists
-function GetPlaylists(connection)
-{
-    let query = "SELECT * FROM playlist"
-    return new Promise((resolve, reject) => {
-        connection.query(query, function (err, result, fields) {
-            if (err) throw err;
-            if(result.length === 0) resolve(null);
-            else resolve(result);
-        });
-    });
-}
