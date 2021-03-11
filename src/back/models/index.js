@@ -23,47 +23,79 @@ console.log("Config loaded.");
 
 // Arguments "Import section"
 if (process.argv[2] == "import") {
-    // Parse datasource
-    console.log("Parse CSV file ...")
-    var trackList = parserManager.ParseCSVToJson(config)
-    trackList.shift()
-    console.log("CSV parsed.")
-
-    console.log("Element found " +trackList.length)
-
-    
-
-    // insert into db
-    dbManager.OpenConnection(config)
-    trackList.forEach(track => {
-        console.log(track)
-        dbManager.StoreTrackOnDB(config, track)
-    });
-
-    console.log("All import in DB finished")
+    importDataDB();
 }
 
+// Arguments "Import section"
+if (process.argv[2] == "listen" || process.argv[3] == "listen") {
+    const router = express.Router();
+
+    const user_route = require('../api/routes/user_route');
+    const track_route = require('../api/routes/track_route');
+    const artist_route = require('../api/routes/artist_route');
+    const playlist_route = require('../api/routes/playlist_route');
+
+    module.exports = () => {
+        router.use('/user', user_route());
+        router.use('/track', track_route());
+        router.use('/artist', artist_route());
+        router.use('/playlist', playlist_route());
+        return router;
+    };
 
 
-async function startServer() {
-    const app = express();
+    async function startServer() {
+        const app = express();
 
-    await require('../loaders')(app);
+        await require('../loaders')(app);
 
-    app.listen(config.port_server, err => {
-        if (err) {
-            Logger.error(err);
-            process.exit(1);
-            return;
-        }
-        console.log(`
+        app.listen(config.port_server, err => {
+            if (err) {
+                Logger.error(err);
+                process.exit(1);
+                return;
+            }
+            console.log(`
         ################################################
         🛡️  Server listening on port: ${config.port_server} 🛡️ 
         ################################################
       `);
-    });
+        });
+    }
+
+    startServer();
 }
 
-startServer();
+async function importDataDB () {
+    // Parse datasource
+    console.log("Parse CSV file ...")
+    let trackList = parserManager.ParseCSVToJson(config)
+    trackList.shift()
+    console.log("CSV parsed.")
+    console.log(trackList)
+
+    console.log("Element found before splice" +trackList.length)
+
+    // keep track after 2015
+    for(let song of trackList) {
+          if(song.year < 2015) {
+              var index = trackList.indexOf(song)
+              trackList.splice(index, 1)
+          }
+    }
+    console.log("Element found after splice" +trackList.length)
+
+
+    // insert into db
+    dbManager.OpenConnection(config)
+    // for (let i = 0; i < track.artist.length; i++) {
+    //trackList.forEach(async function(song) {
+    for(let song of trackList) {
+        await dbManager.StoreTrackOnDB(config, song)
+    }
+
+
+    console.log("All import in DB finished")
+}
 
 console.log("end execution server")
