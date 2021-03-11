@@ -1,55 +1,23 @@
-module.exports = {
-    //********************INSERT IN DATABASE********************
-    InsertPlaylist : function InsertPlaylist(connection, playlist){
-        InsertPlaylist(connection, playlist)
-    },
-
-    //********************GET FROM DATABASE********************
-    GetPlaylists : function GetPlaylists(connection){
-        GetPlaylists(connection)
-    },
-
-    GetPlaylistById : function GetPlaylistById(connection, id){
-        GetPlaylistById(connection, id)
-    },
-
-    GetPlaylistByName : function GetPlaylistByName(connection, name){
-        GetPlaylistByName(connection, name)
-    },
-
-    GetUserPlaylist : function GetUserPlaylist(connection, name, user){
-        GetUserPlaylist(connection, name, user)
-    },
-
-    //********************UPDATE IN DATABASE********************
-    UpdatePlaylist : function UpdatePlaylist(connection, id, playlist){
-        UpdatePlaylist(connection, id, playlist)
-    },
-
-    //********************DELETE IN DATABASE********************
-    DeletePlaylist : function DeletePlaylist(connection, id){
-        DeletePlaylist(connection, id)
-    }
-
-}
-
 
 //Function to insert playlist
 function InsertPlaylist(connection, playlist)
 {
-    let query = "INSERT INTO playlist (name, id_genre) "
-        + "values (\"" + playlist.name +"\"," +playlist.id_genre +");";
 
-    connection.query(query, function (err, result, fields) {
-        if (err) throw err;
-    });
+   let query = "INSERT INTO playlist (name, id_genre) "
+       + "values (\"" + playlist.name +"\"," +playlist.id_genre +");";
+
+   connection.query(query, function (err, result, fields) {
+       if (err) throw err;
+   });
+
+
 }
 
 
 //Function to get playlist by id
 function GetPlaylistById(connection, id)
 {
-    let query = "SELECT * FROM playlist WHERE playlist.id=" +id+");";
+    let query = "SELECT * FROM playlist WHERE playlist.id_playlist=" +id+";";
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
@@ -80,7 +48,7 @@ function GetPlaylists(connection)
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
             if(result.length === 0) resolve(null);
-            else resolve(result);
+            else resolve(result[0]);
         });
     });
 }
@@ -99,7 +67,7 @@ function GetUserPlaylist(connection, name, user)
 
 function UpdatePlaylist(connection, id, new_playlist)
 {
-    let query = "UPDATE playlist SET name="+new_playlist.name+", id_genre="+new_playlist.id_genre+" WHERE id= "+id+");";
+    let query = "UPDATE playlist SET name='"+new_playlist.name+"', id_genre="+new_playlist.id_genre+" WHERE id_playlist="+id+";";
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
@@ -111,7 +79,7 @@ function UpdatePlaylist(connection, id, new_playlist)
 
 function DeletePlaylist(connection, id)
 {
-    let query = "DELETE FROM playlist WHERE id="+id+");";
+    let query = "DELETE FROM playlist WHERE id_playlist="+id+";";
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
@@ -120,3 +88,25 @@ function DeletePlaylist(connection, id)
         });
     });
 }
+module.exports = {
+    //********************INSERT IN DATABASE********************
+
+    InsertPlaylist :  InsertPlaylist,
+
+    //********************GET FROM DATABASE********************
+    GetPlaylists : GetPlaylists,
+
+    GetPlaylistById : GetPlaylistById,
+
+    GetPlaylistByName : GetPlaylistByName,
+
+    GetUserPlaylist : GetUserPlaylist,
+
+    //********************UPDATE IN DATABASE********************
+    UpdatePlaylist : UpdatePlaylist,
+
+    //********************DELETE IN DATABASE********************
+    DeletePlaylist : DeletePlaylist
+
+}
+

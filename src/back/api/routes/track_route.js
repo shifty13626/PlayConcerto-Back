@@ -1,12 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const dbManager = require('../../models/dbManager')
 
 module.exports = () => {
 
     router.post('/', (req, res) => {
-        let connection = dbManager.OpenConnection(config);
-
         console.log("track POST /");
     });
 

@@ -1,42 +1,65 @@
 const express = require('express');
 const router = express.Router();
+const playlist_entity = require('../../entities/playlist')
 const dbManager = require('../../models/dbManager')
+const playlist_model = require('../../models/playlist')
 
 module.exports = (config) => {
-    //console.log("dans route playlist");
-    //console.log(config);
 
     router.post('/', (req, res) => {
-        console.log("playlist POST /");
+        let playlist = new playlist_entity.Playlist(req.body.name, req.body.id_genre);
+        let connection = dbManager.OpenConnection(config);
+        playlist_model.InsertPlaylist(connection, playlist);
     });
 
     router.get('/', (req, res) => {
-        //console.log("dans le GET");
-        //console.log(config);
         let connection = dbManager.OpenConnection(config);
-        console.log(dbManager.GetPlaylists(connection));
 
-        console.log("playlist GET /");
+        let playlists = playlist_model.GetPlaylists(connection)
+        playlists.then(function(result){
+            console.log(result);
+        })
+        // param name a ajouter
     });
 
     router.get('/:id', (req, res) => {
-        console.log("playlist GET /:id => id = "+req.params.id);
+        let connection = dbManager.OpenConnection(config);
+
+        let playlists = playlist_model.GetPlaylistById(connection,req.params.id)
+        playlists.then(function(result){
+            console.log(result);
+        })
+    });
+/*
+    A METTRE DANS LE GET "/"
+    router.get('/:name', (req, res) => {
+        console.log("NAME");
+        let connection = dbManager.OpenConnection(config);
+
+        let playlists = playlist_model.GetPlaylistById(connection,req.params.name)
+        playlists.then(function(result){
+            console.log(result);
+        })
     });
 
-    router.get('/:name', (req, res) => {
-        console.log("playlist GET /:name => name = "+req.params.name);
-    });
+ */
 
     router.get('/:id/track/:name', (req, res) => {
         console.log("playlist GET /:id/track/:name => id = "+req.params.id+" et name = "+req.params.name);
     });
 
     router.put('/:id', (req, res) => {
-        console.log("playlist PUT /:id => id = "+req.params.id);
+        let connection = dbManager.OpenConnection(config);
+        let new_playlist = new playlist_entity.Playlist(req.body.name, req.body.id_genre);
+
+        playlist_model.UpdatePlaylist(connection, req.params.id, new_playlist);
+
     });
 
     router.delete('/:id', (req, res) => {
-        console.log("playlist DELETE /:id => id = "+req.params.id);
+        let connection = dbManager.OpenConnection(config);
+
+        playlist_model.DeletePlaylist(connection, req.params.id);
     });
     return router;
 };
