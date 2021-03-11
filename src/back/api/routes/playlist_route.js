@@ -14,12 +14,18 @@ module.exports = (config) => {
 
     router.get('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
-        let playlists = playlist_model.GetAllPlaylists(connection)
-        playlists.then(function(result){
-            console.log(result);
-        })
-        // param name a ajouter
-        // ex : "/playlist?name=toto"
+        if(req.query.name != null ){
+            // ex : "/playlist?name=toto"
+            let playlists = playlist_model.GetPlaylistByName(connection,req.query.name);
+            playlists.then(function(result){
+                console.log(result);
+            })
+        }else{
+            let playlists = playlist_model.GetAllPlaylists(connection)
+            playlists.then(function(result){
+                console.log(result);
+            })
+        }
     });
 
     router.get('/:id', (req, res) => {
@@ -29,19 +35,6 @@ module.exports = (config) => {
             console.log(result);
         })
     });
-/*
-    A METTRE DANS LE GET "/"
-    router.get('/:name', (req, res) => {
-        console.log("NAME");
-        let connection = dbManager.OpenConnection(config);
-
-        let playlists = playlist_model.GetPlaylistById(connection,req.params.name)
-        playlists.then(function(result){
-            console.log(result);
-        })
-    });
-
- */
 
     router.get('/:id/track/:name', (req, res) => {
         console.log("playlist GET /:id/track/:name => id = "+req.params.id+" et name = "+req.params.name);

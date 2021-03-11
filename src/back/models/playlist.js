@@ -25,7 +25,7 @@ function GetPlaylistById(connection, id)
 //Function to get playlist by name
 function GetPlaylistByName(connection, name)
 {
-    let query = "SELECT * FROM playlist WHERE playlist.name LIKE " +name+";";
+    let query = "SELECT * FROM playlist WHERE playlist.name LIKE '" +name+"';";
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
