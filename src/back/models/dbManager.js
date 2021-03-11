@@ -7,6 +7,7 @@ module.exports = {
     OpenConnection : function OpenConnection(config) {
         connection = mysql.createConnection({
             host: config.address,
+            port: config.port,
             user: config.user,
             password: config.password,
             database: config.database_name
@@ -19,28 +20,27 @@ module.exports = {
     StoreTrackOnDB : async function (config, track) {
         console.log("Start import in DB ...")
 
-        // correct name track
-        track.name = track.name.replace(", ", " ");
-        track.artist = track.artist.replace(", ", " ");
-        track.name = track.name.replace("'", "");
-        track.artist = track.artist.replace("'", "");
-
         try {
-            var idArtist;
-            // check artiste already exist and get his Id if exist
-            idArtist = await GetArtist(track.artist, connection);
-    
-            // if artist doesn't exist, create it
-            if (idArtist === null)
-            {
-                console.log("Artiste, doesn't exist ... creation ...")
-                InsertArtist(track.artist, connection)
-                idArtist = await GetArtist(track.artist, connection);
-                console.log("Artiste created.")
-            }
+            var listIdArtist = [];
+
+            // for each artist
+            track.artist.forEach(async function(artist) {
+
+                // check artist already exist
+                var tempId = await GetArtist(artist, connection);
+
+                // if artist not exist
+                if (tempId === null) {
+                    console.log("Artiste, doesn't exist ... creation ...")
+                    InsertArtist(track.artist, connection)
+                    console.log("Artiste created.")
+                }
+
+                listIdArtist.push(await GetArtist(track.artist, connection));
+            });
 
             // check song already exist
-            const idSong = await GetTrack(track, connection);
+            var idSong = await GetTrack(track, connection);
 
             // If song don't exist, create it
             if(idSong === null)
@@ -48,6 +48,7 @@ module.exports = {
                 console.log("Track, doesn't exist ... creation ...")
                 InsertTrack(track, idArtist, connection)
                 console.log("Track created.")
+                idSong = await GetTrack(track, connection);
             }
             else console.log("Song already exist, not imported");
 
@@ -57,13 +58,8 @@ module.exports = {
             console.log(error)
         }
        
-
-        /* 
-        if(returnSearchArtist == "[]")
-            InsertArtist(Track.artist, connection)
-        
-        InsertTrack(track, artist_id, connection)
-        */
+        // add link track / artist
+        InsertLinkTrackArtist(idSong, idArtist, connection)
     }
 }
 
@@ -82,7 +78,6 @@ function GetArtist(nameArtist, connection)
             if(result.length === 0) resolve(null);
             else resolve(result[0].id_artist);
         });
-
     })
 }
 
@@ -107,7 +102,7 @@ function GetTrack(track, connection)
 
 
 
-// Function to search an artist
+// Function to insert an artist
 function InsertArtist(nameArtist, connection)
 {
    //var id = CountArtist(connection);
@@ -116,6 +111,18 @@ function InsertArtist(nameArtist, connection)
     connection.query(query, function (err, result, fields) {
         if (err) throw err;
     });  
+}
+
+
+// Function to insert a link between track and artist
+function InsertLinkTrackArtist(idSong, idArtist, connection)
+{
+    //var id = CountArtist(connection);
+    var query = "INSERT INTO link_artist (id_track, id_artist) VALUES (" +idSong +"," +idArtist +");"
+
+    connection.query(query, function (err, result, fields) {
+        if (err) throw err;
+    });
 }
 
 // Count nb artist
