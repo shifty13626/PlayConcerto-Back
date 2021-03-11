@@ -1,15 +1,20 @@
 const express = require('express');
 const router = express.Router();
 
-const user = require('./routes/user_route');
-const track = require('./routes/track_route');
-const artist = require('./routes/artist_route');
-const playlist = require('./routes/playlist_route');
+const user_route = require('../api/routes/user_route');
+const track_route = require('../api/routes/track_route');
+const artist_route = require('../api/routes/artist_route');
+const playlist_route = require('../api/routes/playlist_route');
 
-module.exports = () => {
-  router.use('/user',user());
-  router.use('/track',track());
-  router.use('/artist',artist());
-  router.use('/playlist',playlist());
+
+module.exports = (config) => {
+  //console.log("PASSSSE");
+  var configManager = require("../models/configManager")
+  var config = configManager.LoadConfig('../config.json')
+  //console.log(config);
+  router.use('/user',user_route(config));
+  router.use('/track',track_route(config));
+  router.use('/artist',artist_route(config));
+  router.use('/playlist',playlist_route(config));
   return router;
 };

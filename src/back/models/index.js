@@ -43,20 +43,6 @@ if (process.argv[2] == "import") {
     console.log("All import in DB finished")
 }
 
-const router = express.Router();
-
-const user_route = require('../api/routes/user_route');
-const track_route = require('../api/routes/track_route');
-const artist_route = require('../api/routes/artist_route');
-const playlist_route = require('../api/routes/playlist_route');
-
-module.exports = () => {
-    router.use('/user',user_route());
-    router.use('/track',track_route());
-    router.use('/artist',artist_route());
-    router.use('/playlist',playlist_route());
-    return router;
-};
 
 
 async function startServer() {

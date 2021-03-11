@@ -15,6 +15,15 @@ module.exports = {
         if (connection != null) console.log("Connected to DB")
         else console.log("NOT connected to DB")
     },
+    GetPlaylists : function GetPlayList(connection){
+        GetPlaylists(connection)
+    },
+    InsertPlaylist: function InsertPlaylist(playlist, connection){
+        InsertPlaylist(playlist, connection)
+    },
+    InsertTrack : function InsertTrack(track, artist_id, connection){
+        InsertTrack(track, artist_id, connection)
+    },
 
     // Function to add track on DB
     StoreTrackOnDB : async function (config, track) {

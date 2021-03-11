@@ -1,6 +1,6 @@
 class Config {
-    constructor(databse_name, address, port, user, password, pathJsonTracks, pathCSVToRead, port_server) {
-        this.database_name = databse_name;
+    constructor(database_name, address, port, user, password, pathJsonTracks, pathCSVToRead, port_server) {
+        this.database_name = database_name;
         this.address = address;
         this.port = port;
         this.user = user;

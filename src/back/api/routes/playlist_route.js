@@ -1,13 +1,21 @@
 const express = require('express');
 const router = express.Router();
+const dbManager = require('../../models/dbManager')
 
-module.exports = () => {
+module.exports = (config) => {
+    //console.log("dans route playlist");
+    //console.log(config);
 
     router.post('/', (req, res) => {
         console.log("playlist POST /");
     });
 
     router.get('/', (req, res) => {
+        //console.log("dans le GET");
+        //console.log(config);
+        let connection = dbManager.OpenConnection(config);
+        console.log(dbManager.GetPlaylists(connection));
+
         console.log("playlist GET /");
     });
 
