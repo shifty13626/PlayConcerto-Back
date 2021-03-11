@@ -41,9 +41,9 @@ function GetPlaylistByName(connection, name)
 }
 
 //Function to get playlists
-function GetPlaylists(connection)
+function GetAllPlaylists(connection)
 {
-    let query = "SELECT * FROM playlist"
+    let query = "SELECT * FROM playlist;"
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
