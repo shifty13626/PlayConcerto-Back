@@ -7,6 +7,7 @@ class Config {
         this.password = password;
         this.pathJsonTracks = pathJsonTracks;
         this.pathCSVToRead = pathCSVToRead;
+        this.port = port;
     }
 }
 
