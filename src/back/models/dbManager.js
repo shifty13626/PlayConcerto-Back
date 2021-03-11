@@ -1,6 +1,6 @@
-var mysql = require('mysql');
+let mysql = require('mysql');
 
-var connection;
+let connection;
 
 module.exports = {
     // to open connection to DB
@@ -21,13 +21,13 @@ module.exports = {
         console.log("Start import in DB ...")
 
         try {
-            var listIdArtist = [];
+            let listIdArtist = [];
 
             // for each artist
             track.artist.forEach(async function(artist) {
 
                 // check artist already exist
-                var tempId = await GetArtist(artist, connection);
+                let tempId = await GetArtist(artist, connection);
 
                 // if artist not exist
                 if (tempId === null) {
@@ -40,7 +40,7 @@ module.exports = {
             });
 
             // check song already exist
-            var idSong = await GetTrack(track, connection);
+            let idSong = await GetTrack(track, connection);
 
             // If song don't exist, create it
             if(idSong === null)
@@ -70,7 +70,7 @@ module.exports = {
 function GetArtist(nameArtist, connection)
 {
     console.log("Artist searched : " +nameArtist)
-    var query = "SELECT * FROM artist WHERE name = \"" +nameArtist +"\";";
+    let query = "SELECT * FROM artist WHERE name = \"" +nameArtist +"\";";
 
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
@@ -85,7 +85,7 @@ function GetArtist(nameArtist, connection)
 function GetTrack(track, connection)
 {
     console.log("track searched : " +track.name)
-    var query = "SELECT * "
+    let query = "SELECT * "
     + "FROM track, artist "
     + " WHERE track.name = \"" + track.name +"\" "
     + " AND track.artist_id = artist.id_artist "
@@ -105,8 +105,8 @@ function GetTrack(track, connection)
 // Function to insert an artist
 function InsertArtist(nameArtist, connection)
 {
-   //var id = CountArtist(connection);
-    var query = "INSERT INTO artist (name) VALUE (\"" +nameArtist +"\");";
+   //let id = CountArtist(connection);
+    let query = "INSERT INTO artist (name) VALUE (\"" +nameArtist +"\");";
     
     connection.query(query, function (err, result, fields) {
         if (err) throw err;
@@ -117,8 +117,8 @@ function InsertArtist(nameArtist, connection)
 // Function to insert a link between track and artist
 function InsertLinkTrackArtist(idSong, idArtist, connection)
 {
-    //var id = CountArtist(connection);
-    var query = "INSERT INTO link_artist (id_track, id_artist) VALUES (" +idSong +"," +idArtist +");"
+    //let id = CountArtist(connection);
+    let query = "INSERT INTO link_artist (id_track, id_artist) VALUES (" +idSong +"," +idArtist +");"
 
     connection.query(query, function (err, result, fields) {
         if (err) throw err;
@@ -128,7 +128,7 @@ function InsertLinkTrackArtist(idSong, idArtist, connection)
 // Count nb artist
 function CountArtist(connection)
 {
-    var query = "COUNT (*) FROM artist";
+    let query = "COUNT (*) FROM artist";
 
     connection.connect(function(err) {
         if (err) throw err;
@@ -142,7 +142,7 @@ function CountArtist(connection)
 // Count nb artist
 function CountTrack(connection)
 {
-    var query = "COUNT (*) FROM track";
+    let query = "COUNT (*) FROM track";
 
     connection.connect(function(err) {
         if (err) throw err;
@@ -153,13 +153,80 @@ function CountTrack(connection)
     });  
 }
 
+
+//***************************INSERTION IN DATABASE***************************
+
 //Function to add a track on DB
 function InsertTrack(track, artist_id, connection)
 {
-    var query = "INSERT INTO track (name, year, duration, artist_id) "
+    let query = "INSERT INTO track (name, year, duration, artist_id) "
     + "values (\"" + track.name +"\"," +track.year +"," +track.duration +"," +artist_id +");";
 
     connection.query(query, function (err, result, fields) {
         if (err) throw err;
     });  
+}
+
+
+//Function to insert user
+function InsertUser(user, connection)
+{
+    let query = "INSERT INTO user (name, year, duration, artist_id) "
+        + "values (\"" + user.name +"\"," +user.year +"," +track.duration +"," +artist_id +");";
+
+    connection.query(query, function (err, result, fields) {
+        if (err) throw err;
+    });
+}
+
+//Function to insert playlist
+function InsertPlaylist(playlist, connection)
+{
+    let query = "INSERT INTO playlist (name, id_genre) "
+        + "values (\"" + playlist.name +"\"," +playlist.id_genre +");";
+
+    connection.query(query, function (err, result, fields) {
+        if (err) throw err;
+    });
+}
+
+//***************************GET FROM DATABASE***************************
+
+//Function to get playlist by id
+function GetPlaylistById(id, connection)
+{
+    let query = "SELECT * FROM playlist WHERE playlist.id=" +id+");";
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+}
+
+//Function to get playlist by name
+function GetPlaylistByName(name, connection)
+{
+    let query = "SELECT * FROM playlist WHERE playlist.name LIKE" +name+");";
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+}
+
+//Function to get playlists
+function GetPlaylists(connection)
+{
+    let query = "SELECT * FROM playlist"
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
 }
