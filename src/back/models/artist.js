@@ -1,30 +1,52 @@
-// Function to insert an artist
-function InsertArtist(nameArtist, connection)
+function InsertArtist(connection, artist)
 {
-    console.log("Artist to insert : " +nameArtist)
+    //console.log("Artist to insert : " +nameArtist)
     //var id = CountArtist(connection);
-    var query = "INSERT INTO artist (name) VALUE (\"" +nameArtist +"\");";
+    var query = "INSERT INTO artist (name) " +
+        "VALUE (\"" +artist.name +"\");";
 
     connection.query(query, function (err, result, fields) {
         if (err) throw err;
     });
 }
 
-// Function to search an artist
-function GetArtist(nameArtist, connection)
+function GetAllArtists(connection)
 {
-    var query = "SELECT * FROM artist WHERE name = \"" +nameArtist +"\";";
+    let query = "SELECT * FROM artist;"
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+}
+
+function GetArtistById(connection, id)
+{
+    var query = "SELECT * FROM artist WHERE artist.id_artist =" +id+";";
 
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
             if(result.length === 0) resolve(null);
-            else resolve(result[0].id_artist);
+            else resolve(result);
         });
     })
 }
 
-// Count nb artist
+function GetArtistByName(connection, name)
+{
+    let query = "SELECT * FROM artist WHERE artist.name LIKE '" +name+"';";
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+}
+
 function CountArtist(connection)
 {
     let query = "COUNT (*) FROM artist";
@@ -38,8 +60,7 @@ function CountArtist(connection)
     });
 }
 
-// Function to insert a link between track and artist
-function InsertLinkTrackArtist(idSong, idArtist, connection)
+function InsertLinkTrackArtist(connection, idSong, idArtist)
 {
     var query = "INSERT INTO link_artist (id_track, id_artist) VALUES (" + idSong + "," + idArtist + ");"
 
@@ -48,16 +69,44 @@ function InsertLinkTrackArtist(idSong, idArtist, connection)
     });
 }
 
+function UpdateArtist(connection, id, new_artist)
+{
+    let query = "UPDATE artist SET name='"+new_artist.name+"' WHERE id_artist="+id+";";
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+}
+
+function DeleteArtist(connection, id)
+{
+    let query = "DELETE FROM artist WHERE id_artist="+id+";";
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+}
+
 module.exports = {
     //********************INSERT IN DATABASE********************
     InsertArtist : InsertArtist,
 
     //********************GET FROM DATABASE*********************
-    GetArtist : GetArtist,
+    GetAllArtists : GetAllArtists,
+    GetArtistById : GetArtistById,
+    GetArtistByName : GetArtistByName,
 
     //********************UPDATE IN DATABASE********************
+    UpdateArtist : UpdateArtist,
 
     //********************DELETE FROM DATABASE******************
+    DeleteArtist : DeleteArtist,
 
     //********************OTHER*********************************
     CountArtist : CountArtist,

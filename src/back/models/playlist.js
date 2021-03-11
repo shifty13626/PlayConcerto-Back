@@ -1,15 +1,12 @@
 //Function to insert playlist
 function InsertPlaylist(connection, playlist)
 {
-
    let query = "INSERT INTO playlist (name, id_genre) "
        + "values (\"" + playlist.name +"\"," +playlist.id_genre +");";
 
    connection.query(query, function (err, result, fields) {
        if (err) throw err;
    });
-
-
 }
 
 //Function to get playlist by id
@@ -28,7 +25,7 @@ function GetPlaylistById(connection, id)
 //Function to get playlist by name
 function GetPlaylistByName(connection, name)
 {
-    let query = "SELECT * FROM playlist WHERE playlist.name LIKE" +name+");";
+    let query = "SELECT * FROM playlist WHERE playlist.name LIKE " +name+";";
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
@@ -46,7 +43,7 @@ function GetAllPlaylists(connection)
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
             if(result.length === 0) resolve(null);
-            else resolve(result[0]);
+            else resolve(result);
         });
     });
 }
@@ -93,11 +90,8 @@ module.exports = {
 
     //********************GET FROM DATABASE********************
     GetPlaylistById : GetPlaylistById,
-
     GetPlaylistByName : GetPlaylistByName,
-
     GetAllPlaylists : GetAllPlaylists,
-
     GetUserPlaylist : GetUserPlaylist,
 
     //********************UPDATE IN DATABASE*******************
