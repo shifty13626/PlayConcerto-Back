@@ -11,7 +11,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const users = require("../api/routes/user.js");
+const users = require("../api/routes/user_route.js");
 const track = require('../entities/track.js');
 const { Track } = require('../entities/track.js');
 app.use('/api/v1', users());
@@ -21,7 +21,7 @@ console.log("Load config ...");
 var config = configManager.LoadConfig('../config.json')
 console.log("Config loaded.");
 
-// Arguments
+// Arguments "Import section"
 if (process.argv[2] == "import") {
     // Parse datasource
     console.log("Parse CSV file ...")
@@ -41,28 +41,43 @@ if (process.argv[2] == "import") {
     });
 
     console.log("All import in DB finished")
-
-    /*
-    var song = new Track(
-        "Toto",
-        "10",
-        "4.30",
-        "70",
-        "0",
-        "100",
-        "Africa",
-        "100",
-        "1975"
-    )
-    //.Add(song)
-
-    dbManager.StoreTrackOnDB(config, song)
-    /*
-    // Add track to DB
-    trackList.forEach(track => {
-        dbManager.StoreTrackOnDB(config, track)
-    });
-    */
 }
 
-console.log("end execution")
+const router = express.Router();
+
+const user_route = require('../api/routes/user_route');
+const track_route = require('../api/routes/track_route');
+const artist_route = require('../api/routes/artist_route');
+const playlist_route = require('../api/routes/playlist_route');
+
+module.exports = () => {
+    router.use('/user',user_route());
+    router.use('/track',track_route());
+    router.use('/artist',artist_route());
+    router.use('/playlist',playlist_route());
+    return router;
+};
+
+
+async function startServer() {
+    const app = express();
+
+    await require('../loaders')(app);
+
+    app.listen(config.port_server, err => {
+        if (err) {
+            Logger.error(err);
+            process.exit(1);
+            return;
+        }
+        console.log(`
+        ################################################
+        🛡️  Server listening on port: ${config.port_server} 🛡️ 
+        ################################################
+      `);
+    });
+}
+
+startServer();
+
+console.log("end execution server")
