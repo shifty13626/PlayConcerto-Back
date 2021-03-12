@@ -1,5 +1,5 @@
 //Function to add a track on DB
-function InsertTrack(track, connection)
+function InsertTrack(connection, track)
 {
     let d = new Date();
     let date = d.getFullYear() +"/" +d.getMonth() +"/" +d.getDay()
@@ -13,7 +13,7 @@ function InsertTrack(track, connection)
 }
 
 // Function to search a track
-function GetTrack(track, connection)
+function GetTrack(connection, track)
 {
     console.log("track searched : " +track.name)
 
@@ -36,7 +36,7 @@ function GetTrack(track, connection)
 }
 
 // Function to search a track during insertion on DB
-function GetTrackInsert(track, connection)
+function GetTrackInsert(connection, track)
 {
     let query = "SELECT * "
         + "FROM track "
@@ -67,6 +67,74 @@ function CountTrack(connection)
     });
 }
 
+//Function to get track by id
+function GetTrackById(connection, id)
+{
+    let query = "SELECT * FROM track WHERE track.id_track=" +id+";";
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+}
+
+//Function to get track by name
+function GetTrackByName(connection, name)
+{
+    let query = "SELECT * FROM track WHERE track.name=" +name+";";
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+}
+
+
+//Function to get track by id
+function GetAllTracks(connection)
+{
+    let query = "SELECT * FROM track;";
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+}
+
+
+//Function to get track by id
+function UpdateTrack(connection, id, new_track)
+{
+    let query = "UPDATE track SET name='"+new_track.name+"', " +
+        "id_track="+new_track.id_track+", year="+new_track.year+", " +
+        "duration="+new_track.duration+" WHERE id_track="+id+";";
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+}
+
+function DeleteTrack(connection, id)
+{
+    let query = "DELETE FROM track WHERE id_track="+id+";";
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+}
+
 module.exports = {
     //********************INSERT IN DATABASE********************
     InsertTrack : InsertTrack,
@@ -76,9 +144,19 @@ module.exports = {
 
     GetTrackInsert : GetTrackInsert,
 
+    GetTrackById : GetTrackById,
+
+    GetTrackByName : GetTrackByName,
+
+    GetAllTracks : GetAllTracks,
+
     //********************UPDATE IN DATABASE********************
 
+    UpdateTrack : UpdateTrack,
+
     //********************DELETE FROM DATABASE******************
+
+    DeleteTrack : DeleteTrack,
 
     //********************OTHER*********************************
     CountTrack : CountTrack
