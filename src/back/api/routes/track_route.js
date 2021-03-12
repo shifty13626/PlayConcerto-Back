@@ -8,7 +8,9 @@ module.exports = (config) => {
 
     router.post('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
-        let track = new track_entity.Track(req.body.name);
+        let track = new track_entity.Track(req.body.artist, req.body.danceability,
+            req.body.duration, req.body.energy, req.body.instrumentalness,
+            req.body.liveness, req.body.name, req.body.popularity, req.body.year);
         track_model.InsertTrack(connection, track);
         console.log("track POST /");
     });
@@ -45,7 +47,10 @@ module.exports = (config) => {
 
     router.put('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
-        let new_track = new track_entity.Track(req.body.name);
+        let new_track = new track_entity.Track(req.body.artist,req.body.danceability,req.body.duration,
+            req.body.energy, req.body.instrumentalness, req.body.liveness,
+            req.body.name, req.body.popularity, req.body.year)
+        //new_track.sreq.body.name, req.body.year, req.body.duration);
         track_model.UpdateTrack(connection, req.params.id, new_track);
         console.log("track PUT /:id => id = "+req.params.id);
     });

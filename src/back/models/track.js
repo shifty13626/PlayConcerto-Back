@@ -83,7 +83,7 @@ function GetTrackById(connection, id)
 //Function to get track by name
 function GetTrackByName(connection, name)
 {
-    let query = "SELECT * FROM track WHERE track.name=" +name+";";
+    let query = "SELECT * FROM track WHERE track.name=\""+name+"\";";
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
@@ -111,8 +111,7 @@ function GetAllTracks(connection)
 //Function to get track by id
 function UpdateTrack(connection, id, new_track)
 {
-    let query = "UPDATE track SET name='"+new_track.name+"', " +
-        "id_track="+new_track.id_track+", year="+new_track.year+", " +
+    let query = "UPDATE track SET name='"+new_track.name+"', year="+new_track.year+", " +
         "duration="+new_track.duration+" WHERE id_track="+id+";";
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
@@ -125,9 +124,25 @@ function UpdateTrack(connection, id, new_track)
 
 function DeleteTrack(connection, id)
 {
-    let query = "DELETE FROM track WHERE id_track="+id+";";
+    let query_link_artist = "DELETE FROM link_artist WHERE id_track="+id+";";
+    let query_link_playlist = "DELETE FROM link_playlist WHERE id_track="+id+";";
     return new Promise((resolve, reject) => {
-        connection.query(query, function (err, result, fields) {
+        connection.query(query_link_artist, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+    return new Promise((resolve, reject) => {
+        connection.query(query_link_playlist, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+    let query_track = "DELETE FROM track WHERE id_track="+id+";";
+    return new Promise((resolve, reject) => {
+        connection.query(query_track, function (err, result, fields) {
             if (err) throw err;
             if(result.length === 0) resolve(null);
             else resolve(result);
