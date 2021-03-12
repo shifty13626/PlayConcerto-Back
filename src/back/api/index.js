@@ -8,10 +8,7 @@ const playlist_route = require('../api/routes/playlist_route');
 
 
 module.exports = (config) => {
-  //console.log("PASSSSE");
-  var configManager = require("../models/configManager")
-  var config = configManager.LoadConfig('../config.json')
-  //console.log(config);
+  console.log("config from api/index.js :" + config)
   router.use('/user',user_route(config));
   router.use('/track',track_route(config));
   router.use('/artist',artist_route(config));

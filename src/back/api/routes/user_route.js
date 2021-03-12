@@ -5,8 +5,10 @@ const user_entity = require('../../entities/user')
 const user_model = require('../../models/user')
 
 module.exports = (config) => {
+    console.log("config from user_route.js : " +config)
 
     router.post('/', (req, res) => {
+        console.log(config)
         let connection = dbManager.OpenConnection(config);
         console.log("hello")
         let user = new user_entity.User(req.body.pseudo, req.body.firstname,
@@ -18,7 +20,7 @@ module.exports = (config) => {
     router.get('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
 
-        if(req.query.name != null ){
+        if(req.query.pseudo != null ){
             // ex : "/user?pseudo=toto"
             let users = user_model.GetUserByPseudo(connection,req.query.pseudo);
             users.then(function(result){

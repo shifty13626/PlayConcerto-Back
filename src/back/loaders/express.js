@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 
-module.exports = (app) => {
+module.exports = (app, config) => {
 
     app.use(function(req, res, next) {
       res.header("Access-Control-Allow-Origin", "*"); 
@@ -21,5 +21,5 @@ module.exports = (app) => {
     // Middleware that transforms the raw string of req.body into json
     app.use(bodyParser.json());
     // Load API routes
-    app.use('/api', routes());
+    app.use('/api', routes(config));
 };

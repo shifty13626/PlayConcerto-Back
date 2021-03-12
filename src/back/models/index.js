@@ -2,23 +2,21 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-var configManager = require("./configManager.js")
-var parserManager = require("./parserManager.js")
-var dbManager = require("./dbManager.js")
+let configManager = require("./configManager.js")
+let parserManager = require("./parserManager.js")
+let dbManager = require("./dbManager.js")
 
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
 
-const users = require("../api/routes/user_route.js");
 const track = require('../entities/track.js');
 const { Track } = require('../entities/track.js');
-app.use('/api/v1', users());
 
 // Load config
 console.log("Load config ...");
-var config = configManager.LoadConfig('../config.json')
+let config = configManager.LoadConfig('../config.json')
 console.log("Config loaded.");
 
 // Arguments "Import section"
@@ -28,26 +26,11 @@ if (process.argv[2] == "import") {
 
 // Arguments "Import section"
 if (process.argv[2] == "listen" || process.argv[3] == "listen") {
-    const router = express.Router();
-
-    const user_route = require('../api/routes/user_route');
-    const track_route = require('../api/routes/track_route');
-    const artist_route = require('../api/routes/artist_route');
-    const playlist_route = require('../api/routes/playlist_route');
-
-    module.exports = () => {
-        router.use('/user', user_route());
-        router.use('/track', track_route());
-        router.use('/artist', artist_route());
-        router.use('/playlist', playlist_route());
-        return router;
-    };
-
 
     async function startServer() {
         const app = express();
 
-        await require('../loaders')(app);
+        await require('../loaders')(app, config);
 
         app.listen(config.port_server, err => {
             if (err) {
@@ -79,7 +62,7 @@ async function importDataDB () {
     // keep track after 2015
     for(let song of trackList) {
           if(song.year < 2015) {
-              var index = trackList.indexOf(song)
+              let index = trackList.indexOf(song)
               trackList.splice(index, 1)
           }
     }
