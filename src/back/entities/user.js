@@ -1,5 +1,6 @@
 class User {
-    constructor(firstname, lastname, playlists) {
+    constructor(pseudo, firstname, lastname, playlists) {
+        this.pseudo = pseudo
         this.firstname = firstname;
         this.lastname = lastname;
         this.playlists = playlists
