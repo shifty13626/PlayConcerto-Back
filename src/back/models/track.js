@@ -126,20 +126,13 @@ function DeleteTrack(connection, id)
 {
     let query_link_artist = "DELETE FROM link_artist WHERE id_track="+id+";";
     let query_link_playlist = "DELETE FROM link_playlist WHERE id_track="+id+";";
-    return new Promise((resolve, reject) => {
-        connection.query(query_link_artist, function (err, result, fields) {
-            if (err) throw err;
-            if(result.length === 0) resolve(null);
-            else resolve(result);
-        });
+    connection.query(query_link_artist, function (err, result, fields) {
+        if (err) throw err;
     });
-    return new Promise((resolve, reject) => {
-        connection.query(query_link_playlist, function (err, result, fields) {
-            if (err) throw err;
-            if(result.length === 0) resolve(null);
-            else resolve(result);
-        });
+    connection.query(query_link_playlist, function (err, result, fields) {
+        if (err) throw err;
     });
+
     let query_track = "DELETE FROM track WHERE id_track="+id+";";
     return new Promise((resolve, reject) => {
         connection.query(query_track, function (err, result, fields) {
