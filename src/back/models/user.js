@@ -9,6 +9,19 @@ function InsertUser(user, connection)
     });
 }
 
+function CountUser(connection)
+{
+    let query = "COUNT (*) FROM user";
+
+    connection.connect(function(err) {
+        if (err) throw err;
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            else return result;
+        });
+    });
+}
+
 //Function to get user by id
 function GetUserById(connection, id)
 {
@@ -83,6 +96,15 @@ function DeleteUser(connection, id)
     });
 }
 
+function InsertLinkUserPlaylist(connection, idUser, idPlaylist)
+{
+    let query = "INSERT INTO link_user_playlist (id_user, id_playlist) VALUES (" + idUser + "," + idPlaylist + ");"
+
+    connection.query(query, function (err, result, fields) {
+        if (err) throw err;
+    });
+}
+
 module.exports = {
     //********************INSERT IN DATABASE********************
     InsertUser : InsertUser,
@@ -100,5 +122,5 @@ module.exports = {
     //********************OTHER*********************************
     CountUser : CountUser,
 
-    InsertLinkTrackUser : InsertLinkTrackUser
+    InsertLinkUserPlaylist : InsertLinkUserPlaylist
 }
