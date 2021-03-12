@@ -27,35 +27,35 @@ module.exports = {
             // for each artist
             for (let i = 0; i < track.artist.length; i++) {
                 // check artist already exist
-                var tempId = await GetArtist(track.artist[i], connection);
+                var tempId = await GetArtist(connection, track.artist[i]);
 
                 // if artist not exist
                 if (tempId === null) {
                     console.log("Artist '" +track.artist[i] +"', doesn't exist ... creation ...")
-                    await InsertArtist(track.artist[i], connection)
+                    await InsertArtist(connection, track.artist[i])
                     console.log("Artist '" +track.artist[i] +"' created.")
                 }
 
-                track.list_artist_id.push(await GetArtist(track.artist[i], connection));
+                track.list_artist_id.push(await GetArtist(connection, track.artist[i]));
             };
 
 
             // check song already exist
-            track.id = await GetTrackInsert(track, connection);
+            track.id = await GetTrackInsert(connection, track);
 
             // If song don't exist, create it
             if(track.id === null)
             {
                 console.log("Track '" +track.name +"', doesn't exist ... creation ...")
-                InsertTrack(track, connection)
+                InsertTrack(connection, track)
                 console.log("Track '" +track.name +"' created.")
-                track.id = await GetTrackInsert(track, connection);
+                track.id = await GetTrackInsert(connection, track);
             }
             else console.log("Track '" +track.name +"' already exist, not imported");
 
             // add link track / artist
             for (let i = 0; i < track.list_artist_id.length; i++) {
-                InsertLinkTrackArtist(track.id, track.list_artist_id[i], connection)
+                InsertLinkTrackArtist(connection, track.id, track.list_artist_id[i])
                 console.log("Track linked")
             }
             console.log("Track after import procedure")

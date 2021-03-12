@@ -1,8 +1,8 @@
 //Function to insert user
-function InsertUser(user, connection)
+function InsertUser(connection, user)
 {
-    let query = "INSERT INTO user (name, year, duration, User_id) "
-        + "values (\"" + user.name +"\"," +user.year +"," +track.duration +"," +User_id +");";
+    let query = "INSERT INTO user (pseudo, firstname, lastname) "
+        + "values (\"" + user.pseudo +"\"," +user.firstname +"," +user.lastname +");";
 
     connection.query(query, function (err, result, fields) {
         if (err) throw err;
@@ -26,6 +26,34 @@ function CountUser(connection)
 function GetUserById(connection, id)
 {
     let query = "SELECT * FROM user WHERE id_user=" +id+";";
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+}
+
+//Function to get user by id
+function GetAllUserPlaylists(connection, id)
+{
+    let query = "SELECT * FROM playlist, link_user_playlist WHERE playlist.id_playlist=link_user_playlist.id_playlist " +
+        "AND link_user_playlist.id_user=" +id+";";
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+}
+
+function GetUserPlaylistById(connection, id_user, id_playlist)
+{
+    let query = "SELECT * FROM playlist, link_user_playlist WHERE link_user_playlist.id_user="+id_user+" " +
+        "AND link_user_playlist.id_playlist="+id_playlist+" " +
+        "AND link_user_playlist.id_playlist=playlist.id_playlist;";
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
@@ -112,6 +140,8 @@ module.exports = {
     GetAllUsers : GetAllUsers,
     GetUserById : GetUserById,
     GetUserByPseudo : GetUserByPseudo,
+    GetAllUserPlaylists : GetAllUserPlaylists,
+    GetUserPlaylistById : GetUserPlaylistById,
 
     //********************UPDATE IN DATABASE********************
     UpdateUser : UpdateUser,
