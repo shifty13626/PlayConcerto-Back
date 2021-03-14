@@ -23,7 +23,8 @@ console.log("Config loaded.");
 
 // Arguments "Import section"
 if (process.argv[2] == "import") {
-    importDataDB();
+    importTrackDB();
+    importGenreDB();
 }
 
 // Arguments "Import section"
@@ -66,12 +67,12 @@ if (process.argv[2] == "listen" || process.argv[3] == "listen") {
     startServer();
 }
 
-async function importDataDB () {
+async function importTrackDB () {
     // Parse datasource
-    console.log("Parse CSV file ...")
-    let trackList = parserManager.ParseCSVToJson(config)
+    console.log("Parse CSV file track ...")
+    let trackList = parserManager.ParseCSVTrackToJson(config)
     trackList.shift()
-    console.log("CSV parsed.")
+    console.log("CSV track parsed.")
     console.log(trackList)
 
     console.log("Element found before splice" +trackList.length)
@@ -85,17 +86,30 @@ async function importDataDB () {
     }
     console.log("Element found after splice" +trackList.length)
 
-
     // insert into db
     dbManager.OpenConnection(config)
-    // for (let i = 0; i < track.artist.length; i++) {
-    //trackList.forEach(async function(song) {
     for(let song of trackList) {
         await dbManager.StoreTrackOnDB(config, song)
     }
 
 
-    console.log("All import in DB finished")
+    console.log("All import track in DB finished")
 }
+
+async function importGenreDB() {
+    // Parse datasource
+    console.log("Parse CSV file genre ...")
+    let genreList = parserManager.ParseCSVGenreToJson(config)
+    //genreList.shift()
+    console.log("CSV genre parsed.")
+    console.log(genreList)
+
+    dbManager.OpenConnection(config)
+    for(let genre of genreList) {
+        await dbManager.StoreGenreOnDB(config, genre)
+    }
+    console.log("All import genre in DB finished")
+}
+
 
 console.log("end execution server")

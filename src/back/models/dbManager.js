@@ -5,73 +5,82 @@ var connection;
 module.exports = {
     // to open connection to DB
     OpenConnection : function OpenConnection(config) {
-        connection = mysql.createConnection({
-            host: config.address,
-            port: config.port,
-            user: config.user,
-            password: config.password,
-            database: config.database_name
-        });
-        if (connection != null) console.log("Connected to DB")
-        else console.log("NOT connected to DB")
+        OpenConnectionDB(config)
     },
-
     // Function to add track on DB
     StoreTrackOnDB : async function (config, track) {
-        console.log("Start import in DB, track : " +track.name +"'")
-        console.log("Track before import procedure")
-        console.log(track)
-
-        try {
-            // for each artist
-            for (let i = 0; i < track.artist.length; i++) {
-                // check artist already exist
-                var tempId = await GetArtist(track.artist[i], connection);
-
-                // if artist not exist
-                if (tempId === null) {
-                    console.log("Artist '" +track.artist[i] +"', doesn't exist ... creation ...")
-                    await InsertArtist(track.artist[i], connection)
-                    console.log("Artist '" +track.artist[i] +"' created.")
-                }
-
-                track.list_artist_id.push(await GetArtist(track.artist[i], connection));
-            };
-
-
-            // check song already exist
-            track.id = await GetTrackInsert(track, connection);
-
-            // If song don't exist, create it
-            if(track.id === null)
-            {
-                console.log("Track '" +track.name +"', doesn't exist ... creation ...")
-                InsertTrack(track, connection)
-                console.log("Track '" +track.name +"' created.")
-                track.id = await GetTrackInsert(track, connection);
-            }
-            else console.log("Track '" +track.name +"' already exist, not imported");
-
-            // add link track / artist
-            for (let i = 0; i < track.list_artist_id.length; i++) {
-                InsertLinkTrackArtist(track.id, track.list_artist_id[i], connection)
-                console.log("Track linked")
-            }
-            console.log("Track after import procedure")
-            console.log(track)
-
-            console.log()
-
-        } catch (error) {
-            console.log(error)
-        }
+        importTrackDB(config, track)
+    },
+    // Function to add a genre on DB
+    StoreGenreOnDB : async function (config, genre) {
+        importGenreDB(config, genre)
     }
 }
 
+function OpenConnectionDB(config) {
+    connection = mysql.createConnection({
+        host: config.address,
+        port: config.port,
+        user: config.user,
+        password: config.password,
+        database: config.database_name
+    });
+    if (connection != null) console.log("Connected to DB")
+    else console.log("NOT connected to DB")
+}
+
+async function importTrackDB(config, track) {
+    console.log("Start import in DB, track : " +track.name +"'")
+    console.log("Track before import procedure")
+    console.log(track)
+
+    try {
+        // for each artist
+        for (let i = 0; i < track.artist.length; i++) {
+            // check artist already exist
+            var tempId = await GetArtist(track.artist[i], connection);
+
+            // if artist not exist
+            if (tempId === null) {
+                console.log("Artist '" +track.artist[i] +"', doesn't exist ... creation ...")
+                await InsertArtist(track.artist[i], connection)
+                console.log("Artist '" +track.artist[i] +"' created.")
+            }
+
+            track.list_artist_id.push(await GetArtist(track.artist[i], connection));
+        };
+
+
+        // check song already exist
+        track.id = await GetTrackInsert(track, connection);
+
+        // If song don't exist, create it
+        if(track.id === null)
+        {
+            console.log("Track '" +track.name +"', doesn't exist ... creation ...")
+            InsertTrack(track, connection)
+            console.log("Track '" +track.name +"' created.")
+            track.id = await GetTrackInsert(track, connection);
+        }
+        else console.log("Track '" +track.name +"' already exist, not imported");
+
+        // add link track / artist
+        for (let i = 0; i < track.list_artist_id.length; i++) {
+            InsertLinkTrackArtist(track.id, track.list_artist_id[i], connection)
+            console.log("Track linked")
+        }
+        console.log("Track after import procedure")
+        console.log(track)
+
+        console.log()
+
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 // Function to search an artist
-function GetArtist(nameArtist, connection)
-{
+function GetArtist(nameArtist, connection) {
     var query = "SELECT * FROM artist WHERE name = \"" +nameArtist +"\";";
 
     return new Promise((resolve, reject) => {
@@ -84,8 +93,7 @@ function GetArtist(nameArtist, connection)
 }
 
 // Function to search a track
-function GetTrack(track, connection)
-{
+function GetTrack(track, connection) {
     console.log("track searched : " +track.name)
 
     var query = "SELECT * "
@@ -106,10 +114,8 @@ function GetTrack(track, connection)
     })
 }
 
-
 // Function to search a track during insertion on DB
-function GetTrackInsert(track, connection)
-{
+function GetTrackInsert(track, connection) {
     let query = "SELECT * "
         + "FROM track "
         + "WHERE name = \"" +track.name +"\" "
@@ -125,11 +131,8 @@ function GetTrackInsert(track, connection)
     })
 }
 
-
-
 // Function to insert an artist
-function InsertArtist(nameArtist, connection)
-{
+function InsertArtist(nameArtist, connection) {
     console.log("Artist to insert : " +nameArtist)
    //var id = CountArtist(connection);
     var query = "INSERT INTO artist (name) VALUE (\"" +nameArtist +"\");";
@@ -139,10 +142,8 @@ function InsertArtist(nameArtist, connection)
     });  
 }
 
-
 // Function to insert a link between track and artist
-function InsertLinkTrackArtist(idSong, idArtist, connection)
-{
+function InsertLinkTrackArtist(idSong, idArtist, connection) {
     var query = "INSERT INTO link_artist (id_track, id_artist) VALUES (" +idSong +"," +idArtist +");"
 
     connection.query(query, function (err, result, fields) {
@@ -151,8 +152,7 @@ function InsertLinkTrackArtist(idSong, idArtist, connection)
 }
 
 // Count nb artist
-function CountArtist(connection)
-{
+function CountArtist(connection) {
     var query = "COUNT (*) FROM artist";
 
     connection.connect(function(err) {
@@ -165,8 +165,7 @@ function CountArtist(connection)
 }
 
 // Count nb artist
-function CountTrack(connection)
-{
+function CountTrack(connection) {
     var query = "COUNT (*) FROM track";
 
     connection.connect(function(err) {
@@ -179,8 +178,7 @@ function CountTrack(connection)
 }
 
 //Function to add a track on DB
-function InsertTrack(track, connection)
-{
+function InsertTrack(track, connection) {
     let d = new Date();
     let date = d.getFullYear() +"/" +d.getMonth() +"/" +d.getDay()
         +"_" +d.getHours() +":" +d.getMinutes() +":" +d.getSeconds()
@@ -190,4 +188,39 @@ function InsertTrack(track, connection)
     connection.query(query, function (err, result, fields) {
         if (err) throw err;
     });  
+}
+
+
+
+// Function to add a genre on DB
+async function importGenreDB(config, genre) {
+    // search if genre already exist
+    let idGenre = getGenre(connection, genre.name)
+
+    if (idGenre == null) {
+        InsertGenre(connection, genre.name)
+    }
+}
+
+// Function to search an artist
+function getGenre(connection, nameGenre) {
+    var query = "SELECT * FROM genre WHERE name = \"" +nameGenre +"\";";
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result[0].id_genre);
+        });
+    })
+}
+
+// To insert a new genre on DB
+function InsertGenre(connection, nameGenre) {
+    var query = "INSERT INTO genre (name) "
+        + "value (\"" + nameGenre +"\");,";
+
+    connection.query(query, function (err, result, fields) {
+        if (err) throw err;
+    });
 }
