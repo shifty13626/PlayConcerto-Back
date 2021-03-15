@@ -27,6 +27,13 @@ if (process.argv[2] == "import") {
     importGenreDB();
 }
 
+// Arguments "Purge section"
+if (process.argv[2] == "purge") {
+    dbManager.OpenConnection(config)
+    dbManager.PurgeAllTableDB()
+}
+
+
 // Arguments "Import section"
 if (process.argv[2] == "listen" || process.argv[3] == "listen") {
     const router = express.Router();
@@ -110,6 +117,5 @@ async function importGenreDB() {
     }
     console.log("All import genre in DB finished")
 }
-
 
 console.log("end execution server")

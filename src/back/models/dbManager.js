@@ -14,6 +14,10 @@ module.exports = {
     // Function to add a genre on DB
     StoreGenreOnDB : async function (config, genre) {
         importGenreDB(config, genre)
+    },
+    // Purge database
+    PurgeAllTableDB : async function () {
+        purgeDB()
     }
 }
 
@@ -220,6 +224,45 @@ function InsertGenre(connection, nameGenre) {
     var query = "INSERT INTO genre (name) "
         + "value (\"" + nameGenre +"\");,";
 
+    connection.query(query, function (err, result, fields) {
+        if (err) throw err;
+    });
+}
+
+// To delete all date in DB
+function purgeDB() {
+    // DELETE link artist / track
+    let query = "DELETE FROM link_artist";
+    connection.query(query, function (err, result, fields) {
+        if (err) throw err;
+    });
+
+    // DELETE link playlist
+    query = "DELETE FROM link_artist";
+    connection.query(query, function (err, result, fields) {
+        if (err) throw err;
+    });
+
+    // DELETE playlist
+    query = "DELETE FROM playlist;";
+    connection.query(query, function (err, result, fields) {
+        if (err) throw err;
+    });
+
+    // DELETE track
+    query = "DELETE FROM track";
+    connection.query(query, function (err, result, fields) {
+        if (err) throw err;
+    });
+
+    // DELETE artist
+    query = "DELETE FROM artist";
+    connection.query(query, function (err, result, fields) {
+        if (err) throw err;
+    });
+
+    // DELETE genre
+    query = "DELETE FROM genre";
     connection.query(query, function (err, result, fields) {
         if (err) throw err;
     });
