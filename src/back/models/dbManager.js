@@ -1,6 +1,6 @@
-var mysql = require('mysql');
+let mysql = require('mysql');
 
-var connection;
+let connection;
 
 module.exports = {
     // to open connection to DB
@@ -38,43 +38,43 @@ async function importTrackDB(config, track) {
     console.log("Track before import procedure")
     console.log(track)
 
-    try {
-        // for each artist
-        for (let i = 0; i < track.artist.length; i++) {
-            // check artist already exist
-            var tempId = await GetArtist(track.artist[i], connection);
+        try {
+            // for each artist
+            for (let i = 0; i < track.artist.length; i++) {
+                // check artist already exist
+                var tempId = await GetArtist(track.artist[i], connection);
 
-            // if artist not exist
-            if (tempId === null) {
-                console.log("Artist '" +track.artist[i] +"', doesn't exist ... creation ...")
-                await InsertArtist(track.artist[i], connection)
-                console.log("Artist '" +track.artist[i] +"' created.")
-            }
+                // if artist not exist
+                if (tempId === null) {
+                    console.log("Artist '" +track.artist[i] +"', doesn't exist ... creation ...")
+                    await InsertArtist(track.artist[i], connection)
+                    console.log("Artist '" +track.artist[i] +"' created.")
+                }
 
-            track.list_artist_id.push(await GetArtist(track.artist[i], connection));
-        };
+                track.list_artist_id.push(await GetArtist(track.artist[i], connection));
+            };
 
 
-        // check song already exist
-        track.id = await GetTrackInsert(track, connection);
-
-        // If song don't exist, create it
-        if(track.id === null)
-        {
-            console.log("Track '" +track.name +"', doesn't exist ... creation ...")
-            InsertTrack(track, connection)
-            console.log("Track '" +track.name +"' created.")
+            // check song already exist
             track.id = await GetTrackInsert(track, connection);
-        }
-        else console.log("Track '" +track.name +"' already exist, not imported");
 
-        // add link track / artist
-        for (let i = 0; i < track.list_artist_id.length; i++) {
-            InsertLinkTrackArtist(track.id, track.list_artist_id[i], connection)
-            console.log("Track linked")
-        }
-        console.log("Track after import procedure")
-        console.log(track)
+            // If song don't exist, create it
+            if(track.id === null)
+            {
+                console.log("Track '" +track.name +"', doesn't exist ... creation ...")
+                InsertTrack(track, connection)
+                console.log("Track '" +track.name +"' created.")
+                track.id = await GetTrackInsert(track, connection);
+            }
+            else console.log("Track '" +track.name +"' already exist, not imported");
+
+            // add link track / artist
+            for (let i = 0; i < track.list_artist_id.length; i++) {
+                InsertLinkTrackArtist(track.id, track.list_artist_id[i], connection)
+                console.log("Track linked")
+            }
+            console.log("Track after import procedure")
+            console.log(track)
 
         console.log()
 
@@ -140,10 +140,10 @@ function InsertArtist(nameArtist, connection) {
     console.log("Artist to insert : " +nameArtist)
    //var id = CountArtist(connection);
     var query = "INSERT INTO artist (name) VALUE (\"" +nameArtist +"\");";
-    
+
     connection.query(query, function (err, result, fields) {
         if (err) throw err;
-    });  
+    });
 }
 
 // Function to insert a link between track and artist
@@ -165,7 +165,7 @@ function CountArtist(connection) {
           if (err) throw err;
           else return result;
         });
-    });  
+    });
 }
 
 // Count nb artist
@@ -178,7 +178,7 @@ function CountTrack(connection) {
           if (err) throw err;
           else return result;
         });
-    });  
+    });
 }
 
 //Function to add a track on DB
@@ -191,7 +191,7 @@ function InsertTrack(track, connection) {
 
     connection.query(query, function (err, result, fields) {
         if (err) throw err;
-    });  
+    });
 }
 
 
