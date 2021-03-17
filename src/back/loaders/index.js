@@ -1,7 +1,7 @@
 const expressLoader = require('./express');
 
-module.exports = async (app) => {
+module.exports = async (app, config) => {
   
-    await expressLoader(app);
+    await expressLoader(app, config);
     console.log('✌️ Express loaded');
   };
