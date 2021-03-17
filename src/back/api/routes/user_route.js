@@ -7,6 +7,7 @@ const user_model = require('../../models/user')
 module.exports = (config) => {
     console.log("config from user_route.js : " +config)
 
+    // Route to add a user
     router.post('/', (req, res) => {
         console.log(config)
         let connection = dbManager.OpenConnection(config);
@@ -17,6 +18,7 @@ module.exports = (config) => {
         console.log("user POST /");
     });
 
+    
     router.get('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
 
@@ -36,6 +38,7 @@ module.exports = (config) => {
         }
     });
 
+    // Get user by id
     router.get('/:id', (req, res) => {
         console.log("user GET /:id => id = "+req.params.id);
         let connection = dbManager.OpenConnection(config);
@@ -45,6 +48,7 @@ module.exports = (config) => {
         })
     });
 
+    // Get user playlist by id user
     router.get('/:id/playlist/', (req, res) => {
         console.log("user GET /:id/playlist => id = "+req.params.id);
         let connection = dbManager.OpenConnection(config);
@@ -54,6 +58,7 @@ module.exports = (config) => {
         })
     });
 
+    // Get playlist for an user idenitified by his id and name playlist
     router.get('/:id/playlist/:name', (req, res) => {
         console.log("user GET /:id/playlist/:name => id = "+req.params.id+" et name = "+req.params.name);
         let connection = dbManager.OpenConnection(config);
@@ -71,6 +76,7 @@ module.exports = (config) => {
         console.log("user PUT /:id => id = "+req.params.id);
     });
 
+    // To delete an user
     router.delete('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         user_model.DeleteUser(connection, req.params.id);

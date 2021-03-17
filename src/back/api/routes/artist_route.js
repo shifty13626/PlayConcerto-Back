@@ -6,12 +6,14 @@ const artist_model = require('../../models/artist')
 
 module.exports = (config) => {
 
+    // To create an artist
     router.post('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         let artist = new artist_entity.Artist(req.body.name);
         artist_model.InsertArtist(connection, artist);
     });
 
+    // To get all artist
     router.get('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
 
@@ -30,6 +32,7 @@ module.exports = (config) => {
 
     });
 
+    // Get artist identified by his id
     router.get('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         let artists = artist_model.GetArtistById(connection,req.params.id);
@@ -42,12 +45,14 @@ module.exports = (config) => {
         console.log("artist GET /:id/track/:name => id = "+req.params.id+" et name = "+req.params.name);
     });
 
+
     router.put('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         let new_artist = new artist_entity.Artist(req.body.name);
         artist_model.UpdateArtist(connection, req.params.id, new_artist);
     });
 
+    // Delete artist identified by id
     router.delete('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         artist_model.DeleteArtist(connection, req.params.id);
