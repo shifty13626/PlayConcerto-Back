@@ -1,12 +1,12 @@
-# SpotifyAPI
+# PlayConcerto API
 
 ## Language
 NodeJS
 
 ## Target
-Create a programme to get all music from the official Spotify API and create API to select music to create playlists.
+Create a web api that let a user to create its own playlists from a set of music, and navigate through it even offline.
 
 ## Contributor
-- Chloé 
-- Alex 
-- Ludo
+- Chloé XAINTRAY
+- Alexandre MARIE
+- Ludovic HAMEL
