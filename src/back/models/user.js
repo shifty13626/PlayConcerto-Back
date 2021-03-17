@@ -1,11 +1,41 @@
-//Function to insert user
-function InsertUser(connection, user)
-{
-    let query = "INSERT INTO user (pseudo, firstname, lastname) "
-        + "values (\"" + user.pseudo +"\",\"" +user.firstname +"\",\"" +user.lastname +"\");";
 
-    connection.query(query, function (err, result, fields) {
-        if (err) throw err;
+module.exports = {
+    //********************INSERT IN DATABASE********************
+    InsertUser : InsertUser,
+    //********************GET FROM DATABASE*********************
+    GetAllUsers : GetAllUsers,
+    GetUserById : GetUserById,
+    GetUserByPseudo : GetUserByPseudo,
+    GetAllUserPlaylists : GetAllUserPlaylists,
+    GetUserPlaylistById : GetUserPlaylistById,
+
+    //********************UPDATE IN DATABASE********************
+    UpdateUser : UpdateUser,
+
+    //********************DELETE FROM DATABASE******************
+    DeleteUser : DeleteUser,
+
+    //********************OTHER*********************************
+    CountUser : CountUser,
+
+    InsertLinkUserPlaylist : InsertLinkUserPlaylist
+}
+
+
+
+//Function to insert user
+function InsertUser(connection, user) {
+    let query = "INSERT INTO user (pseudo, firstname, lastname) "
+        + "values (\"" + user.pseudo + "\",\"" + user.firstname + "\",\"" + user.lastname + "\");";
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) reject(err);
+            else {
+                if (result.length === 0) resolve(null);
+                else resolve(result);
+            }
+        });
     });
 }
 
@@ -66,7 +96,7 @@ function GetUserPlaylistById(connection, id_user, id_playlist)
 //Function to get user by pseudo
 function GetUserByPseudo(connection, pseudo)
 {
-    let query = "SELECT * FROM user WHERE pseudo=\"" +pseudo+"\";";
+    let query = "SELECT * FROM user WHERE pseudo=\""+pseudo+"\";";
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
@@ -131,26 +161,4 @@ function InsertLinkUserPlaylist(connection, idUser, idPlaylist)
     connection.query(query, function (err, result, fields) {
         if (err) throw err;
     });
-}
-
-module.exports = {
-    //********************INSERT IN DATABASE********************
-    InsertUser : InsertUser,
-    //********************GET FROM DATABASE*********************
-    GetAllUsers : GetAllUsers,
-    GetUserById : GetUserById,
-    GetUserByPseudo : GetUserByPseudo,
-    GetAllUserPlaylists : GetAllUserPlaylists,
-    GetUserPlaylistById : GetUserPlaylistById,
-
-    //********************UPDATE IN DATABASE********************
-    UpdateUser : UpdateUser,
-
-    //********************DELETE FROM DATABASE******************
-    DeleteUser : DeleteUser,
-
-    //********************OTHER*********************************
-    CountUser : CountUser,
-
-    InsertLinkUserPlaylist : InsertLinkUserPlaylist
 }

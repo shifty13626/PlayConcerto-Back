@@ -1,3 +1,22 @@
+module.exports = {
+    //********************INSERT IN DATABASE*******************
+    InsertPlaylist :  InsertPlaylist,
+
+    //********************GET FROM DATABASE********************
+    GetPlaylistById : GetPlaylistById,
+    GetPlaylistByName : GetPlaylistByName,
+    GetAllPlaylists : GetAllPlaylists,
+    GetUserPlaylist : GetUserPlaylist,
+
+    //********************UPDATE IN DATABASE*******************
+    UpdatePlaylist : UpdatePlaylist,
+
+    //********************DELETE IN DATABASE*******************
+    DeletePlaylist : DeletePlaylist
+}
+
+
+
 //Function to insert playlist
 function InsertPlaylist(connection, playlist)
 {
@@ -82,22 +101,5 @@ function DeletePlaylist(connection, id)
             else resolve(result);
         });
     });
-}
-
-module.exports = {
-    //********************INSERT IN DATABASE*******************
-    InsertPlaylist :  InsertPlaylist,
-
-    //********************GET FROM DATABASE********************
-    GetPlaylistById : GetPlaylistById,
-    GetPlaylistByName : GetPlaylistByName,
-    GetAllPlaylists : GetAllPlaylists,
-    GetUserPlaylist : GetUserPlaylist,
-
-    //********************UPDATE IN DATABASE*******************
-    UpdatePlaylist : UpdatePlaylist,
-
-    //********************DELETE IN DATABASE*******************
-    DeletePlaylist : DeletePlaylist
 }
 

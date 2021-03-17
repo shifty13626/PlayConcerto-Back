@@ -1,3 +1,24 @@
+module.exports = {
+    //********************INSERT IN DATABASE********************
+    InsertArtist : InsertArtist,
+
+    //********************GET FROM DATABASE*********************
+    GetAllArtists : GetAllArtists,
+    GetArtistById : GetArtistById,
+    GetArtistByName : GetArtistByName,
+
+    //********************UPDATE IN DATABASE********************
+    UpdateArtist : UpdateArtist,
+
+    //********************DELETE FROM DATABASE******************
+    DeleteArtist : DeleteArtist,
+
+    //********************OTHER*********************************
+    CountArtist : CountArtist,
+
+    InsertLinkTrackArtist : InsertLinkTrackArtist
+}
+
 function InsertArtist(connection, artist)
 {
     //console.log("Artist to insert : " +nameArtist)
@@ -93,23 +114,3 @@ function DeleteArtist(connection, id)
     });
 }
 
-module.exports = {
-    //********************INSERT IN DATABASE********************
-    InsertArtist : InsertArtist,
-
-    //********************GET FROM DATABASE*********************
-    GetAllArtists : GetAllArtists,
-    GetArtistById : GetArtistById,
-    GetArtistByName : GetArtistByName,
-
-    //********************UPDATE IN DATABASE********************
-    UpdateArtist : UpdateArtist,
-
-    //********************DELETE FROM DATABASE******************
-    DeleteArtist : DeleteArtist,
-
-    //********************OTHER*********************************
-    CountArtist : CountArtist,
-
-    InsertLinkTrackArtist : InsertLinkTrackArtist
-}

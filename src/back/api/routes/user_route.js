@@ -5,62 +5,88 @@ const user_entity = require('../../entities/user')
 const user_model = require('../../models/user')
 
 module.exports = (config) => {
-    console.log("config from user_route.js : " +config)
+    console.log("config from user_route.js : " +config);
 
     router.post('/', (req, res) => {
-        console.log(config)
         let connection = dbManager.OpenConnection(config);
-        console.log("hello")
         let user = new user_entity.User(req.body.pseudo, req.body.firstname,
             req.body.lastname, req.body.playlists);
-        user_model.InsertUser(connection, user);
-        console.log("user POST /");
+        user_model.InsertUser(connection, user).then((created) => {
+            if (created['affectedRows'] !== 0) {
+                res.status(200).send(`User ${user.pseudo} has been created.`);
+            }
+            else {
+                res.status(400).send(`User ${user} cannot be created. Pseudo is mandatory.`);
+            }
+        }).catch((error) => {
+            res.status(500).send(error);
+        });
     });
 
     router.get('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
-
         if(req.query.pseudo != null ){
             // ex : "/user?pseudo=toto"
-            let users = user_model.GetUserByPseudo(connection,req.query.pseudo);
-            users.then(function(result){
-                console.log("user GET/ by pseudo :"+req.query.pseudo)
-                console.log(result);
-            })
-        }else {
-            let users = user_model.GetAllUsers(connection)
-            users.then(function (result) {
-                console.log(result);
-            })
-            console.log("user GET /");
+            user_model.GetUserByPseudo(connection,req.query.pseudo).then((user) => {
+                if (user !== null) {
+                    res.send(user);
+                }
+                else {
+                    res.status(400).send(`User ${req.query.pseudo} does not exist.`)
+                }
+            }).catch((error) => {
+                res.status(500).send(error);
+            });
+        }
+        else {
+            user_model.GetAllUsers(connection).then((users) => {
+                res.send(users);
+            }).catch((error) => {
+                res.status(500).send(error);
+            });
         }
     });
 
     router.get('/:id', (req, res) => {
-        console.log("user GET /:id => id = "+req.params.id);
         let connection = dbManager.OpenConnection(config);
-        let users = user_model.GetUserById(connection, req.params.id);
-        users.then(function(result){
-            console.log(result);
-        })
+        user_model.GetUserById(connection, req.params.id).then((user) => {
+            if (user !== null) {
+                res.send(user);
+            }
+            else {
+                res.status(400).send(`User ${req.params.id} not found.`);
+            }
+        }).catch((error) => {
+            res.status(500).send(error);
+        });
     });
 
     router.get('/:id/playlist/', (req, res) => {
-        console.log("user GET /:id/playlist => id = "+req.params.id);
         let connection = dbManager.OpenConnection(config);
-        let playlists = user_model.GetAllUserPlaylists(connection, req.params.id);
-        playlists.then(function(result){
-            console.log(result);
+        user_model.GetAllUserPlaylists(connection, req.params.id).then((playlists) => {
+            if (playlists !== null) {
+                res.send(playlists);
+            }
+            else {
+                res.status(400).send(`User ${req.params.id} does not have playlist yet.`)
+            }
+        }).catch((error) => {
+            res.status(500).send(error);
         })
     });
 
     router.get('/:id/playlist/:name', (req, res) => {
-        console.log("user GET /:id/playlist/:name => id = "+req.params.id+" et name = "+req.params.name);
         let connection = dbManager.OpenConnection(config);
-        let playlist = user_model.GetUserPlaylistById(connection, req.params.id, req.params.name);
-        playlist.then(function(result){
-            console.log(result);
-        })
+        user_model.GetUserPlaylistById(connection, req.params.id, req.params.name).then((playlist) => {
+            if (playlist !== null) {
+                res.send(playlist);
+            }
+            else {
+                res.status(400).send(`User ${req.params.id} does not have playlist ${req.params.name}.`)
+            }
+        }).catch((error) => {
+            res.status(500).send(error);
+        });
     });
 
     router.put('/:id', (req, res) => {
@@ -73,8 +99,16 @@ module.exports = (config) => {
 
     router.delete('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
-        user_model.DeleteUser(connection, req.params.id);
-        console.log("user DELETE /:id => id = "+req.params.id);
+        user_model.DeleteUser(connection, req.params.id).then( (deleted) => {
+            if (deleted['affectedRows'] !== 0) {
+                res.status(200).send(`User ${req.params.id} has been deleted.`);
+            }
+            else {
+                res.status(400).send(`User ${req.params.id} not found. Can not delete it.`);
+            }
+        }).catch((error) => {
+            res.status(500).send(error);
+        })
     });
 
     return router;

@@ -1,3 +1,21 @@
+module.exports = {
+    //********************INSERT IN DATABASE*********************
+    InsertGenre : InsertGenre,
+
+    //********************GET FROM DATABASE**********************
+    GetGenreById : GetGenreById,
+
+    GetGenreByName : GetGenreByName,
+
+    GetAllGenres : GetAllGenres,
+
+    //********************UPDATE IN DATABASE*********************
+    UpdateGenre : UpdateGenre,
+
+    //********************DELETE FROM DATABASE*******************
+    DeleteGenre : DeleteGenre
+}
+
 //Function to insert genre
 function InsertGenre(connection, genre)
 {
@@ -73,20 +91,3 @@ function DeleteGenre(connection, id)
     });
 }
 
-module.exports = {
-    //********************INSERT IN DATABASE*********************
-    InsertGenre : InsertGenre,
-
-    //********************GET FROM DATABASE**********************
-    GetGenreById : GetGenreById,
-
-    GetGenreByName : GetGenreByName,
-
-    GetAllGenres : GetAllGenres,
-
-    //********************UPDATE IN DATABASE*********************
-    UpdateGenre : UpdateGenre,
-
-    //********************DELETE FROM DATABASE*******************
-    DeleteGenre : DeleteGenre
-}
