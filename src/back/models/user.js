@@ -24,13 +24,18 @@ module.exports = {
 
 
 //Function to insert user
-function InsertUser(connection, user)
-{
+function InsertUser(connection, user) {
     let query = "INSERT INTO user (pseudo, firstname, lastname) "
-        + "values (\"" + user.pseudo +"\",\"" +user.firstname +"\",\"" +user.lastname +"\");";
+        + "values (\"" + user.pseudo + "\",\"" + user.firstname + "\",\"" + user.lastname + "\");";
 
-    connection.query(query, function (err, result, fields) {
-        if (err) throw err;
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) reject(err);
+            else {
+                if (result.length === 0) resolve(null);
+                else resolve(result);
+            }
+        });
     });
 }
 
@@ -91,7 +96,7 @@ function GetUserPlaylistById(connection, id_user, id_playlist)
 //Function to get user by pseudo
 function GetUserByPseudo(connection, pseudo)
 {
-    let query = "SELECT * FROM user WHERE pseudo=\"" +pseudo+"\";";
+    let query = "SELECT * FROM user WHERE pseudo=\""+pseudo+"\";";
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
