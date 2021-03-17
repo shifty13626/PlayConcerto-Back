@@ -44,3 +44,13 @@ SELECT *
 FROM track
 WHERE name = 'I Put A Spell On You'
 ORDER BY add_date DESC;
+
+-- dataset example to import, launch command after command
+insert into user (pseudo, firstname, lastname, password)
+values ('shifty', 'Ludo', 'hamel' , 'password');
+insert into genre (name) value ('rock');
+insert into playlist (name, id_genre) values ('playlist_test', 7);
+insert into link_user_playlist (id_user, id_playlist) values (3, 4);
+insert into track (name, year, duration, danceability, energy, instrumentalness, liveness, popularity, add_date)
+VALUES ('Supremacy', 2021, 4.55, 0.0, 100.0, 90.1, 100.0, 60.5, NOW());
+insert into link_playlist (id_playlist, id_track) values (4, 2689);

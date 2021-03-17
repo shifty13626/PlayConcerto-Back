@@ -6,6 +6,7 @@ const track_model = require('../../models/track')
 
 module.exports = (config) => {
 
+    // To add a track
     router.post('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         let track = new track_entity.Track(req.body.artist, req.body.danceability,
@@ -15,6 +16,7 @@ module.exports = (config) => {
         console.log("track POST /");
     });
 
+    // To get all track
     router.get('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         if(req.query.name != null ){
@@ -32,6 +34,7 @@ module.exports = (config) => {
         }
     });
 
+    // Get track by id
     router.get('/:id', (req, res) => {
         console.log("track GET /:id => id = "+req.params.id);
         let connection = dbManager.OpenConnection(config);
@@ -41,6 +44,7 @@ module.exports = (config) => {
         })
     });
 
+    // To get a track identified by his id and artist id
     router.get('/:id/artist/:name', (req, res) => {
         console.log("track GET /:id/artist/:name => id = "+req.params.id+" et name = "+req.params.name);
     });
@@ -55,6 +59,7 @@ module.exports = (config) => {
         console.log("track PUT /:id => id = "+req.params.id);
     });
 
+    // To delete a track identified by id
     router.delete('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         track_model.DeleteTrack(connection, req.params.id);
