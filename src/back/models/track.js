@@ -1,3 +1,31 @@
+
+module.exports = {
+    //********************INSERT IN DATABASE********************
+    InsertTrack : InsertTrack,
+
+    //********************GET FROM DATABASE*********************
+    GetTrack : GetTrack,
+
+    GetTrackInsert : GetTrackInsert,
+
+    GetTrackById : GetTrackById,
+
+    GetTrackByName : GetTrackByName,
+
+    GetAllTracks : GetAllTracks,
+
+    //********************UPDATE IN DATABASE********************
+
+    UpdateTrack : UpdateTrack,
+
+    //********************DELETE FROM DATABASE******************
+
+    DeleteTrack : DeleteTrack,
+
+    //********************OTHER*********************************
+    CountTrack : CountTrack
+}
+
 //Function to add a track on DB
 function InsertTrack(connection, track)
 {
@@ -141,31 +169,4 @@ function DeleteTrack(connection, id)
             else resolve(result);
         });
     });
-}
-
-module.exports = {
-    //********************INSERT IN DATABASE********************
-    InsertTrack : InsertTrack,
-
-    //********************GET FROM DATABASE*********************
-    GetTrack : GetTrack,
-
-    GetTrackInsert : GetTrackInsert,
-
-    GetTrackById : GetTrackById,
-
-    GetTrackByName : GetTrackByName,
-
-    GetAllTracks : GetAllTracks,
-
-    //********************UPDATE IN DATABASE********************
-
-    UpdateTrack : UpdateTrack,
-
-    //********************DELETE FROM DATABASE******************
-
-    DeleteTrack : DeleteTrack,
-
-    //********************OTHER*********************************
-    CountTrack : CountTrack
 }

@@ -4,9 +4,7 @@ let connection;
 
 module.exports = {
     // to open connection to DB
-    OpenConnection : function OpenConnection(config) {
-        OpenConnectionDB(config)
-    },
+    OpenConnection : OpenConnectionDB,
     // Function to add track on DB
     StoreTrackOnDB : async function (config, track) {
         importTrackDB(config, track)
@@ -31,6 +29,7 @@ function OpenConnectionDB(config) {
     });
     if (connection != null) console.log("Connected to DB")
     else console.log("NOT connected to DB")
+    return connection
 }
 
 async function importTrackDB(config, track) {

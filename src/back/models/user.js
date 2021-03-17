@@ -1,3 +1,28 @@
+
+module.exports = {
+    //********************INSERT IN DATABASE********************
+    InsertUser : InsertUser,
+    //********************GET FROM DATABASE*********************
+    GetAllUsers : GetAllUsers,
+    GetUserById : GetUserById,
+    GetUserByPseudo : GetUserByPseudo,
+    GetAllUserPlaylists : GetAllUserPlaylists,
+    GetUserPlaylistById : GetUserPlaylistById,
+
+    //********************UPDATE IN DATABASE********************
+    UpdateUser : UpdateUser,
+
+    //********************DELETE FROM DATABASE******************
+    DeleteUser : DeleteUser,
+
+    //********************OTHER*********************************
+    CountUser : CountUser,
+
+    InsertLinkUserPlaylist : InsertLinkUserPlaylist
+}
+
+
+
 //Function to insert user
 function InsertUser(connection, user)
 {
@@ -131,26 +156,4 @@ function InsertLinkUserPlaylist(connection, idUser, idPlaylist)
     connection.query(query, function (err, result, fields) {
         if (err) throw err;
     });
-}
-
-module.exports = {
-    //********************INSERT IN DATABASE********************
-    InsertUser : InsertUser,
-    //********************GET FROM DATABASE*********************
-    GetAllUsers : GetAllUsers,
-    GetUserById : GetUserById,
-    GetUserByPseudo : GetUserByPseudo,
-    GetAllUserPlaylists : GetAllUserPlaylists,
-    GetUserPlaylistById : GetUserPlaylistById,
-
-    //********************UPDATE IN DATABASE********************
-    UpdateUser : UpdateUser,
-
-    //********************DELETE FROM DATABASE******************
-    DeleteUser : DeleteUser,
-
-    //********************OTHER*********************************
-    CountUser : CountUser,
-
-    InsertLinkUserPlaylist : InsertLinkUserPlaylist
 }
