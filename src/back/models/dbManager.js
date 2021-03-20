@@ -230,20 +230,20 @@ function InsertGenre(connection, nameGenre) {
 
 // To delete all date in DB
 function purgeDB() {
-    // DELETE link artist / track
-    let query = "DELETE FROM link_artist";
-    connection.query(query, function (err, result, fields) {
-        if (err) throw err;
-    });
-
     // DELETE link playlist
-    query = "DELETE FROM link_artist";
+    let query = "DELETE FROM link_playlist";
     connection.query(query, function (err, result, fields) {
         if (err) throw err;
     });
 
     // DELETE playlist
     query = "DELETE FROM playlist;";
+    connection.query(query, function (err, result, fields) {
+        if (err) throw err;
+    });
+
+    // DELETE genre
+    query = "DELETE FROM genre";
     connection.query(query, function (err, result, fields) {
         if (err) throw err;
     });
@@ -260,8 +260,25 @@ function purgeDB() {
         if (err) throw err;
     });
 
-    // DELETE genre
-    query = "DELETE FROM genre";
+
+
+    // DELETE user
+    query = "DELETE FROM user";
+    connection.query(query, function (err, result, fields) {
+        if (err) throw err;
+    });
+
+
+    // DELETE link artist / track
+    query = "DELETE FROM link_artist";
+    connection.query(query, function (err, result, fields) {
+        if (err) throw err;
+    });
+
+
+
+    // DELETE link user/playlist
+    query = "DELETE FROM link_user_playlist";
     connection.query(query, function (err, result, fields) {
         if (err) throw err;
     });

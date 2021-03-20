@@ -11,6 +11,7 @@ SELECT COUNT(*) AS nbTrack FROM track;
 SELECT COUNT(*) AS nbArtist FROM artist;
 SELECT COUNT(*) AS nbPlaylist FROM playlist;
 SELECT COUNT(*) AS nbGenre FROM genre;
+SELECT COUNT(*) AS nbUser FROM user;
 
 -- Delete all element in tables
 DELETE FROM link_playlist;

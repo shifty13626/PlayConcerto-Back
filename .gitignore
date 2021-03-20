@@ -21,3 +21,5 @@ tmp
 */tmp
 */.DS_Store
 */.idea
+
+*/config.json

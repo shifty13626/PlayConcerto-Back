@@ -14,9 +14,10 @@ module.exports = {
 function ParseCSVTrack (config) {
   // Read csv file
   var trackList = []
-  var contents = fs.readFileSync(config.pathCSVToRead, 'utf8');
+  var contents = fs.readFileSync(config.pathCSVTrackToRead, 'utf8');
 
   lines = contents.split('\n')
+      
 
       // create all track object
       .forEach(element => {
@@ -26,7 +27,7 @@ function ParseCSVTrack (config) {
         for (index = 0; index < artists.length; ++index) {
           artists[index] = artists[index].replace("'", "");
           artists[index] = artists[index].replace("'", "");
-          //artists[index] = artists[index].replace(" ", "");
+          //artists[index] = artists[index].replaceAll(" ", "");
           artists[index] = artists[index].replace("\"", "");
           artists[index] = artists[index].replace("\"", "");
         }
