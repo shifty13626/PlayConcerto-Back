@@ -26,9 +26,8 @@ module.exports = (config) => {
                 console.log(result);
             })
         }else {
-            let tracks = track_model.GetAllTracks(connection)
-            tracks.then(function (result) {
-                console.log(result);
+            track_model.GetAllTracks(connection).then((tracks) => {
+                res.status(200).send(tracks)
             })
             console.log("track GET /");
         }

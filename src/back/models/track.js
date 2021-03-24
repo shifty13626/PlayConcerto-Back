@@ -41,14 +41,15 @@ function InsertTrack(connection, track)
 }
 
 // Function to search a track
-function GetTrack(connection, track)
+function GetTrack(connection, track, size, index)
 {
     console.log("track searched : " +track.name)
 
     var query = "SELECT * "
         + "FROM track, link_artist "
         + "WHERE track.name = \"" +track.name +"\" "
-        + "AND track.id_track = link_artist.id_track ";
+        + "AND track.id_track = link_artist.id_track "
+        + "LIMIT " + (index * size) +" OFFSET " +size +";";
 
     track.list_artist_id.forEach(function(idArtist) {
         query += "AND link_artist.id_artist = " +idArtist;
