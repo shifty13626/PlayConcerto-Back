@@ -12,8 +12,8 @@ module.exports = (config) => {
         let connection = dbManager.OpenConnection(config);
         let user = new user_entity.User(req.body.pseudo, req.body.firstname,
             req.body.lastname, req.body.playlists);
-        user_model.InsertUser(connection, user).then((created) => {
-            if (created['affectedRows'] !== 0) {
+        user_model.InsertUser(connection, user).then((user_created) => {
+            if (user_created['affectedRows'] !== 0) {
                 res.status(200).send(`User ${user.pseudo} has been created.`);
             }
             else {
@@ -105,8 +105,8 @@ module.exports = (config) => {
     // To delete an user
     router.delete('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
-        user_model.DeleteUser(connection, req.params.id).then( (deleted) => {
-            if (deleted['affectedRows'] !== 0) {
+        user_model.DeleteUser(connection, req.params.id).then( (user_deleted) => {
+            if (user_deleted['affectedRows'] !== 0) {
                 res.status(200).send(`User ${req.params.id} has been deleted.`);
             }
             else {

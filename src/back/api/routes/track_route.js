@@ -14,10 +14,10 @@ module.exports = (config) => {
             req.body.liveness, req.body.name, req.body.popularity, req.body.year);
         track_model.InsertTrack(connection, track).then((created) => {
             if (created['affectedRows'] !== 0) {
-                res.status(200).send(`User ${track.title} has been created.`);
+                res.status(200).send(`Track ${track.title} has been created.`);
             }
             else {
-                res.status(400).send(`User ${track} cannot be created. Pseudo is mandatory.`);
+                res.status(400).send(`Track ${track} cannot be created. Pseudo is mandatory.`);
             }
         }).catch((error) => {
             res.status(500).send(error);
@@ -29,9 +29,9 @@ module.exports = (config) => {
         let connection = dbManager.OpenConnection(config);
         if(req.query.title != null ){
             // ex : "/track?name=toto"
-            track_model.GetTrackByName(connection,req.query.title).then((result) => {
-                if(result != null){
-                    res.status(200).send(result);
+            track_model.GetTrackByName(connection,req.query.title).then((track) => {
+                if(track != null){
+                    res.status(200).send(track);
                 }
                 else{
                     res.status(400).send(`Track ${req.query.title} not found in database.`);
@@ -56,9 +56,9 @@ module.exports = (config) => {
     // Get track by id
     router.get('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
-        track_model.GetTrackById(connection,req.params.id).then((result) => {
-            if (result != null){
-                res.status(200).send(result);
+        track_model.GetTrackById(connection,req.params.id).then((track) => {
+            if (track != null){
+                res.status(200).send(track);
             }
             else {
                 res.status(400).send(`The song ${req.params.id} does not exist in the database.`);
@@ -93,8 +93,8 @@ module.exports = (config) => {
     // To delete a track identified by id
     router.delete('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
-        track_model.DeleteTrack(connection, req.params.id).then( (deleted) => {
-            if (deleted['affectedRows'] !== 0) {
+        track_model.DeleteTrack(connection, req.params.id).then( (deleted_track) => {
+            if (deleted_track['affectedRows'] !== 0) {
                 res.status(200).send(`Track ${req.params.id} has been deleted.`);
             }
             else {
