@@ -112,7 +112,7 @@ function GetTrackById(connection, id)
 //Function to get track by name
 function GetTrackByName(connection, name)
 {
-    let query = "SELECT * FROM track WHERE track.name=\""+name+"\";";
+    let query = "SELECT * FROM track WHERE title=\""+name+"\";";
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
@@ -140,7 +140,7 @@ function GetAllTracks(connection)
 //Function to get track by id
 function UpdateTrack(connection, id, new_track)
 {
-    let query = "UPDATE track SET name='"+new_track.name+"', year="+new_track.year+", " +
+    let query = "UPDATE track SET title=\'"+new_track.title+"\', year="+new_track.year+", " +
         "duration="+new_track.duration+" WHERE id_track="+id+";";
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
