@@ -39,7 +39,9 @@ module.exports = (config) => {
                 res.status(500).send(error);
             })
         }else{
+            console.log("toto")
             artist_model.GetAllArtists(connection).then( (artists) => {
+                console.log(artists)
                 if(artists != null){
                     res.status(200).send(artists);
                 }
