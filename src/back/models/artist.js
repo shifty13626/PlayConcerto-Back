@@ -58,7 +58,7 @@ function GetArtistById(connection, id)
 
 function GetArtistByName(connection, name)
 {
-    let query = "SELECT * FROM artist WHERE artist.name LIKE '" +name+"';";
+    let query = "SELECT * FROM artist WHERE artist.name LIKE \"%" +name +"%\";";
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
