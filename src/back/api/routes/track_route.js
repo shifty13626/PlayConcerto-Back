@@ -28,7 +28,8 @@ module.exports = (config) => {
     router.get('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         if(req.query.title != null ){
-            // ex : "/track?name=toto"
+            console.log("Get track by name : " +req.query.title)
+            // ex : "/track?title=toto"
             track_model.GetTrackByName(connection,req.query.title).then((track) => {
                 if(track != null){
                     res.status(200).send(track);
@@ -40,6 +41,7 @@ module.exports = (config) => {
                 res.status(500).send(error);
             })
         }else {
+            console.log("Get all track")
             track_model.GetAllTracks(connection).then((tracks) => {
                 if(tracks != null){
                     res.status(200).send(tracks);

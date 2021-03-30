@@ -112,7 +112,7 @@ function GetTrackById(connection, id)
 //Function to get track by name
 function GetTrackByName(connection, name)
 {
-    let query = "SELECT * FROM track WHERE title=\""+name+"\";";
+    let query = "SELECT * FROM track WHERE title LIKE \"%" +name +"%\";";
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
             if (err) throw err;

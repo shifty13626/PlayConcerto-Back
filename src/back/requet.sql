@@ -23,7 +23,7 @@ DELETE FROM artist;
 
 -- insert value test
 INSERT INTO artist (name) VALUE ('MUSE');
-INSERT INTO track (name, year, duration, add_date)
+INSERT INTO track (title, year, duration, add_date)
 VALUES ('I Put A Spell On You', 2021, 4.56, NOW());
 insert into link_artist (id_track, id_artist) VALUES ();
 INSERT INTO genre (name) VALUE ('Rock');
@@ -33,7 +33,7 @@ VALUES (1, 84);
 
 SELECT *
 FROM track, link_artist
-WHERE track.name = ""
+WHERE track.title = ""
   AND track.id_track = link_artist.id_track
   AND link_artist.id_artist =
 
@@ -43,7 +43,7 @@ select * from artist where name = 'MamieSmith'
 
 SELECT *
 FROM track
-WHERE name = 'I Put A Spell On You'
+WHERE title = 'I Put A Spell On You'
 ORDER BY add_date DESC;
 
 -- dataset example to import, launch command after command
@@ -52,6 +52,6 @@ values ('shifty', 'Ludo', 'hamel' , 'password');
 insert into genre (name) value ('rock');
 insert into playlist (name, id_genre) values ('playlist_test', 7);
 insert into link_user_playlist (id_user, id_playlist) values (3, 4);
-insert into track (name, year, duration, danceability, energy, instrumentalness, liveness, popularity, add_date)
+insert into track (title, year, duration, danceability, energy, instrumentalness, liveness, popularity, add_date)
 VALUES ('Supremacy', 2021, 4.55, 0.0, 100.0, 90.1, 100.0, 60.5, NOW());
 insert into link_playlist (id_playlist, id_track) values (4, 2689);
