@@ -69,8 +69,19 @@ module.exports = (config) => {
     });
 
     // To get a track identified by his id and artist id
-    router.get('/:id/artist/:name', (req, res) => {
-        console.log("track GET /:id/artist/:name => id = "+req.params.id+" et name = "+req.params.name);
+    router.get('/:id/artists', (req, res) => {
+        let connection = dbManager.OpenConnection(config);
+        track_model.GetTracksArtists(connection, req.params.id).then( (artists) => {
+            console.log(artists);
+            if (artists != null){
+                res.status(200).send(artists);
+            }
+            else {
+                res.status(400).send(`The song ${req.params.id} does not have artists.`);
+            }
+        }).catch( (error) => {
+            res.status(500).send(error);
+        })
     });
 
     router.put('/:id', (req, res) => {
