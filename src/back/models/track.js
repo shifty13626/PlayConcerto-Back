@@ -14,6 +14,8 @@ module.exports = {
 
     GetAllTracks : GetAllTracks,
 
+    GetTracksArtists : GetTracksArtists,
+
     //********************UPDATE IN DATABASE********************
 
     UpdateTrack : UpdateTrack,
@@ -127,6 +129,21 @@ function GetTrackByName(connection, name)
 function GetAllTracks(connection)
 {
     let query = "SELECT * FROM track;";
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+}
+
+
+//Function to get artists of one track
+function GetTracksArtists(connection, track_id)
+{
+    let query = "SELECT artist.name FROM link_artist, artist WHERE link_artist.id_track = " + track_id +
+    " AND link_artist.id_artist = artist.id_artist;";
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
