@@ -40,7 +40,7 @@ function ParseCSVTrack (config) {
             //element.split(',')[1].substring(2, (element.split(',')[1].length-2)),   // artist
             artists,
             element.split(';')[2],    // danceability
-            element.split(';')[3],    // duration
+            millisToMinutesAndSeconds(element.split(';')[3]), // duration
             element.split(';')[4],    // energy
             element.split(';')[7],    // instrumentalness
             element.split(';')[9],    // liveness
@@ -61,6 +61,12 @@ function ParseCSVTrack (config) {
 
   console.log("end parsing, json file ready.")
   return trackList;
+}
+
+function millisToMinutesAndSeconds(millis) {
+    var minutes = Math.floor(millis / 60000);
+    var seconds = ((millis % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
 }
 
 function ParseCSVGenre(config) {
