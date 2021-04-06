@@ -22,6 +22,7 @@ module.exports = (config) => {
         }).catch((error) => {
             res.status(500).send(error);
         });
+        connection.end();
     });
 
     
@@ -47,6 +48,7 @@ module.exports = (config) => {
                 res.status(500).send(error);
             });
         }
+        connection.end();
     });
 
     // Get user by id
@@ -62,6 +64,7 @@ module.exports = (config) => {
         }).catch((error) => {
             res.status(500).send(error);
         });
+        connection.end();
     });
 
     // Get user playlist by id user
@@ -77,6 +80,7 @@ module.exports = (config) => {
         }).catch((error) => {
             res.status(500).send(error);
         })
+        connection.end();
     });
 
     // Get playlist for an user idenitified by his id and name playlist
@@ -92,6 +96,7 @@ module.exports = (config) => {
         }).catch((error) => {
             res.status(500).send(error);
         });
+        connection.end();
     });
 
     router.put('/:id', (req, res) => {
@@ -100,6 +105,7 @@ module.exports = (config) => {
             req.body.lastname, req.body.playlists)
         user_model.UpdateUser(connection, req.params.id, new_user);
         console.log("user PUT /:id => id = "+req.params.id);
+        connection.end();
     });
 
     // To delete an user
@@ -115,6 +121,7 @@ module.exports = (config) => {
         }).catch((error) => {
             res.status(500).send(error);
         })
+        connection.end();
     });
 
     return router;

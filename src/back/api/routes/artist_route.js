@@ -20,6 +20,7 @@ module.exports = (config) => {
         }).catch((error) => {
             res.status(500).send(error);
         });
+        connection.end();
     });
 
     // To get all artist
@@ -52,7 +53,7 @@ module.exports = (config) => {
                 res.status(500).send(error);
             })
         }
-
+        connection.end();
     });
 
     // Get artist identified by his id
@@ -68,6 +69,7 @@ module.exports = (config) => {
         }).catch( (error) => {
             res.status(500).send(error);
         })
+        connection.end();
     });
 
     router.get('/:id/track/:name', (req, res) => {
@@ -79,6 +81,7 @@ module.exports = (config) => {
         let connection = dbManager.OpenConnection(config);
         let new_artist = new artist_entity.Artist(req.body.name);
         artist_model.UpdateArtist(connection, req.params.id, new_artist);
+        connection.end();
     });
 
     // Delete artist identified by id
@@ -94,6 +97,7 @@ module.exports = (config) => {
         }).catch((error) => {
             res.status(500).send(error);
         })
+        connection.end();
     });
 
     return router;

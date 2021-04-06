@@ -22,6 +22,7 @@ module.exports = (config) => {
         }).catch((error) => {
             res.status(500).send(error);
         });
+        connection.end();
     });
 
     // To get all track
@@ -53,6 +54,7 @@ module.exports = (config) => {
                 res.status(500).send(error);
             })
         }
+        connection.end();
     });
 
     // Get track by id
@@ -68,6 +70,7 @@ module.exports = (config) => {
         }).catch((error) => {
             res.status(500).send(error);
         })
+        connection.end();
     });
 
     // To get a track identified by his id and artist id
@@ -84,6 +87,7 @@ module.exports = (config) => {
         }).catch( (error) => {
             res.status(500).send(error);
         })
+        connection.end();
     });
 
     router.put('/:id', (req, res) => {
@@ -93,14 +97,15 @@ module.exports = (config) => {
             req.body.name, req.body.popularity, req.body.year)
         //new_track.sreq.body.name, req.body.year, req.body.duration);
         track_model.UpdateTrack(connection, req.params.id, new_track).then((result) => {
-                if (result != null) {
-                    res.status(200).send(`Track ${result} has been created.`);
-                } else {
-                    res.status(400).send(`Track has not been created, something is missing.`);
-                }
-            }).catch((error) => {
-                res.status(500).send(error);
-            })
+            if (result != null) {
+                res.status(200).send(`Track ${result} has been created.`);
+            } else {
+                res.status(400).send(`Track has not been created, something is missing.`);
+            }
+        }).catch((error) => {
+            res.status(500).send(error);
+        })
+        connection.end();
     });
 
     // To delete a track identified by id
@@ -116,6 +121,7 @@ module.exports = (config) => {
         }).catch((error) => {
             res.status(500).send(error);
         })
+        connection.end();
     });
 
     return router;

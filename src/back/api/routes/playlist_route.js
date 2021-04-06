@@ -19,6 +19,7 @@ module.exports = (config) => {
         }).catch((error) => {
             res.status(500).send(error);
         });
+        connection.end();
     });
 
     router.get('/', (req, res) => {
@@ -46,6 +47,7 @@ module.exports = (config) => {
                 res.status(500).send(error);
             });
         }
+        connection.end();
     });
 
     router.get('/:id', (req, res) => {
@@ -60,6 +62,7 @@ module.exports = (config) => {
         }).catch( (error) => {
             res.status(500).send(error);
         })
+        connection.end();
     });
 
     router.get('/:id/track/:name', (req, res) => {
@@ -70,6 +73,7 @@ module.exports = (config) => {
         let connection = dbManager.OpenConnection(config);
         let new_playlist = new playlist_entity.Playlist(req.body.name, req.body.id_genre);
         playlist_model.UpdatePlaylist(connection, req.params.id, new_playlist);
+        connection.end();
     });
 
     router.delete('/:id', (req, res) => {
@@ -84,6 +88,7 @@ module.exports = (config) => {
         }).catch((error) => {
             res.status(500).send(error);
         })
+        connection.end();
     });
 
     return router;
