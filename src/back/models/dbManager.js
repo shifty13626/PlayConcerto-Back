@@ -101,7 +101,7 @@ function GetTrack(track, connection) {
 
     var query = "SELECT * "
         + "FROM track, link_artist "
-        + "WHERE track.name = \"" +track.name +"\" "
+        + "WHERE track.title = \"" +track.name +"\" "
         + "AND track.id_track = link_artist.id_track ";
 
     track.list_artist_id.forEach(function(idArtist) {
@@ -121,7 +121,7 @@ function GetTrack(track, connection) {
 function GetTrackInsert(track, connection) {
     let query = "SELECT * "
         + "FROM track "
-        + "WHERE name = \"" +track.name +"\" "
+        + "WHERE title = \"" +track.name +"\" "
         + "ORDER BY add_date DESC;"
 
 
@@ -185,8 +185,10 @@ function InsertTrack(track, connection) {
     let d = new Date();
     let date = d.getFullYear() +"/" +d.getMonth() +"/" +d.getDay()
         +"_" +d.getHours() +":" +d.getMinutes() +":" +d.getSeconds()
-    var query = "INSERT INTO track (name, year, duration, add_date) "
-    + "values (\"" + track.name +"\"," +track.year +"," +track.duration +", NOW());";
+    var query = "INSERT INTO track (title, year, duration, add_date," +
+        " danceability, energy, instrumentalness, liveness, popularity) "
+    + "values (\"" + track.name +"\"," +track.year +",\"" +track.duration +"\", NOW()," +
+        ");";
 
     connection.query(query, function (err, result, fields) {
         if (err) throw err;
@@ -236,6 +238,18 @@ function purgeDB() {
         if (err) throw err;
     });
 
+    // DELETE link user/playlist
+    query = "DELETE FROM link_user_playlist";
+    connection.query(query, function (err, result, fields) {
+        if (err) throw err;
+    });
+
+    // DELETE link artist / track
+    query = "DELETE FROM link_artist";
+    connection.query(query, function (err, result, fields) {
+        if (err) throw err;
+    });
+
     // DELETE playlist
     query = "DELETE FROM playlist;";
     connection.query(query, function (err, result, fields) {
@@ -264,21 +278,6 @@ function purgeDB() {
 
     // DELETE user
     query = "DELETE FROM user";
-    connection.query(query, function (err, result, fields) {
-        if (err) throw err;
-    });
-
-
-    // DELETE link artist / track
-    query = "DELETE FROM link_artist";
-    connection.query(query, function (err, result, fields) {
-        if (err) throw err;
-    });
-
-
-
-    // DELETE link user/playlist
-    query = "DELETE FROM link_user_playlist";
     connection.query(query, function (err, result, fields) {
         if (err) throw err;
     });
