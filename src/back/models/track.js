@@ -128,7 +128,12 @@ function GetTrackByName(connection, name)
 //Function to get track by id
 function GetAllTracks(connection)
 {
-    let query = "SELECT * FROM track;";
+    //let query = "SELECT * FROM track;";
+    let query = "SELECT DISTINCT * "
+        + "FROM track, artist, link_artist "
+        + "WHERE track.id_track = link_artist.id_track "
+        + "AND link_artist.id_artist = artist.id_artist "
+        + "ORDER BY track.id_track;";
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
             if (err) throw err;

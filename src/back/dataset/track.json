@@ -1273,20 +1273,6 @@
 	},
 	{
 		"artist": [
-			"Chris Mills"
-		],
-		"list_artist_id": [],
-		"danceability": "0.36",
-		"duration": "3:41",
-		"energy": "0.598",
-		"instrumentalness": "0.000655",
-		"liveness": "0.114",
-		"name": "Nightmare at 20",
-		"popularity": "000 Feet\"",
-		"year": "0.11199999999999999"
-	},
-	{
-		"artist": [
 			"La Gusana Ciega"
 		],
 		"list_artist_id": [],
@@ -3690,20 +3676,6 @@
 		"name": "Believe",
 		"popularity": "54",
 		"year": "2001\r"
-	},
-	{
-		"artist": [
-			"Vyacheslav Sankov"
-		],
-		"list_artist_id": [],
-		"danceability": "0.722",
-		"duration": "5:29",
-		"energy": "0.71",
-		"instrumentalness": "0.8859999999999999",
-		"liveness": "0.113",
-		"name": "Revival",
-		"popularity": "Pt.2\"",
-		"year": "0.715"
 	},
 	{
 		"artist": [
@@ -26134,20 +26106,6 @@
 	},
 	{
 		"artist": [
-			"Aron Shorty"
-		],
-		"list_artist_id": [],
-		"danceability": "0.737",
-		"duration": "4:30",
-		"energy": "0.833",
-		"instrumentalness": "0.807",
-		"liveness": "0.10099999999999999",
-		"name": "Rock da House, Pt.2",
-		"popularity": "5",
-		"year": "2009\r"
-	},
-	{
-		"artist": [
 			"Eric Church"
 		],
 		"list_artist_id": [],
@@ -26158,20 +26116,6 @@
 		"liveness": "0.111",
 		"name": "Those I've Loved",
 		"popularity": "45",
-		"year": "2009\r"
-	},
-	{
-		"artist": [
-			"Aron Shorty"
-		],
-		"list_artist_id": [],
-		"danceability": "0.737",
-		"duration": "4:30",
-		"energy": "0.833",
-		"instrumentalness": "0.807",
-		"liveness": "0.10099999999999999",
-		"name": "Rock da House, Pt.2",
-		"popularity": "5",
 		"year": "2009\r"
 	},
 	{

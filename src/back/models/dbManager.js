@@ -182,13 +182,25 @@ function CountTrack(connection) {
 
 //Function to add a track on DB
 function InsertTrack(track, connection) {
-    let d = new Date();
-    let date = d.getFullYear() +"/" +d.getMonth() +"/" +d.getDay()
-        +"_" +d.getHours() +":" +d.getMinutes() +":" +d.getSeconds()
-    var query = "INSERT INTO track (title, year, duration, add_date," +
-        " danceability, energy, instrumentalness, liveness, popularity) "
-    + "values (\"" + track.name +"\"," +track.year +",\"" +track.duration +"\", NOW()," +
-        ");";
+    var query = "INSERT INTO track (title"
+        + ", year"
+        + ", duration"
+        + ", add_date"
+        + ", danceability"
+        + ", energy"
+        + ", instrumentalness"
+        + ", liveness"
+        + ", popularity)"
+        + "values (\""
+        + track.name +"\","
+        + track.year +",\""
+        + track.duration +"\""
+        + ", NOW()"
+        + "," +track.danceability
+        +"," +track.energy
+        +"," +track.instrumentalness
+        +"," +track.liveness
+        + "," +track.popularity +");";
 
     connection.query(query, function (err, result, fields) {
         if (err) throw err;
