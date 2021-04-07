@@ -43,6 +43,19 @@ module.exports = (config) => {
         }else {
             track_model.GetAllTracks(connection).then((tracks) => {
                 if(tracks != null){
+                    let previous_title = undefined;
+                    let occurrences = 0;
+                    for (const [index, actual_track] of tracks.entries()){
+                        if (previous_title === actual_track.title){
+                            occurrences += 1;
+                            tracks[index - occurrences].name +=  ", " + actual_track.name;
+                            delete tracks[index];
+                        }
+                        else {
+                            previous_title = actual_track.title;
+                            occurrences = 0;
+                        }
+                    }
                     res.status(200).send(tracks);
                 }
                 else{
