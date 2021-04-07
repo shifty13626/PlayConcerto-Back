@@ -128,7 +128,6 @@ function GetTrackByName(connection, name)
 //Function to get track by id
 function GetAllTracks(connection)
 {
-    //let query = "SELECT * FROM track;";
     let query = "SELECT DISTINCT * "
         + "FROM track, artist, link_artist "
         + "WHERE track.id_track = link_artist.id_track "
