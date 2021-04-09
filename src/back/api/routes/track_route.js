@@ -41,11 +41,12 @@ module.exports = (config) => {
                 res.status(500).send(error);
             })
         }else {
-            track_model.GetAllTracks(connection).then((tracks) => {
+            track_model.GetAllTracks(connection).then( (tracks) => {
                 if(tracks != null){
                     let previous_title = undefined;
                     let occurrences = 0;
                     for (const [index, actual_track] of tracks.entries()){
+
                         if (previous_title === actual_track.title){
                             occurrences += 1;
                             tracks[index - occurrences].name +=  ", " + actual_track.name;
@@ -56,7 +57,11 @@ module.exports = (config) => {
                             occurrences = 0;
                         }
                     }
-                    res.status(200).send(tracks);
+                    // remove null objects that where occurrences with other artists.
+                    const filtered_tracks = tracks.filter( (el) => {
+                        return el != null;
+                    });
+                    res.status(200).send(filtered_tracks);
                 }
                 else{
                     res.status(400).send(`There is no tracks on database.`);
