@@ -32,7 +32,7 @@ module.exports = (config) => {
             // ex : "/track?name=toto"
             track_model.GetTrackByName(connection,req.query.title).then((track) => {
                 if(track != null){
-                    res.status(200).send(track);
+                    res.status(200).send(track[0]);
                 }
                 else{
                     res.status(400).send(`Track ${req.query.title} not found in database.`);
@@ -73,7 +73,7 @@ module.exports = (config) => {
         let connection = dbManager.OpenConnection(config);
         track_model.GetTrackById(connection,req.params.id).then((track) => {
             if (track != null){
-                res.status(200).send(track);
+                res.status(200).send(track[0]);
             }
             else {
                 res.status(400).send(`The song ${req.params.id} does not exist in the database.`);

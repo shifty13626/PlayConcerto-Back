@@ -28,7 +28,7 @@ module.exports = (config) => {
             // ex : "/playlist?name=toto"
             playlist_model.GetPlaylistByName(connection, req.query.name).then((playlist) => {
                 if (playlist != null) {
-                    res.status(200).send(playlist);
+                    res.status(200).send(playlist[0]);
                 } else {
                     res.status(400).send(`Cannot get playlit ${req.query.name}, it does not exist`);
                 }
@@ -54,7 +54,7 @@ module.exports = (config) => {
         let connection = dbManager.OpenConnection(config);
         playlist_model.GetPlaylistById(connection,req.params.id).then( (playlist) => {
             if(playlist != null){
-                res.status(200).send(playlist);
+                res.status(200).send(playlist[0]);
             }
             else{
                 res.status(400).send(`Cannot get ${playlist.name}, it does not exist.`);

@@ -31,7 +31,7 @@ module.exports = (config) => {
             // ex : "/artist?name=toto"
             artist_model.GetArtistByName(connection,req.query.name).then( (artist) => {
                 if(artist != null){
-                    res.status(200).send(artist);
+                    res.status(200).send(artist[0]);
                 }
                 else {
                     res.status(400).send(`Can not get ${artist.name}.`);
@@ -59,7 +59,7 @@ module.exports = (config) => {
         let connection = dbManager.OpenConnection(config);
         artist_model.GetArtistById(connection,req.params.id).then( (artist) => {
             if(artist != null){
-                res.status(200).send(artist);
+                res.status(200).send(artist[0]);
             }
             else {
                 res.status(400).send(`Can not get ${artist.name}.`);
