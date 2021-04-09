@@ -8,11 +8,14 @@ module.exports = (config) => {
 
     // To add a track
     router.post('/', (req, res) => {
+        console.log("request add track...");
         let connection = dbManager.OpenConnection(config);
-        let track = new track_entity.Track(req.body.artist, req.body.danceability,
-            req.body.duration, req.body.energy, req.body.instrumentalness,
-            req.body.liveness, req.body.name, req.body.popularity, req.body.year);
+        console.log("title : " +req.body.title)
+
+        let track = req.body;
+        console.log("track : " +JSON.stringify(track));
         track_model.InsertTrack(connection, track).then((created) => {
+            console.log(created['affectedRows'])
             if (created['affectedRows'] !== 0) {
                 res.status(200).send(`Track ${track.title} has been created.`);
             }
@@ -44,7 +47,7 @@ module.exports = (config) => {
         }else {
             console.log("Get all track")
             track_model.GetAllTracks(connection).then((tracks) => {
-                if(tracks != null){
+                if(tracks != null) {
                     let previous_title = undefined;
                     let occurrences = 0;
                     for (const [index, actual_track] of tracks.entries()){

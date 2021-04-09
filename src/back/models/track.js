@@ -31,14 +31,33 @@ module.exports = {
 //Function to add a track on DB
 function InsertTrack(connection, track)
 {
-    let d = new Date();
-    let date = d.getFullYear() +"/" +d.getMonth() +"/" +d.getDay()
-        +"_" +d.getHours() +":" +d.getMinutes() +":" +d.getSeconds()
-    var query = "INSERT INTO track (name, year, duration, add_date) "
-        + "values (\"" + track.name +"\"," +track.year +"," +track.duration +", NOW());";
+    var query = "INSERT INTO track (title"
+        + ", year"
+        + ", duration"
+        + ", add_date"
+        + ", danceability"
+        + ", energy"
+        + ", instrumentalness"
+        + ", liveness"
+        + ", popularity)"
+        + "values (\""
+        + track.title +"\","
+        + track.year +",\""
+        + track.duration +"\""
+        + ", NOW()"
+        + "," +track.danceability
+        +"," +track.energy
+        +"," +track.instrumentalness
+        +"," +track.liveness
+        + "," +track.popularity +");";
+    console.log("query : " +query);
 
-    connection.query(query, function (err, result, fields) {
-        if (err) throw err;
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
     });
 }
 
