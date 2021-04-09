@@ -3,15 +3,16 @@ const router = express.Router();
 const dbManager = require('../../models/dbManager')
 const user_entity = require('../../entities/user')
 const user_model = require('../../models/user')
+const bcrypt = require('bcrypt')
 
 module.exports = (config) => {
     console.log("config from user_route.js : " +config);
 
     // Route to add a user
-    router.post('/', (req, res) => {
+     router.post('/', async (req, res) => {
         let connection = dbManager.OpenConnection(config);
-        let user = new user_entity.User(req.body.pseudo, req.body.firstname,
-            req.body.lastname, req.body.playlists);
+        let hashedPassword = await bcrypt.hash(req.body.password, 10);
+        let user = new user_entity.User(req.body.pseudo, hashedPassword, req.body.firstname, req.body.lastname);
         user_model.InsertUser(connection, user).then((user_created) => {
             if (user_created['affectedRows'] !== 0) {
                 res.status(200).send(`User ${user.pseudo} has been created.`);
@@ -25,6 +26,21 @@ module.exports = (config) => {
         connection.end();
     });
 
+
+    //User get authentication
+    router.get('/auth/',  (req, res) => {
+        let connection = dbManager.OpenConnection(config);
+        user_model.GetUserByPseudo(connection, req.body.pseudo).then( async (user) => {
+            if (user !== null){
+                const comparison = await bcrypt.compare(req.body.password, user[0].password);
+                res.status(200).send(comparison);
+            } else {
+                res.status(400).send(`User ${req.body.pseudo} not found.`);
+            }
+        }).catch( (error) => {
+            res.status(500).send(error);
+        })
+    })
     
     router.get('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
@@ -32,7 +48,7 @@ module.exports = (config) => {
             // ex : "/user?pseudo=toto"
             user_model.GetUserByPseudo(connection,req.query.pseudo).then((user) => {
                 if (user !== null) {
-                    res.send(user);
+                    res.status(200).send(user[0]);
                 }
                 else {
                     res.status(400).send(`User ${req.query.pseudo} does not exist.`)
@@ -43,7 +59,11 @@ module.exports = (config) => {
         }
         else {
             user_model.GetAllUsers(connection).then((users) => {
-                res.send(users);
+                if (users !== null) {
+                    res.status(200).send(users);
+                } else {
+                    res.status(400).send('No users at all in the database.');
+                }
             }).catch((error) => {
                 res.status(500).send(error);
             });
@@ -56,7 +76,7 @@ module.exports = (config) => {
         let connection = dbManager.OpenConnection(config);
         user_model.GetUserById(connection, req.params.id).then((user) => {
             if (user !== null) {
-                res.send(user);
+                res.status(200).send(user[0]);
             }
             else {
                 res.status(400).send(`User ${req.params.id} not found.`);
@@ -72,7 +92,7 @@ module.exports = (config) => {
         let connection = dbManager.OpenConnection(config);
         user_model.GetAllUserPlaylists(connection, req.params.id).then((playlists) => {
             if (playlists !== null) {
-                res.send(playlists);
+                res.status(200).send(playlists);
             }
             else {
                 res.status(400).send(`User ${req.params.id} does not have playlist yet.`)
@@ -88,7 +108,7 @@ module.exports = (config) => {
         let connection = dbManager.OpenConnection(config);
         user_model.GetUserPlaylistById(connection, req.params.id, req.params.name).then((playlist) => {
             if (playlist !== null) {
-                res.send(playlist);
+                res.status(200).send(playlist[0]);
             }
             else {
                 res.status(400).send(`User ${req.params.id} does not have playlist ${req.params.name}.`)
@@ -99,10 +119,12 @@ module.exports = (config) => {
         connection.end();
     });
 
+
+
     router.put('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         let new_user = new user_entity.User(req.body.pseudo, req.body.firstname,
-            req.body.lastname, req.body.playlists)
+            req.body.lastname, req.body.body.password);
         user_model.UpdateUser(connection, req.params.id, new_user);
         console.log("user PUT /:id => id = "+req.params.id);
         connection.end();
