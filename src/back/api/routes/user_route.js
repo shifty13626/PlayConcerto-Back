@@ -28,7 +28,7 @@ module.exports = (config) => {
 
 
     //User get authentication
-    router.get('/auth/',  (req, res) => {
+    router.post('/auth',  (req, res) => {
         let connection = dbManager.OpenConnection(config);
         user_model.GetUserByPseudo(connection, req.body.pseudo).then( async (user) => {
             if (user !== null){
