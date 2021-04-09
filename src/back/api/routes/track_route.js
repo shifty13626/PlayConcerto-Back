@@ -36,7 +36,7 @@ module.exports = (config) => {
             // ex : "/track?title=toto"
             track_model.GetTrackByName(connection,req.query.title).then((track) => {
                 if(track != null){
-                    res.status(200).send(track);
+                    res.status(200).send(track[0]);
                 }
                 else{
                     res.status(400).send(`Track ${req.query.title} not found in database.`);
@@ -51,6 +51,7 @@ module.exports = (config) => {
                     let previous_title = undefined;
                     let occurrences = 0;
                     for (const [index, actual_track] of tracks.entries()){
+
                         if (previous_title === actual_track.title){
                             occurrences += 1;
                             tracks[index - occurrences].name +=  ", " + actual_track.name;
@@ -61,7 +62,11 @@ module.exports = (config) => {
                             occurrences = 0;
                         }
                     }
-                    res.status(200).send(tracks);
+                    // remove null objects that where occurrences with other artists.
+                    const filtered_tracks = tracks.filter( (el) => {
+                        return el != null;
+                    });
+                    res.status(200).send(filtered_tracks);
                 }
                 else{
                     res.status(400).send(`There is no tracks on database.`);
@@ -78,7 +83,7 @@ module.exports = (config) => {
         let connection = dbManager.OpenConnection(config);
         track_model.GetTrackById(connection,req.params.id).then((track) => {
             if (track != null){
-                res.status(200).send(track);
+                res.status(200).send(track[0]);
             }
             else {
                 res.status(400).send(`The song ${req.params.id} does not exist in the database.`);

@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 
 module.exports = {
     //********************INSERT IN DATABASE********************
@@ -25,8 +26,8 @@ module.exports = {
 
 //Function to insert user
 function InsertUser(connection, user) {
-    let query = "INSERT INTO user (pseudo, firstname, lastname) "
-        + "values (\"" + user.pseudo + "\",\"" + user.firstname + "\",\"" + user.lastname + "\");";
+    let query = "INSERT INTO user (firstname, lastname, pseudo, password) "
+        + "values (\"" + user.firstname + "\",\"" + user.lastname + "\",\"" + user.pseudo + "\",\"" +user.password + "\");";
 
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
@@ -162,3 +163,5 @@ function InsertLinkUserPlaylist(connection, idUser, idPlaylist)
         if (err) throw err;
     });
 }
+
+
