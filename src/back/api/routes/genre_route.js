@@ -37,4 +37,6 @@ module.exports = (config) => {
         });
         connection.end();
     });
+
+    return router;
 }
