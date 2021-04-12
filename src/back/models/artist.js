@@ -21,13 +21,15 @@ module.exports = {
 
 function InsertArtist(connection, artist)
 {
-    //console.log("Artist to insert : " +nameArtist)
-    //var id = CountArtist(connection);
     var query = "INSERT INTO artist (name) " +
         "VALUE (\"" +artist.name +"\");";
 
-    connection.query(query, function (err, result, fields) {
-        if (err) throw err;
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
     });
 }
 
