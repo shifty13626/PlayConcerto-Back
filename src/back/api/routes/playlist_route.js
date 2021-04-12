@@ -8,7 +8,7 @@ module.exports = (config) => {
 
     router.post('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
-        let playlist = new playlist_entity.Playlist(req.body.name, req.body.id_genre);
+        let playlist = new playlist_entity.Playlist(req.body.name, req.body.id_genre, req.body.id_user);
         playlist_model.InsertPlaylist(connection, playlist).then((playlist_created) => {
             if (playlist_created['affectedRows'] !== 0) {
                 res.status(200).send(`Playlist ${playlist.name} has been created.`);
@@ -37,7 +37,7 @@ module.exports = (config) => {
             });
         }else{
             playlist_model.GetAllPlaylists(connection).then( (playlists) => {
-                if (playlists != null){
+                if (playlists != null) {
                     res.status(200).send(playlists);
                 }
                 else {
@@ -71,7 +71,7 @@ module.exports = (config) => {
 
     router.put('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
-        let new_playlist = new playlist_entity.Playlist(req.body.name, req.body.id_genre);
+        let new_playlist = new playlist_entity.Playlist(req.body.name, req.body.id_genre, req.body.id_user);
         playlist_model.UpdatePlaylist(connection, req.params.id, new_playlist);
         connection.end();
     });
