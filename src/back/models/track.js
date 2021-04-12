@@ -9,12 +9,14 @@ module.exports = {
     GetTrackInsert : GetTrackInsert,
 
     GetTrackById : GetTrackById,
+    GetIdTrack, GetIdTrack,
 
     GetTrackByName : GetTrackByName,
 
     GetAllTracks : GetAllTracks,
 
     GetTracksArtists : GetTracksArtists,
+    LinkTrackArtist : LinkTrackArtist,
 
     //********************UPDATE IN DATABASE********************
 
@@ -40,7 +42,7 @@ function InsertTrack(connection, track)
         + ", instrumentalness"
         + ", liveness"
         + ", popularity)"
-        + "values (\""
+        + " values (\""
         + track.title +"\","
         + track.year +",\""
         + track.duration +"\""
@@ -99,6 +101,28 @@ function GetTrackInsert(connection, track)
             if (err) throw err;
             if(result.length === 0) resolve(null);
             else resolve(result[0].id_track);
+        });
+    })
+}
+
+// Function to get Id of a track
+function GetIdTrack(connection, track)
+{
+    let query = "SELECT id_track "
+    + "FROM track "
+    + "WHERE title = \"" +track.title +"\" "
+    + "AND duration = \"" +track.duration +"\" "
+    + "AND danceability = \"" + track.danceability +"\" "
+    + "ADN energy = \"" +track.energy +"\" "
+    + "AND instrumentalness = \"" +track.instrumentalness +"\" "
+    + "AND liveness = \"" +track.liveness +"\" "
+    + "AND popularity = \"" +track.liveness +"\";"
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
         });
     })
 }
@@ -167,6 +191,20 @@ function GetTracksArtists(connection, track_id)
 {
     let query = "SELECT artist.name FROM link_artist, artist WHERE link_artist.id_track = " + track_id +
     " AND link_artist.id_artist = artist.id_artist;";
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+}
+
+// To link an artist to track
+function LinkTrackArtist(connection, track_id, artist_id) {
+    let query = "INSERT INTO link_artist (id_track, id_artist) "
+    +"values (" +track_id +"," +artist_id +");";
+
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
