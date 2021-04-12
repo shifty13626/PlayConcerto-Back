@@ -7,24 +7,28 @@ const track_model = require('../../models/track')
 module.exports = (config) => {
 
     // To add a track
-    router.post('/', (req, res) => {
+    router.post('/', async (req, res) => {
         console.log("request add track...");
         let connection = dbManager.OpenConnection(config);
         console.log("title : " +req.body.title)
 
         let track = req.body;
         console.log("track : " +JSON.stringify(track));
-        track_model.InsertTrack(connection, track).then((created) => {
-            console.log(created['affectedRows'])
-            if (created['affectedRows'] !== 0) {
-                res.status(200).send(`Track ${track.title} has been created.`);
+        const created = await track_model.InsertTrack(connection, track);
+        console.log(created)
+        if (created.affectedRows !== 0) {
+            console.log("created.insertId : " +created.insertId);
+            console.log(track);
+            console.log("list id artist : " +track.list_artist_id);
+            for (const id_artist of track.list_artist_id) {
+                console.log("id artist ! " + id_artist);
+                await track_model.LinkTrackArtist(connection, created.insertId, id_artist)
             }
-            else {
-                res.status(400).send(`Track ${track} cannot be created. Pseudo is mandatory.`);
-            }
-        }).catch((error) => {
-            res.status(500).send(error);
-        });
+            res.status(200).send(`Track ${track.title}, ${created.insertId} has been created.`);
+        }
+        else {
+            res.status(400).send(`Track ${track} cannot be created. Pseudo is mandatory.`);
+        }
         connection.end();
     });
 
