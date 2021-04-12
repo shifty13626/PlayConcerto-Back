@@ -196,7 +196,7 @@ function GetIdPlaylistTrack(connection, id_track) {
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
             let list_id = [];
-            if (result.length === 0) resolve(null);
+            if (result.length === 0) resolve(list_id);
             else {
                 for (const id_playlist of result) {
                     let test = JSON.stringify(id_playlist)

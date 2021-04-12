@@ -9,9 +9,9 @@ module.exports = (config) => {
     // To create an artist
     router.post('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
-        let artist = new artist_entity.Artist(req.body.name);
+        let artist = new artist_entity.Artist(req.body);
         artist_model.InsertArtist(connection, artist).then((artist_created) => {
-            if (artist_created['affectedRows'] !== 0) {
+            if (artist_created.affectedRows !== 0) {
                 res.status(200).send(`Artist ${artist.name} has been created.`);
             }
             else {
