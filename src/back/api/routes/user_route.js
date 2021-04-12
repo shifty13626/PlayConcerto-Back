@@ -14,8 +14,8 @@ module.exports = (config) => {
         let hashedPassword = await bcrypt.hash(req.body.password, 10);
         let user = new user_entity.User(null, req.body.pseudo, hashedPassword, req.body.firstname, req.body.lastname);
         user_model.InsertUser(connection, user).then((user_created) => {
-            if (user_created['affectedRows'] !== 0) {
-                res.status(200).send(`User ${user.pseudo} has been created.`);
+            if (user_created.affectedRows !== 0) {
+                res.status(200).send({'id' : user_created.insertId});
             }
             else {
                 res.status(400).send(`User ${user} cannot be created. Pseudo is mandatory.`);
