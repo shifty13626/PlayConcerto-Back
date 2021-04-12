@@ -5,6 +5,7 @@ const user_route = require('../api/routes/user_route');
 const track_route = require('../api/routes/track_route');
 const artist_route = require('../api/routes/artist_route');
 const playlist_route = require('../api/routes/playlist_route');
+const genre_route = require('../api/routes/genre_route');
 
 
 module.exports = (config) => {
@@ -13,5 +14,6 @@ module.exports = (config) => {
   router.use('/track',track_route(config));
   router.use('/artist',artist_route(config));
   router.use('/playlist',playlist_route(config));
+  router.use('/genre', genre_route(config));
   return router;
 };
