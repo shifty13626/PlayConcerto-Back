@@ -57,8 +57,10 @@ function GetPlaylistByName(connection, name)
 //Function to get playlists
 function GetAllPlaylists(connection)
 {
-    let query = "SELECT DISTINCT * "
-        + "FROM playlist, link_user_playlist;";
+    let query = "SELECT playlist.name, playlist.id_genre, link_user_playlist.id_user "
+        + "FROM playlist, link_user_playlist "
+        + "WHERE playlist.id_playlist = link_user_playlist.id_playlist "
+        + "ORDER BY playlist.name;";
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
