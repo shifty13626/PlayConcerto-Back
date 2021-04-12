@@ -7,6 +7,7 @@ module.exports = {
     GetPlaylistByName : GetPlaylistByName,
     GetAllPlaylists : GetAllPlaylists,
     GetUserPlaylist : GetUserPlaylist,
+    GetTrackPlaylist : GetTrackPlaylist,
 
     //********************UPDATE IN DATABASE*******************
     UpdatePlaylist : UpdatePlaylist,
@@ -40,6 +41,39 @@ function GetPlaylistById(connection, id)
         });
     });
 }
+
+// function to get all track for a playlist identified by his name
+function GetTrackPlaylist(connection, id_playlist)
+{
+    let query = "SELECT track.id_track, "
+        + "track.title, "
+        + "track.year, "
+        + "track.duration, "
+        + "track.add_date, "
+        + "track.danceability, "
+        + "track.energy, "
+        + "track.instrumentalness, "
+        + "track.liveness, "
+        + "track.popularity, "
+        + "artist.id_artist, "
+        + "artist.name, "
+        + "link_playlist.id_playlist "
+        + "FROM track, artist, link_artist, link_playlist "
+        + "WHERE track.id_track = link_artist.id_track "
+        + "AND link_artist.id_artist = artist.id_artist "
+        + "AND track.id_track = link_playlist.id_track "
+        + "AND link_playlist.id_playlist = " +id_playlist
+        + " ORDER BY track.id_track;";
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+}
+
+
 
 //Function to get playlist by name
 function GetPlaylistByName(connection, name)

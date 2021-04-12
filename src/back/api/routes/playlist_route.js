@@ -65,6 +65,22 @@ module.exports = (config) => {
         connection.end();
     });
 
+    // /api/track
+    router.get('/:id/tracks', (req, res) => {
+        let connection = dbManager.OpenConnection(config);
+        playlist_model.GetTrackPlaylist(connection,req.params.id).then( (tracks) => {
+            if(tracks != null){
+                res.status(200).send(tracks);
+            }
+            else{
+                res.status(400).send(`Cannot get tracks, it does not exist.`);
+            }
+        }).catch( (error) => {
+            res.status(500).send(error);
+        })
+        connection.end();
+    });
+
     router.get('/:id/track/:name', (req, res) => {
         console.log("playlist GET /:id/track/:name => id = "+req.params.id+" et name = "+req.params.name);
     });
@@ -90,6 +106,8 @@ module.exports = (config) => {
         })
         connection.end();
     });
+
+
 
     return router;
 };
