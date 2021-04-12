@@ -12,10 +12,10 @@ module.exports = (config) => {
      router.post('/', async (req, res) => {
         let connection = dbManager.OpenConnection(config);
         let hashedPassword = await bcrypt.hash(req.body.password, 10);
-        let user = new user_entity.User(req.body.pseudo, hashedPassword, req.body.firstname, req.body.lastname);
+        let user = new user_entity.User(null, req.body.pseudo, hashedPassword, req.body.firstname, req.body.lastname);
         user_model.InsertUser(connection, user).then((user_created) => {
-            if (user_created['affectedRows'] !== 0) {
-                res.status(200).send(`User ${user.pseudo} has been created.`);
+            if (user_created.affectedRows !== 0) {
+                res.status(200).send({'id' : user_created.insertId});
             }
             else {
                 res.status(400).send(`User ${user} cannot be created. Pseudo is mandatory.`);
@@ -33,7 +33,12 @@ module.exports = (config) => {
         user_model.GetUserByPseudo(connection, req.body.pseudo).then( async (user) => {
             if (user !== null){
                 const comparison = await bcrypt.compare(req.body.password, user[0].password);
-                res.status(200).send(comparison);
+                if(comparison){
+                    res.status(200).send({'id': user[0].id_user});
+                }
+                else{
+                    res.status(200).send(null);
+                }
             } else {
                 res.status(400).send(`User ${req.body.pseudo} not found.`);
             }
