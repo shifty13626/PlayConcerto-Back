@@ -3,6 +3,7 @@ class Track {
     this.idTrack;
     this.artist = artist;
     this.list_artist_id = [];
+    this.list_playlist_id = [];
     this.danceability = danceability;
     this.duration = duration;
     this.energy = energy;

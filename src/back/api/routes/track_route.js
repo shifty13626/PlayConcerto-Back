@@ -33,7 +33,7 @@ module.exports = (config) => {
     });
 
     // To get all track
-    router.get('/', (req, res) => {
+    router.get('/', async (req, res) => {
         let connection = dbManager.OpenConnection(config);
         if(req.query.title != null ){
             console.log("Get track by name : " +req.query.title)
@@ -50,34 +50,36 @@ module.exports = (config) => {
             })
         }else {
             console.log("Get all track")
-            track_model.GetAllTracks(connection).then((tracks) => {
-                if(tracks != null) {
-                    let previous_title = undefined;
-                    let occurrences = 0;
-                    for (const [index, actual_track] of tracks.entries()){
+            const tracks = await track_model.GetAllTracks(connection);
+            if(tracks != null) {
+                let previous_title = undefined;
+                let occurrences = 0;
+                for (const [index, actual_track] of tracks.entries()){
 
-                        if (previous_title === actual_track.title){
-                            occurrences += 1;
-                            tracks[index - occurrences].name +=  ", " + actual_track.name;
-                            delete tracks[index];
-                        }
-                        else {
-                            previous_title = actual_track.title;
-                            occurrences = 0;
-                        }
+                    if (previous_title === actual_track.title){
+                        occurrences += 1;
+                        tracks[index - occurrences].name +=  ", " + actual_track.name;
+                        delete tracks[index];
                     }
-                    // remove null objects that where occurrences with other artists.
-                    const filtered_tracks = tracks.filter( (el) => {
-                        return el != null;
-                    });
-                    res.status(200).send(filtered_tracks);
+                    else {
+                        previous_title = actual_track.title;
+                        occurrences = 0;
+                    }
                 }
-                else{
-                    res.status(400).send(`There is no tracks on database.`);
+                // remove null objects that where occurrences with other artists.
+                const filtered_tracks = tracks.filter( (el) => {
+                    return el != null;
+                });
+
+                for (const track of filtered_tracks) {
+                    track.list_playlist_id = await track_model.GetIdPlaylistTrack(connection, track.id_track)
                 }
-            }).catch((error) => {
-                res.status(500).send(error);
-            })
+
+                res.status(200).send(filtered_tracks);
+            }
+            else{
+                res.status(400).send(`There is no tracks on database.`);
+            }
         }
         connection.end();
     });

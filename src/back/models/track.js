@@ -14,6 +14,7 @@ module.exports = {
     GetTrackByName : GetTrackByName,
 
     GetAllTracks : GetAllTracks,
+    GetIdPlaylistTrack : GetIdPlaylistTrack,
 
     GetTracksArtists : GetTracksArtists,
     LinkTrackArtist : LinkTrackArtist,
@@ -153,9 +154,9 @@ function GetTrackById(connection, id)
         });
     });
 }
+function GetTrackByName(connection, name)
 
 //Function to get track by name
-function GetTrackByName(connection, name)
 {
     let query = "SELECT * FROM track WHERE title LIKE \"%" +name +"%\";";
     return new Promise((resolve, reject) => {
@@ -181,6 +182,32 @@ function GetAllTracks(connection)
             if (err) throw err;
             if(result.length === 0) resolve(null);
             else resolve(result);
+        });
+    });
+}
+
+// Function to get all playlist id associed to this trac
+function GetIdPlaylistTrack(connection, id_track) {
+    let query = "SELECT id_playlist "
+        + "FROM link_playlist "
+        + "WHERE id_track = " +id_track;
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            let list_id = [];
+            if (result.length === 0) resolve(null);
+            else {
+                for (const id_playlist of result) {
+                    let test = JSON.stringify(id_playlist)
+                    let test_json = JSON.parse(test)
+                    list_id.push(test_json.id_playlist);
+                }
+
+                resolve(list_id);
+            }
+
+
         });
     });
 }
