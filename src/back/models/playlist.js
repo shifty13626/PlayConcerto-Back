@@ -9,6 +9,7 @@ module.exports = {
     GetUserPlaylist : GetUserPlaylist,
     GetTrackPlaylist : GetTrackPlaylist,
     LinkGenrePlaylist : LinkGenrePlaylist,
+    LinkUserPlaylist : LinkUserPlaylist,
 
     //********************UPDATE IN DATABASE*******************
     UpdatePlaylist : UpdatePlaylist,
@@ -82,6 +83,20 @@ function GetTrackPlaylist(connection, id_playlist)
 function LinkGenrePlaylist(connection, id_playlist, id_genre) {
     let query = "INSERT INTO link_playlist_genre (id_playlist, id_genre) "
         +"values (" +id_playlist +"," +id_genre +");";
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+}
+
+//To link playlist with genre
+function LinkUserPlaylist(connection, id_playlist, user_id) {
+    let query = "INSERT INTO link_user_playlist (id_playlist, id_user) "
+        +"values (" +id_playlist +"," +user_id +");";
 
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {

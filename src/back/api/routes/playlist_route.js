@@ -15,10 +15,16 @@ module.exports = (config) => {
         console.log("result insert : " +create.affectedRows);
         if (create.affectedRows !== 0) {
             console.log("playlist created with id : " +create.insertId);
+
+            // Link all genre of the playlist
             for (const id_genre of playlist.list_id_genre) {
                 console.log("id genre ! " + id_genre);
                 await playlist_model.LinkGenrePlaylist(connection, create.insertId, id_genre)
             }
+
+            // Link user of playlist
+            await playlist_model.LinkUserPlaylist(connection, create.insertId, playlist.id_user)
+
             res.status(200).send(`Playlist ${playlist.name} has been created.`);
         }
         else {
