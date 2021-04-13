@@ -21,8 +21,13 @@ function InsertGenre(connection, genre)
 {
     let query = "INSERT INTO genre (name) "
         + "values (\"" + genre.name +");";
-    connection.query(query, function (err, result, fields) {
-        if (err) throw err;
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
     });
 }
 

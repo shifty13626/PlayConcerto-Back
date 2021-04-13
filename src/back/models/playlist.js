@@ -9,6 +9,7 @@ module.exports = {
     GetUserPlaylist : GetUserPlaylist,
     GetTrackPlaylist : GetTrackPlaylist,
     LinkGenrePlaylist : LinkGenrePlaylist,
+    LinkUserPlaylist : LinkUserPlaylist,
 
     //********************UPDATE IN DATABASE*******************
     UpdatePlaylist : UpdatePlaylist,
@@ -92,6 +93,20 @@ function LinkGenrePlaylist(connection, id_playlist, id_genre) {
     });
 }
 
+//To link playlist with genre
+function LinkUserPlaylist(connection, id_playlist, user_id) {
+    let query = "INSERT INTO link_user_playlist (id_playlist, id_user) "
+        +"values (" +id_playlist +"," +user_id +");";
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+}
+
 //Function to get playlist by name
 function GetPlaylistByName(connection, name)
 {
@@ -108,7 +123,7 @@ function GetPlaylistByName(connection, name)
 //Function to get playlists
 function GetAllPlaylists(connection)
 {
-    let query = "SELECT playlist.id_playlist, playlist.name, playlist.id_genre, link_user_playlist.id_user "
+    let query = "SELECT playlist.id_playlist, playlist.name, link_user_playlist.id_user "
         + "FROM playlist, link_user_playlist "
         + "WHERE playlist.id_playlist = link_user_playlist.id_playlist "
         + "ORDER BY playlist.name;";
