@@ -6,20 +6,25 @@ const playlist_model = require('../../models/playlist')
 
 module.exports = (config) => {
 
-    router.post('/', (req, res) => {
+    router.post('/', async(req, res) => {
         let connection = dbManager.OpenConnection(config);
-        let playlist = new playlist_entity.Playlist(req.body.name, req.body.id_genre, req.body.id_user);
-        playlist_model.InsertPlaylist(connection, playlist).then((playlist_created) => {
-            if (playlist_created['affectedRows'] !== 0) {
-                res.status(200).send(`Playlist ${playlist.name} has been created.`);
+
+        let playlist = req.body;
+        console.log(playlist);
+        const create = await playlist_model.InsertPlaylist(connection, playlist);
+        console.log("result insert : " +create.affectedRows);
+        if (create.affectedRows !== 0) {
+            console.log("playlist created with id : " +create.insertId);
+            for (const id_genre of playlist.list_id_genre) {
+                console.log("id genre ! " + id_genre);
+                await playlist_model.LinkGenrePlaylist(connection, create.insertId, id_genre)
             }
-            else {
-                res.status(400).send(`Playlist ${playlist} cannot be created. Pseudo is mandatory.`);
-            }
-        }).catch((error) => {
-            res.status(500).send(error);
-        });
-        connection.end();
+            res.status(200).send(`Playlist ${playlist.name} has been created.`);
+        }
+        else {
+            res.status(400).send(`Playlist ${playlist} cannot be created. Pseudo is mandatory.`);
+        }
+    connection.end();
     });
 
     router.get('/', (req, res) => {
