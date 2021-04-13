@@ -8,6 +8,7 @@ module.exports = {
     GetAllPlaylists : GetAllPlaylists,
     GetUserPlaylist : GetUserPlaylist,
     GetTrackPlaylist : GetTrackPlaylist,
+    LinkGenrePlaylist : LinkGenrePlaylist,
 
     //********************UPDATE IN DATABASE*******************
     UpdatePlaylist : UpdatePlaylist,
@@ -21,12 +22,16 @@ module.exports = {
 //Function to insert playlist
 function InsertPlaylist(connection, playlist)
 {
-   let query = "INSERT INTO playlist (name, id_genre) "
-       + "values (\"" + playlist.name +"\"," +playlist.id_genre +");";
+   let query = "INSERT INTO playlist (name) "
+       + "values (\"" + playlist.name +"\");";
 
-   connection.query(query, function (err, result, fields) {
-       if (err) throw err;
-   });
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
 }
 
 //Function to get playlist by id
@@ -73,7 +78,19 @@ function GetTrackPlaylist(connection, id_playlist)
     });
 }
 
+//To link playlist with genre
+function LinkGenrePlaylist(connection, id_playlist, id_genre) {
+    let query = "INSERT INTO link_playlist_genre (id_playlist, id_genre) "
+        +"values (" +id_playlist +"," +id_genre +");";
 
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+}
 
 //Function to get playlist by name
 function GetPlaylistByName(connection, name)
