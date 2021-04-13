@@ -84,6 +84,24 @@ module.exports = (config) => {
         connection.end();
     });
 
+    // To link track to a playlist
+    router.post('/linkPlaylist', async (req, res) => {
+        console.log("request link track to playlist ...");
+        let connection = dbManager.OpenConnection(config);
+
+        let link = req.body;
+        const created = await track_model.LinkTrackPlaylist(connection, link.id_track, link.id_playlist);
+        console.log(created)
+        if (created.affectedRows !== 0) {
+            res.status(200).send(`Track ${link.id_track}, linked.`);
+        }
+        else {
+            res.status(400).send(`Track ${link.id_track} cannot be linked.`);
+        }
+        connection.end();
+    });
+
+
     // Get track by id
     router.get('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
@@ -122,7 +140,7 @@ module.exports = (config) => {
         let new_track = new track_entity.Track(req.body.artist,req.body.danceability,req.body.duration,
             req.body.energy, req.body.instrumentalness, req.body.liveness,
             req.body.name, req.body.popularity, req.body.year)
-        //new_track.sreq.body.name, req.body.year, req.body.duration);
+        //new_track.req.body.name, req.body.year, req.body.duration);
         track_model.UpdateTrack(connection, req.params.id, new_track).then((result) => {
             if (result != null) {
                 res.status(200).send(`Track ${result} has been created.`);

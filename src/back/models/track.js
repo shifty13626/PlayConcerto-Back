@@ -18,6 +18,7 @@ module.exports = {
 
     GetTracksArtists : GetTracksArtists,
     LinkTrackArtist : LinkTrackArtist,
+    LinkTrackPlaylist : LinkTrackPlaylist,
 
     //********************UPDATE IN DATABASE********************
 
@@ -241,6 +242,20 @@ function LinkTrackArtist(connection, track_id, artist_id) {
     });
 }
 
+
+// Function to link a track with a user playlist
+function LinkTrackPlaylist(connection, track_id, playlist_id) {
+    let query = "INSERT INTO link_playlist (id_track, id_playlist) "
+        +"values (" +track_id +"," +playlist_id +");";
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+}
 
 //Function to get track by id
 function UpdateTrack(connection, id, new_track)
