@@ -101,6 +101,23 @@ module.exports = (config) => {
         connection.end();
     });
 
+    // To unlink track to a playlist
+    router.post('/unlinkPlaylist', async (req, res) => {
+        console.log("request link track to playlist ...");
+        let connection = dbManager.OpenConnection(config);
+
+        let link = req.body;
+        const created = await track_model.UnlinkTrackPlaylist(connection, link.id_track, link.id_playlist);
+        console.log(created)
+        if (created.affectedRows !== 0) {
+            res.status(200).send({success : true});
+        }
+        else {
+            res.status(400).send(`Track ${link.id_track} cannot be unlinked.`);
+        }
+        connection.end();
+    });
+
 
     // Get track by id
     router.get('/:id', (req, res) => {
