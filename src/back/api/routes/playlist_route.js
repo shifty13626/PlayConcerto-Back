@@ -25,7 +25,8 @@ module.exports = (config) => {
             // Link user of playlist
             await playlist_model.LinkUserPlaylist(connection, create.insertId, playlist.id_user)
 
-            res.status(200).send(`Playlist ${playlist.name} has been created.`);
+            // res.status(200).send();
+            res.sendStatus(200);
         }
         else {
             res.status(400).send(`Playlist ${playlist} cannot be created. Pseudo is mandatory.`);

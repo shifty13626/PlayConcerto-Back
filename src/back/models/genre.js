@@ -20,7 +20,7 @@ module.exports = {
 function InsertGenre(connection, genre)
 {
     let query = "INSERT INTO genre (name) "
-        + "values (\"" + genre.name +");";
+        + "values (\"" + genre.name +"\");";
 
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
