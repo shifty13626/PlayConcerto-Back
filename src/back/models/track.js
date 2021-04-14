@@ -19,6 +19,7 @@ module.exports = {
     GetTracksArtists : GetTracksArtists,
     LinkTrackArtist : LinkTrackArtist,
     LinkTrackPlaylist : LinkTrackPlaylist,
+    UnlinkTrackPlaylist : UnlinkTrackPlaylist,
 
     //********************UPDATE IN DATABASE********************
 
@@ -247,6 +248,21 @@ function LinkTrackArtist(connection, track_id, artist_id) {
 function LinkTrackPlaylist(connection, track_id, playlist_id) {
     let query = "INSERT INTO link_playlist (id_track, id_playlist) "
         +"values (" +track_id +"," +playlist_id +");";
+
+    return new Promise((resolve, reject) => {
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            if(result.length === 0) resolve(null);
+            else resolve(result);
+        });
+    });
+}
+
+// Function to delete link between track and playlist
+function UnlinkTrackPlaylist(connection, track_id, playlist_id) {
+    let query = "DELETE FROM link_playlist "
+    + "WHERE id_playlist = " +playlist_id +" "
+    + "AND id_track = " +track_id +";";
 
     return new Promise((resolve, reject) => {
         connection.query(query, function (err, result, fields) {
