@@ -1,7 +1,7 @@
 {
   "database_name": "db",
-  "address": "92.151.63.16",
-  "port" : "9658",
+  "address": "localhost",
+  "port" : "3306",
   "user": "user",
   "password": "password",
   "pathJsonTracks": "./dataset/track.json",
