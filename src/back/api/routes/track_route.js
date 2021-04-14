@@ -93,7 +93,7 @@ module.exports = (config) => {
         const created = await track_model.LinkTrackPlaylist(connection, link.id_track, link.id_playlist);
         console.log(created)
         if (created.affectedRows !== 0) {
-            res.status(200).send(`Track ${link.id_track}, linked.`);
+            res.status(200).send({success : true});
         }
         else {
             res.status(400).send(`Track ${link.id_track} cannot be linked.`);
