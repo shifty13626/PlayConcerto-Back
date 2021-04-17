@@ -1,9 +1,9 @@
 {
   "database_name": "db",
-  "address": "localhost",
-  "port" : "3306",
-  "user": "user",
-  "password": "password",
+  "address": "152.228.131.58",
+  "port" : "3333",
+  "user": "administrator",
+  "password": "ludolecaleporte",
   "pathJsonTracks": "./dataset/track.json",
   "pathJsonGenre" : "./dataset/genre.json",
   "pathCSVTrackToRead": "./dataset/spotify_tracks.csv",
