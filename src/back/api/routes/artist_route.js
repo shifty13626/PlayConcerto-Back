@@ -6,7 +6,6 @@ const artist_model = require('../../models/artist')
 
 module.exports = (config) => {
 
-    // To create an artist
     /**
      * @openapi
      *
@@ -16,12 +15,12 @@ module.exports = (config) => {
      *     tags :
      *       - Artist
      *     responses:
-     *       "200":
-     *         description: {artist created}
-     *       "400":
-     *         description: artist {artist.id} cannot be created, one or many parameters missing.
-     *       "500":
-     *         description: {error}, error message.
+     *       200:
+     *         description: Create a new artist object in database!
+     *       400:
+     *         description: artist cannot be created, one or many parameters missing.
+     *       500:
+     *         description: Error message.
      */
     router.post('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
@@ -39,22 +38,21 @@ module.exports = (config) => {
         connection.end();
     });
 
-    // To get all artist
     /**
      * @openapi
      *
      * /api/artist:
      *   get:
      *     description: Get all the artists in the database ! Or only one by name if there is a parameter.
-     *     tracks:
+     *     tags:
      *       - Artist
      *     responses:
-     *       "200":
-     *         description: {artists} All the artists found in the database, or the one searched with the parameter.
-     *       "400":
+     *       200:
+     *         description: All the artists found in the database, or the one searched with the parameter.
+     *       400:
      *         description: No artist in database or the one searched is missing.
-     *       "500":
-     *         description: {error}, error message.
+     *       500:
+     *         description: Error message.
      */
     router.get('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
@@ -86,7 +84,6 @@ module.exports = (config) => {
         connection.end();
     });
 
-    // Get artist identified by his id
     /**
      * @openapi
      *
@@ -96,12 +93,12 @@ module.exports = (config) => {
      *     tags:
      *       - Artist
      *     responses:
-     *       "200":
-     *         description: {artist} Artist with id_artist equals id.
-     *       "400":
+     *       200:
+     *         description: Artist with id_artist equals id.
+     *       400:
      *         description: No artist in database with this id.
-     *       "500":
-     *         description: {error}, error message.
+     *       500:
+     *         description: Error message.
      */
     router.get('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
@@ -118,6 +115,7 @@ module.exports = (config) => {
         connection.end();
     });
 
+
     /**
      * @openapi
      *
@@ -127,12 +125,12 @@ module.exports = (config) => {
      *     tags:
      *       - Artist
      *     responses:
-     *       "200":
-     *         description: {artist} new Artist with id_artist equals id.
-     *       "400":
+     *       200:
+     *         description: New Artist with id_artist equals id.
+     *       400":
      *         description: No artist in database with this id or missing parameters to artist.
-     *       "500":
-     *         description: {error}, error message.
+     *       500:
+     *         description: Error message.
      */
     router.put('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
@@ -141,7 +139,6 @@ module.exports = (config) => {
         connection.end();
     });
 
-    // Delete artist identified by id
     /**
      * @openapi
      *
@@ -151,12 +148,12 @@ module.exports = (config) => {
      *     tags:
      *       - Artist
      *     responses:
-     *       "200":
-     *         description: {artist deleted} The artist is deleted.
-     *       "400":
+     *       200:
+     *         description: The artist is deleted.
+     *       400:
      *         description: No artist in database with this id.
-     *       "500":
-     *         description: {error}, error message.
+     *       500:
+     *         description: Error message.
      */
     router.delete('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);

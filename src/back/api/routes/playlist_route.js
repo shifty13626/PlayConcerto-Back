@@ -14,12 +14,12 @@ module.exports = (config) => {
      *     tags:
      *       - Playlist
      *     responses:
-     *       "200":
-     *         description: {playlist.id} playlist created in the database.
-     *       "400":
+     *       200:
+     *         description: Playlist created in the database.
+     *       400:
      *         description: This playlist cannot be created, already existed or missing parameters.
-     *       "500":
-     *         description: {error}, message d'erreur venant du serveur.
+     *       500:
+     *         description: Error message.
      */
     router.post('/', async(req, res) => {
         let connection = dbManager.OpenConnection(config);
@@ -49,6 +49,7 @@ module.exports = (config) => {
     connection.end();
     });
 
+
     /**
      * @openapi
      * /api/playlist:
@@ -57,12 +58,12 @@ module.exports = (config) => {
      *     tags:
      *       - Playlist
      *     responses:
-     *       "200":
-     *         description: {playlists} All the playlist in the database, or the one with parameter name.
-     *       "400":
+     *       200:
+     *         description: All the playlist in the database, or the one with parameter name.
+     *       400:
      *         description: No playlist in the databse, or the one searched does not exist.
-     *       "500":
-     *         description: {error}, message d'erreur venant du serveur.
+     *       500:
+     *         description: Error message.
      */
     router.get('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
@@ -100,12 +101,12 @@ module.exports = (config) => {
      *     tags:
      *       - Playlist
      *     responses:
-     *       "200":
-     *         description: {playlist} playlist found in the database.
-     *       "400":
+     *       200:
+     *         description: Playlist found in the database.
+     *       400:
      *         description: This playlist cannot be found,it does not exist.
-     *       "500":
-     *         description: {error}, message d'erreur venant du serveur.
+     *       500:
+     *         description: Error message.
      */
     router.get('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
@@ -122,7 +123,6 @@ module.exports = (config) => {
         connection.end();
     });
 
-    // /api/track
     /**
      * @openapi
      * /api/playlist/:id/tracks:
@@ -131,12 +131,12 @@ module.exports = (config) => {
      *     tags:
      *       - Playlist
      *     responses:
-     *       "200":
-     *         description: {tracks} TRacks of all the playlist with playlist_id equals id.
-     *       "400":
+     *       200:
+     *         description: Tacks of all the playlist with playlist_id equals id.
+     *       400:
      *         description: This playlist cannot be found, or there is no track in it.
-     *       "500":
-     *         description: {error}, message d'erreur venant du serveur.
+     *       500:
+     *         description: Error message.
      */
     router.get('/:id/tracks', (req, res) => {
         let connection = dbManager.OpenConnection(config);
@@ -161,12 +161,12 @@ module.exports = (config) => {
      *     tags:
      *       - Playlist
      *     responses:
-     *       "200":
-     *         description: {playlist.id} playlist updated in the database.
-     *       "400":
+     *       200:
+     *         description: Playlist updated in the database.
+     *       400:
      *         description: This playlist cannot be updated, does not exist or missing parameters.
-     *       "500":
-     *         description: {error}, message d'erreur venant du serveur.
+     *       500:
+     *         description: Error message.
      */
     router.put('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
@@ -183,12 +183,12 @@ module.exports = (config) => {
      *     tags:
      *       - Playlist
      *     responses:
-     *       "200":
-     *         description: {playlist.id} playlist deleted in the database.
-     *       "400":
+     *       200:
+     *         description: Playlist deleted in the database.
+     *       400:
      *         description: This playlist cannot be deleted, does not exist.
-     *       "500":
-     *         description: {error}, message d'erreur venant du serveur.
+     *       500:
+     *         description: Error message.
      */
     router.delete('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);

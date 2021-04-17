@@ -8,25 +8,25 @@ const bcrypt = require('bcrypt')
 module.exports = (config) => {
     console.log("config from user_route.js : " +config);
 
+
     /**
      * @swagger
      *
      * /user/auth:
      *   post:
-     *     description: to save a new user
+     *     description: To save a new user.
      *     tags :
      *       - User
      *     produces:
      *       - application/json
-     *      responses:
-     *           "200":
-     *              description: id : {user_id}
-     *           "400":
-     *              description: User ${user.id} cannot be created. Pseudo is mandatory.
-     *           "500":
-     *              description: {error} error message.
+     *     responses:
+     *       200:
+     *         description: Save new user.
+     *       400:
+     *         description: User cannot be created. Pseudo is mandatory.
+     *       500:
+     *         description: Error message.
      */
-    // Route to add a user
      router.post('/', async (req, res) => {
         let connection = dbManager.OpenConnection(config);
         let hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -44,6 +44,7 @@ module.exports = (config) => {
         connection.end();
     });
 
+
     /**
      * @swagger
      *
@@ -54,15 +55,14 @@ module.exports = (config) => {
      *       - User
      *     produces:
      *       - application/json
-     *      responses:
-     *           "200":
-     *              description: id : {user_id}
-     *           "400":
-     *              description: User ${user.pseudo} not found.
-     *           "500":
-     *              description: {error} error message.
+     *     responses:
+     *       200:
+     *         description: Check authentication of user.
+     *       400:
+     *         description: User not found.
+     *       500:
+     *         description: Error message.
      */
-    //User get authentication
     router.post('/auth',  (req, res) => {
         let connection = dbManager.OpenConnection(config);
         user_model.GetUserByPseudo(connection, req.body.pseudo).then( async (user) => {
@@ -92,13 +92,13 @@ module.exports = (config) => {
      *       - User
      *     produces:
      *       - application/json
-     *      responses:
-     *           "200":
-     *              description: id : {user}
-     *           "400":
-     *              description: User ${user.pseudo} does not exist.
-     *           "500":
-     *              description: {error} error message.
+     *     responses:
+     *       200:
+     *         description: Get user by pseudo.
+     *       400:
+     *         description: User does not exist.
+     *       500:
+     *         description: Error message.
      */
     router.get('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
@@ -139,13 +139,13 @@ module.exports = (config) => {
      *       - User
      *     produces:
      *       - application/json
-     *      responses:
-     *           "200":
-     *              description: {user}
-     *           "400":
-     *              description: User ${user.id} not found.
-     *           "500":
-     *              description: {error} error message.
+     *     responses:
+     *       200:
+     *         description: Get user by id.
+     *       400:
+     *         description: User not found.
+     *       500:
+     *         description: Error message.
      */
     router.get('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
@@ -172,13 +172,13 @@ module.exports = (config) => {
      *       - User
      *     produces:
      *       - application/json
-     *      responses:
-     *           "200":
-     *              description: {playlist[]}
-     *           "400":
-     *              description: User ${user.id} does not have playlist yet.
-     *           "500":
-     *              description: {error} error message.
+     *     responses:
+     *       200:
+     *         description: Get all playlist for user identified by his id.
+     *       400:
+     *         description: User does not have playlist yet.
+     *       500:
+     *         description: Error message.
      */
     router.get('/:id/playlist/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
@@ -205,13 +205,13 @@ module.exports = (config) => {
      *       - User
      *     produces:
      *       - application/json
-     *      responses:
-     *           "200":
-     *              description: {playlist}
-     *           "400":
-     *              description: User ${user.id} does not have playlist {playlist.name}.
-     *           "500":
-     *              description: {error} error message.
+     *     responses:
+     *       200:
+     *         description: Get playlist identified by his name for a user identified by his id.
+     *       400:
+     *         description: User does not have playlist.
+     *       500:
+     *         description: Error message.
      */
     router.get('/:id/playlist/:name', (req, res) => {
         let connection = dbManager.OpenConnection(config);
@@ -228,11 +228,12 @@ module.exports = (config) => {
         connection.end();
     });
 
+
     /**
      * @swagger
      *
      * /user/:id/:
-     *   get:
+     *   put:
      *     description: Update user information.
      *     tags :
      *       - User
@@ -252,19 +253,19 @@ module.exports = (config) => {
      * @swagger
      *
      * /user/:id/:
-     *   get:
+     *   delete:
      *     description: To delete an user.
      *     tags :
      *       - User
      *     produces:
      *       - application/json
-     *      responses:
-     *           "200":
-     *              description: User {user.id} has been deleted.}
-     *           "400":
-     *              description: User ${user.id} not found. Can not delete it.
-     *           "500":
-     *              description: {error} error message.
+     *     responses:
+     *       200:
+     *         description: User has been deleted.
+     *       400:
+     *         description: User not found. Can not delete it.
+     *       500:
+     *         description: Error message.
      */
     router.delete('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);

@@ -9,13 +9,13 @@ module.exports = (config) => {
     // To add a track
     /**
      * @openapi
-     * /api/track
+     * /api/tracks:
      *   post:
      *     description: Welcome to swagger-jsdoc!
      *     tags:
      *       - Track
      *     responses:
-     *       "200":
+     *       200:
      *         description: Returns a mysterious string.
      */
     router.post('/', async (req, res) => {
