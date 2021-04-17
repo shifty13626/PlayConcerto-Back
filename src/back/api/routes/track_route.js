@@ -9,7 +9,7 @@ module.exports = (config) => {
     // To add a track
     /**
      * @openapi
-     * /api/tracks
+     * /api/tracks:
      *   post:
      *     description: Welcome to swagger-jsdoc!
      *     tags:

@@ -15,11 +15,11 @@ module.exports = (config) => {
      *       - Genre
      *     responses:
      *       200:
-     *         description: {genres} All genre in the database.
+     *         description: All genre in the database.
      *       400:
      *         description: No genre in database.
      *       500:
-     *         description: {error}, message d'erreur venant du serveur.
+     *         description: Error message.
      */
     router.get('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
@@ -46,11 +46,11 @@ module.exports = (config) => {
      *       - Genre
      *     responses:
      *       200:
-     *         description: {genre.id} Genre created in the database.
+     *         description: Genre created in the database.
      *       400:
      *         description: This genre cannot be created, already existed or missing parameters.
      *       500:
-     *         description: {error}, message d'erreur venant du serveur.
+     *         description: Error message.
      */
     router.post('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
