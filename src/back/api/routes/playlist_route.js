@@ -8,9 +8,11 @@ module.exports = (config) => {
 
     /**
      * @openapi
-     * /playlist:
+     * /api/playlist:
      *   post:
      *     description: Create a playlist in the database.
+     *     tags:
+     *       - Playlist
      *     responses:
      *       200:
      *         description: {playlist.id} playlist created in the database.
@@ -49,9 +51,11 @@ module.exports = (config) => {
 
     /**
      * @openapi
-     * /playlist:
+     * /api/playlist:
      *   get:
      *     description: Get all the playlist in the database, or one with parameter name.
+     *     tags:
+     *       - Playlist
      *     responses:
      *       200:
      *         description: {playlists} All the playlist in the database, or the one with parameter name.
@@ -90,9 +94,11 @@ module.exports = (config) => {
 
     /**
      * @openapi
-     * /playlist/:id:
+     * /api/playlist/:id:
      *   get:
      *     description: Get a playlist by id.
+     *     tags:
+     *       - Playlist
      *     responses:
      *       200:
      *         description: {playlist} playlist found in the database.
@@ -119,9 +125,11 @@ module.exports = (config) => {
     // /api/track
     /**
      * @openapi
-     * /playlist/:id/tracks:
+     * /api/playlist/:id/tracks:
      *   post:
      *     description: Get all tracks of one playlist
+     *     tags:
+     *       - Playlist
      *     responses:
      *       200:
      *         description: {tracks} TRacks of all the playlist with playlist_id equals id.
@@ -147,9 +155,11 @@ module.exports = (config) => {
 
     /**
      * @openapi
-     * /playlist/:id:
+     * /api/playlist/:id:
      *   put:
      *     description: Update a playlist in the database.
+     *     tags:
+     *       - Playlist
      *     responses:
      *       200:
      *         description: {playlist.id} playlist updated in the database.
@@ -167,9 +177,11 @@ module.exports = (config) => {
 
     /**
      * @openapi
-     * /playlist/:id:
+     * /api/playlist/:id:
      *   delete:
      *     description: Delete a playlist in the database.
+     *     tags:
+     *       - Playlist
      *     responses:
      *       200:
      *         description: {playlist.id} playlist deleted in the database.

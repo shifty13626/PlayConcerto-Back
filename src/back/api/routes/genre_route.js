@@ -8,9 +8,11 @@ module.exports = (config) => {
     // To get all genre
     /**
      * @openapi
-     * /genre:
+     * /api/genre:
      *   get:
      *     description: Get all the genres.
+     *     tags:
+     *       - Genre
      *     responses:
      *       200:
      *         description: {genres} All genre in the database.
@@ -37,9 +39,11 @@ module.exports = (config) => {
     // To create a genre
     /**
      * @openapi
-     * /genre:
+     * /api/genre:
      *   post:
      *     description: Create a genre in the database.
+     *     tags:
+     *       - Genre
      *     responses:
      *       200:
      *         description: {genre.id} Genre created in the database.
