@@ -7,6 +7,17 @@ const track_model = require('../../models/track')
 module.exports = (config) => {
 
     // To add a track
+    /**
+     * @openapi
+     * /api/tracks
+     *   post:
+     *     description: Welcome to swagger-jsdoc!
+     *     tags:
+     *       - Track
+     *     responses:
+     *       200:
+     *         description: Returns a mysterious string.
+     */
     router.post('/', async (req, res) => {
         console.log("request add track...");
         let connection = dbManager.OpenConnection(config);
