@@ -18,30 +18,13 @@ module.exports = (config) => {
      *       - User
      *     produces:
      *       - application/json
-     *     parameters:
-     *       - name: firstname
-     *         in: body
-     *         required: true
-     *         type: string
-     *       - name: lastname
-     *         in: body
-     *         required: true
-     *         type: string
-     *       - name: pseudo
-     *         in: body
-     *         required: true
-     *         type: string
-     *       - name: password
-     *         in: body
-     *         required: true
-     *         type: string
      *      responses:
      *           "200":
-     *           description: id : {user_id}
+     *              description: id : {user_id}
      *           "400":
-     *           description: User ${user.id} cannot be created. Pseudo is mandatory.
+     *              description: User ${user.id} cannot be created. Pseudo is mandatory.
      *           "500":
-     *           description: {error} error message.
+     *              description: {error} error message.
      */
     // Route to add a user
      router.post('/', async (req, res) => {
@@ -66,27 +49,18 @@ module.exports = (config) => {
      *
      * /user/auth:
      *   post:
-     *     description: Check authentification of user.
+     *     description: Check authentication of user.
      *     tags :
      *       - User
      *     produces:
      *       - application/json
-     *     parameters:
-     *       - name: pseudo
-     *         in: body
-     *         required: true
-     *         type: string
-     *       - name: password
-     *         in: body
-     *         required: true
-     *         type: string
      *      responses:
      *           "200":
-     *           description: id : {user_id}
+     *              description: id : {user_id}
      *           "400":
-     *           description: User ${user.pseudo} not found.
+     *              description: User ${user.pseudo} not found.
      *           "500":
-     *           description: {error} error message.
+     *              description: {error} error message.
      */
     //User get authentication
     router.post('/auth',  (req, res) => {
@@ -118,18 +92,13 @@ module.exports = (config) => {
      *       - User
      *     produces:
      *       - application/json
-     *     parameters:
-     *       - name: pseudo
-     *         in: body
-     *         required: true
-     *         type: string
      *      responses:
      *           "200":
-     *           description: id : {user}
+     *              description: id : {user}
      *           "400":
-     *           description: User ${user.pseudo} does not exist.
+     *              description: User ${user.pseudo} does not exist.
      *           "500":
-     *           description: {error} error message.
+     *              description: {error} error message.
      */
     router.get('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
@@ -170,18 +139,13 @@ module.exports = (config) => {
      *       - User
      *     produces:
      *       - application/json
-     *     parameters:
-     *       - name: id
-     *         in: path
-     *         required: true
-     *         type: string
      *      responses:
      *           "200":
-     *           description: {user}
+     *              description: {user}
      *           "400":
-     *           description: User ${user.id} not found.
+     *              description: User ${user.id} not found.
      *           "500":
-     *           description: {error} error message.
+     *              description: {error} error message.
      */
     router.get('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
@@ -208,18 +172,13 @@ module.exports = (config) => {
      *       - User
      *     produces:
      *       - application/json
-     *     parameters:
-     *       - name: id
-     *         in: path
-     *         required: true
-     *         type: string
      *      responses:
      *           "200":
-     *           description: {playlist[]}
+     *              description: {playlist[]}
      *           "400":
-     *           description: User ${user.id} does not have playlist yet.
+     *              description: User ${user.id} does not have playlist yet.
      *           "500":
-     *           description: {error} error message.
+     *              description: {error} error message.
      */
     router.get('/:id/playlist/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
@@ -246,22 +205,13 @@ module.exports = (config) => {
      *       - User
      *     produces:
      *       - application/json
-     *     parameters:
-     *       - name: id
-     *         in: path
-     *         required: true
-     *         type: string
-     *      - name: name
-     *         in: path
-     *         required: true
-     *         type: string
      *      responses:
      *           "200":
-     *           description: {playlist
+     *              description: {playlist}
      *           "400":
-     *           description: User ${user.id} does not have playlist {playlist.name}.
+     *              description: User ${user.id} does not have playlist {playlist.name}.
      *           "500":
-     *           description: {error} error message.
+     *              description: {error} error message.
      */
     router.get('/:id/playlist/:name', (req, res) => {
         let connection = dbManager.OpenConnection(config);
@@ -288,27 +238,6 @@ module.exports = (config) => {
      *       - User
      *     produces:
      *       - application/json
-     *     parameters:
-     *       - name: id
-     *         in: path
-     *         required: true
-     *         type: string
-     *      - name: psuedo
-     *         in: body
-     *         required: true
-     *         type: string
- *          - name: firstname
-     *         in: body
-     *         required: true
-     *         type: string
-     *     - name: lastname
-     *         in: body
-     *         required: true
-     *         type: string
-*           - name: paswword
-     *         in: body
-     *         required: true
-     *         type: string
      */
     router.put('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
@@ -329,18 +258,13 @@ module.exports = (config) => {
      *       - User
      *     produces:
      *       - application/json
-     *     parameters:
-     *       - name: id
-     *         in: path
-     *         required: true
-     *         type: string
      *      responses:
      *           "200":
-     *           description: User {user.id} has been deleted.}
+     *              description: User {user.id} has been deleted.}
      *           "400":
-     *           description: User ${user.id} not found. Can not delete it.
+     *              description: User ${user.id} not found. Can not delete it.
      *           "500":
-     *           description: {error} error message.
+     *              description: {error} error message.
      */
     router.delete('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);

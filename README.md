@@ -6,6 +6,18 @@ NodeJS
 ## Target
 Create a web api that let a user to create its own playlists from a set of music, and navigate through it even offline.
 
+## Launch
+You can use this API with command :
+**node indes.js** in folder 'PlayConcerto-Back/src/back'
+### Argument
+- Import : Import a dataset of track on the database
+- Purge : Delete all element on database
+- Listen : open listening og API.
+
+## Documentation
+**Swagger** are install to define all path of API.
+[Swagger](http://localhost:3500/docs/).
+
 ## Configuration
 Configuration are made with file **config.json**
 

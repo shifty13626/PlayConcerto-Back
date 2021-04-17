@@ -14,11 +14,11 @@ module.exports = (config) => {
      *     tags:
      *       - Playlist
      *     responses:
-     *       200:
+     *       "200":
      *         description: {playlist.id} playlist created in the database.
-     *       400:
+     *       "400":
      *         description: This playlist cannot be created, already existed or missing parameters.
-     *       500:
+     *       "500":
      *         description: {error}, message d'erreur venant du serveur.
      */
     router.post('/', async(req, res) => {
@@ -57,11 +57,11 @@ module.exports = (config) => {
      *     tags:
      *       - Playlist
      *     responses:
-     *       200:
+     *       "200":
      *         description: {playlists} All the playlist in the database, or the one with parameter name.
-     *       400:
+     *       "400":
      *         description: No playlist in the databse, or the one searched does not exist.
-     *       500:
+     *       "500":
      *         description: {error}, message d'erreur venant du serveur.
      */
     router.get('/', (req, res) => {
@@ -100,11 +100,11 @@ module.exports = (config) => {
      *     tags:
      *       - Playlist
      *     responses:
-     *       200:
+     *       "200":
      *         description: {playlist} playlist found in the database.
-     *       400:
+     *       "400":
      *         description: This playlist cannot be found,it does not exist.
-     *       500:
+     *       "500":
      *         description: {error}, message d'erreur venant du serveur.
      */
     router.get('/:id', (req, res) => {
@@ -131,11 +131,11 @@ module.exports = (config) => {
      *     tags:
      *       - Playlist
      *     responses:
-     *       200:
+     *       "200":
      *         description: {tracks} TRacks of all the playlist with playlist_id equals id.
-     *       400:
+     *       "400":
      *         description: This playlist cannot be found, or there is no track in it.
-     *       500:
+     *       "500":
      *         description: {error}, message d'erreur venant du serveur.
      */
     router.get('/:id/tracks', (req, res) => {
@@ -161,11 +161,11 @@ module.exports = (config) => {
      *     tags:
      *       - Playlist
      *     responses:
-     *       200:
+     *       "200":
      *         description: {playlist.id} playlist updated in the database.
-     *       400:
+     *       "400":
      *         description: This playlist cannot be updated, does not exist or missing parameters.
-     *       500:
+     *       "500":
      *         description: {error}, message d'erreur venant du serveur.
      */
     router.put('/:id', (req, res) => {
@@ -183,11 +183,11 @@ module.exports = (config) => {
      *     tags:
      *       - Playlist
      *     responses:
-     *       200:
+     *       "200":
      *         description: {playlist.id} playlist deleted in the database.
-     *       400:
+     *       "400":
      *         description: This playlist cannot be deleted, does not exist.
-     *       500:
+     *       "500":
      *         description: {error}, message d'erreur venant du serveur.
      */
     router.delete('/:id', (req, res) => {
