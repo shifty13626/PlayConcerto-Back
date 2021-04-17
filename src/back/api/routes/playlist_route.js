@@ -6,6 +6,19 @@ const playlist_model = require('../../models/playlist')
 
 module.exports = (config) => {
 
+    /**
+     * @openapi
+     * /playlist:
+     *   post:
+     *     description: Create a playlist in the database.
+     *     responses:
+     *       200:
+     *         description: {playlist.id} playlist created in the database.
+     *       400:
+     *         description: This playlist cannot be created, already existed or missing parameters.
+     *       500:
+     *         description: {error}, message d'erreur venant du serveur.
+     */
     router.post('/', async(req, res) => {
         let connection = dbManager.OpenConnection(config);
 
@@ -34,6 +47,19 @@ module.exports = (config) => {
     connection.end();
     });
 
+    /**
+     * @openapi
+     * /playlist:
+     *   get:
+     *     description: Get all the playlist in the database, or one with parameter name.
+     *     responses:
+     *       200:
+     *         description: {playlists} All the playlist in the database, or the one with parameter name.
+     *       400:
+     *         description: No playlist in the databse, or the one searched does not exist.
+     *       500:
+     *         description: {error}, message d'erreur venant du serveur.
+     */
     router.get('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         if(req.query.name != null ) {
@@ -62,6 +88,19 @@ module.exports = (config) => {
         connection.end();
     });
 
+    /**
+     * @openapi
+     * /playlist/:id:
+     *   get:
+     *     description: Get a playlist by id.
+     *     responses:
+     *       200:
+     *         description: {playlist} playlist found in the database.
+     *       400:
+     *         description: This playlist cannot be found,it does not exist.
+     *       500:
+     *         description: {error}, message d'erreur venant du serveur.
+     */
     router.get('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         playlist_model.GetPlaylistById(connection,req.params.id).then( (playlist) => {
@@ -78,6 +117,19 @@ module.exports = (config) => {
     });
 
     // /api/track
+    /**
+     * @openapi
+     * /playlist/:id/tracks:
+     *   post:
+     *     description: Get all tracks of one playlist
+     *     responses:
+     *       200:
+     *         description: {tracks} TRacks of all the playlist with playlist_id equals id.
+     *       400:
+     *         description: This playlist cannot be found, or there is no track in it.
+     *       500:
+     *         description: {error}, message d'erreur venant du serveur.
+     */
     router.get('/:id/tracks', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         playlist_model.GetTrackPlaylist(connection,req.params.id).then( (tracks) => {
@@ -93,10 +145,19 @@ module.exports = (config) => {
         connection.end();
     });
 
-    router.get('/:id/track/:name', (req, res) => {
-        console.log("playlist GET /:id/track/:name => id = "+req.params.id+" et name = "+req.params.name);
-    });
-
+    /**
+     * @openapi
+     * /playlist/:id:
+     *   put:
+     *     description: Update a playlist in the database.
+     *     responses:
+     *       200:
+     *         description: {playlist.id} playlist updated in the database.
+     *       400:
+     *         description: This playlist cannot be updated, does not exist or missing parameters.
+     *       500:
+     *         description: {error}, message d'erreur venant du serveur.
+     */
     router.put('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         let new_playlist = new playlist_entity.Playlist(req.body.name, req.body.id_genre, req.body.id_user);
@@ -104,6 +165,19 @@ module.exports = (config) => {
         connection.end();
     });
 
+    /**
+     * @openapi
+     * /playlist/:id:
+     *   delete:
+     *     description: Delete a playlist in the database.
+     *     responses:
+     *       200:
+     *         description: {playlist.id} playlist deleted in the database.
+     *       400:
+     *         description: This playlist cannot be deleted, does not exist.
+     *       500:
+     *         description: {error}, message d'erreur venant du serveur.
+     */
     router.delete('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         playlist_model.DeletePlaylist(connection, req.params.id).then( (playlist_deleted) => {

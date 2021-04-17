@@ -7,6 +7,19 @@ const artist_model = require('../../models/artist')
 module.exports = (config) => {
 
     // To create an artist
+    /**
+     * @openapi
+     * /artist:
+     *   post:
+     *     description: Create a new artist object in database!
+     *     responses:
+     *       200:
+     *         description: {artist created}
+     *       400:
+     *         description: artist {artist.id} cannot be created, one or many parameters missing.
+     *       500:
+     *         description: {error}, message d'erreur venant du serveur.
+     */
     router.post('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         let artist = new artist_entity.Artist(req.body.name);
@@ -24,6 +37,19 @@ module.exports = (config) => {
     });
 
     // To get all artist
+    /**
+     * @openapi
+     * /artist:
+     *   get:
+     *     description: Get all the artists in the database ! Or only one by name if there is a parameter.
+     *     responses:
+     *       200:
+     *         description: {artists} All the artists found in the database, or the one searched with the parameter.
+     *       400:
+     *         description: No artist in database or the one searched is missing.
+     *       500:
+     *         description: {error}, message d'erreur venant du serveur.
+     */
     router.get('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
 
@@ -55,6 +81,19 @@ module.exports = (config) => {
     });
 
     // Get artist identified by his id
+    /**
+     * @openapi
+     * /artist/:id:
+     *   get:
+     *     description: Get one artist by id.
+     *     responses:
+     *       200:
+     *         description: {artist} Artist with id_artist equals id.
+     *       400:
+     *         description: No artist in database with this id.
+     *       500:
+     *         description: {error}, message d'erreur venant du serveur.
+     */
     router.get('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         artist_model.GetArtistById(connection,req.params.id).then( (artist) => {
@@ -70,11 +109,19 @@ module.exports = (config) => {
         connection.end();
     });
 
-    router.get('/:id/track/:name', (req, res) => {
-        console.log("artist GET /:id/track/:name => id = "+req.params.id+" et name = "+req.params.name);
-    });
-
-
+    /**
+     * @openapi
+     * /artist/:id:
+     *   put:
+     *     description: Update one artist according to the id.
+     *     responses:
+     *       200:
+     *         description: {artist} new Artist with id_artist equals id.
+     *       400:
+     *         description: No artist in database with this id or missing parameters to artist.
+     *       500:
+     *         description: {error}, message d'erreur venant du serveur.
+     */
     router.put('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         let new_artist = new artist_entity.Artist(req.body.name);
@@ -83,6 +130,19 @@ module.exports = (config) => {
     });
 
     // Delete artist identified by id
+    /**
+     * @openapi
+     * /artist/:id:
+     *   delete:
+     *     description: Delete the artist with artist_id equals id.
+     *     responses:
+     *       200:
+     *         description: {artist deleted} The artist is deleted.
+     *       400:
+     *         description: No artist in database with this id.
+     *       500:
+     *         description: {error}, message d'erreur venant du serveur.
+     */
     router.delete('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         artist_model.DeleteArtist(connection, req.params.id).then( (artist_deleted) => {

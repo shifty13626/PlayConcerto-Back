@@ -6,6 +6,19 @@ const genre_entity = require('../../entities/genre');
 
 module.exports = (config) => {
     // To get all genre
+    /**
+     * @openapi
+     * /genre:
+     *   get:
+     *     description: Get all the genres.
+     *     responses:
+     *       200:
+     *         description: {genres} All genre in the database.
+     *       400:
+     *         description: No genre in database.
+     *       500:
+     *         description: {error}, message d'erreur venant du serveur.
+     */
     router.get('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
 
@@ -22,6 +35,19 @@ module.exports = (config) => {
     });
 
     // To create a genre
+    /**
+     * @openapi
+     * /genre:
+     *   post:
+     *     description: Create a genre in the database.
+     *     responses:
+     *       200:
+     *         description: {genre.id} Genre created in the database.
+     *       400:
+     *         description: This genre cannot be created, already existed or missing parameters.
+     *       500:
+     *         description: {error}, message d'erreur venant du serveur.
+     */
     router.post('/', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         let genre = new genre_entity.Genre(req.body.name);
