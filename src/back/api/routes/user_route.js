@@ -14,6 +14,8 @@ module.exports = (config) => {
      * /user/auth:
      *   post:
      *     description: to save a new user
+     *     tags :
+     *       - User
      *     produces:
      *       - application/json
      *     parameters:
@@ -65,6 +67,8 @@ module.exports = (config) => {
      * /user/auth:
      *   post:
      *     description: Check authentification of user.
+     *     tags :
+     *       - User
      *     produces:
      *       - application/json
      *     parameters:
@@ -110,6 +114,8 @@ module.exports = (config) => {
      * /user/:
      *   get:
      *     description: Get user by pseudo.
+     *     tags :
+     *       - User
      *     produces:
      *       - application/json
      *     parameters:
@@ -160,6 +166,8 @@ module.exports = (config) => {
      * /user/:id:
      *   get:
      *     description: Get user by id.
+     *     tags :
+     *       - User
      *     produces:
      *       - application/json
      *     parameters:
@@ -196,6 +204,8 @@ module.exports = (config) => {
      * /user/:id/playlist:
      *   get:
      *     description: Get all playlist for user identified by his id.
+     *     tags :
+     *       - User
      *     produces:
      *       - application/json
      *     parameters:
@@ -232,6 +242,8 @@ module.exports = (config) => {
      * /user/:id/playlist/:name:
      *   get:
      *     description: Get playlist identified by his name for a user identified by his id.
+     *     tags :
+     *       - User
      *     produces:
      *       - application/json
      *     parameters:
@@ -272,6 +284,8 @@ module.exports = (config) => {
      * /user/:id/:
      *   get:
      *     description: Update user information.
+     *     tags :
+     *       - User
      *     produces:
      *       - application/json
      *     parameters:
@@ -311,6 +325,8 @@ module.exports = (config) => {
      * /user/:id/:
      *   get:
      *     description: To delete an user.
+     *     tags :
+     *       - User
      *     produces:
      *       - application/json
      *     parameters:
