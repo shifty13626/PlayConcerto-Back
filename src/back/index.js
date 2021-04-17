@@ -6,6 +6,7 @@ let configManager = require("./models/configManager.js")
 let parserManager = require("./models/parserManager.js")
 let dbManager = require("./models/dbManager.js")
 
+
 const app = express();
 
 app.use(cors());
