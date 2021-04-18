@@ -6,17 +6,23 @@ const track_model = require('../../models/track')
 
 module.exports = (config) => {
 
-    // To add a track
     /**
-     * @openapi
-     * /api/tracks:
+     * @swagger
+     *
+     * /track/:
      *   post:
-     *     description: Welcome to swagger-jsdoc!
-     *     tags:
+     *     description: Add a new track.
+     *     tags :
      *       - Track
+     *     produces:
+     *       - application/json
      *     responses:
      *       200:
-     *         description: Returns a mysterious string.
+     *         description: Track {track.title}, {track.id} has been created.
+     *       400:
+     *         description: Track {track} cannot be created. Title is mandatory.
+     *       500:
+     *         description: Error message.
      */
     router.post('/', async (req, res) => {
         console.log("request add track...");
@@ -38,12 +44,29 @@ module.exports = (config) => {
             res.status(200).send(`Track ${track.title}, ${created.insertId} has been created.`);
         }
         else {
-            res.status(400).send(`Track ${track} cannot be created. Pseudo is mandatory.`);
+            res.status(400).send(`Track ${track} cannot be created. Title is mandatory.`);
         }
         connection.end();
     });
 
-    // To get all track
+    /**
+     * @swagger
+     *
+     * /track/:
+     *   get:
+     *     description: Get all track save in system.
+     *     tags :
+     *       - Track
+     *     produces:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: {track}
+     *       400:
+     *         description: Track {track.title} not found in database.
+     *       500:
+     *         description: Error message.
+     */
     router.get('/', async (req, res) => {
         let connection = dbManager.OpenConnection(config);
         if(req.query.title != null ){
@@ -95,7 +118,24 @@ module.exports = (config) => {
         connection.end();
     });
 
-    // To link track to a playlist
+    /**
+     * @swagger
+     *
+     * /track/linkPlaylist:
+     *   post:
+     *     description: To link a track to a playlist.
+     *     tags :
+     *       - Track
+     *     produces:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: success (true/false).
+     *       400:
+     *         description: Track {link.idTrack} cannot be linked.
+     *       500:
+     *         description: Error message.
+     */
     router.post('/linkPlaylist', async (req, res) => {
         console.log("request link track to playlist ...");
         let connection = dbManager.OpenConnection(config);
@@ -112,6 +152,24 @@ module.exports = (config) => {
         connection.end();
     });
 
+    /**
+     * @swagger
+     *
+     * /track/unlinkPlaylist:
+     *   post:
+     *     description: To delete a link between a track and a playlist.
+     *     tags :
+     *       - Track
+     *     produces:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: success (true/false).
+     *       400:
+     *         description: Track {link.idTrack} cannot be unlinked.
+     *       500:
+     *         description: Error message.
+     */
     // To unlink track to a playlist
     router.post('/unlinkPlaylist', async (req, res) => {
         console.log("request link track to playlist ...");
@@ -130,7 +188,24 @@ module.exports = (config) => {
     });
 
 
-    // Get track by id
+    /**
+     * @swagger
+     *
+     * /track/:id:
+     *   get:
+     *     description: Get a track identified by id.
+     *     tags :
+     *       - Track
+     *     produces:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: {track}
+     *       400:
+     *         description: the song {track.id} does not exist in the database.
+     *       500:
+     *         description: Error message.
+     */
     router.get('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         track_model.GetTrackById(connection,req.params.id).then((track) => {
@@ -146,7 +221,24 @@ module.exports = (config) => {
         connection.end();
     });
 
-    // To get a track identified by his id and artist id
+    /**
+     * @swagger
+     *
+     * /track/:id/artists:
+     *   get:
+     *     description: To get all artist for the track.
+     *     tags :
+     *       - Track
+     *     produces:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: (list artists)
+     *       400:
+     *         description: The song {track.id} does not have artists.
+     *       500:
+     *         description: Error message.
+     */
     router.get('/:id/artists', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         track_model.GetTracksArtists(connection, req.params.id).then( (artists) => {
@@ -163,6 +255,24 @@ module.exports = (config) => {
         connection.end();
     });
 
+    /**
+     * @swagger
+     *
+     * /track/:id:
+     *   put:
+     *     description: To update a track information.
+     *     tags :
+     *       - Track
+     *     produces:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: Track {track} has been updated.
+     *       400:
+     *         description: Track has not been updated, something is missing.
+     *       500:
+     *         description: Error message.
+     */
     router.put('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         let new_track = new track_entity.Track(req.body.artist,req.body.danceability,req.body.duration,
@@ -171,9 +281,9 @@ module.exports = (config) => {
         //new_track.req.body.name, req.body.year, req.body.duration);
         track_model.UpdateTrack(connection, req.params.id, new_track).then((result) => {
             if (result != null) {
-                res.status(200).send(`Track ${result} has been created.`);
+                res.status(200).send(`Track ${result} has been updated.`);
             } else {
-                res.status(400).send(`Track has not been created, something is missing.`);
+                res.status(400).send(`Track has not been updated, something is missing.`);
             }
         }).catch((error) => {
             res.status(500).send(error);
@@ -181,7 +291,24 @@ module.exports = (config) => {
         connection.end();
     });
 
-    // To delete a track identified by id
+    /**
+     * @swagger
+     *
+     * /track/:id:
+     *   put:
+     *     description: To delete a track identified by his id.
+     *     tags :
+     *       - Track
+     *     produces:
+     *       - application/json
+     *     responses:
+     *       200:
+     *         description: Track {track.id} has been deleted.
+     *       400:
+     *         description: Track {track.id} not found. Can not delete it.
+     *       500:
+     *         description: Error message.
+     */
     router.delete('/:id', (req, res) => {
         let connection = dbManager.OpenConnection(config);
         track_model.DeleteTrack(connection, req.params.id).then( (deleted_track) => {
